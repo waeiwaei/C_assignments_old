@@ -15,7 +15,7 @@ typedef enum logicalop {or, and, xor} logicalop;
 
 struct boolarr{
 
-   char * binary;
+   bool* binary;
    int length;
 
 };
@@ -27,8 +27,8 @@ boolarr* boolarr_init(void){
     
     boolarr* temp = (boolarr*)calloc(1, sizeof(boolarr));
     
-    temp->binary = (char*)calloc(1, sizeof(char));
-    *(temp->binary) = '0';
+    temp->binary = (bool*)calloc(1, sizeof(bool));
+    *(temp->binary) = false;
     temp->length = 0;
 
     return temp;
@@ -40,8 +40,15 @@ boolarr* boolarr_initstr(const char* str){
     boolarr* temp = (boolarr*)calloc(1, sizeof(boolarr));
     int length_of_string = strlen(str);
 
-    temp->binary = (char*)calloc(length_of_string + 1, sizeof(char));
-    strcpy((temp->binary), str); 
+    temp->binary = (bool*)calloc(length_of_string + 1, sizeof(bool));
+    
+    for(int i = 0; i < length_of_string; i++){
+        if(str[i] == '1'){
+            temp->binary[i] = true;
+        }else{
+            temp->binary[i] = false;
+        }
+    }
 
     temp->length = length_of_string;
 
@@ -54,8 +61,17 @@ boolarr* boolarr_initstr(const char* str){
 boolarr* boolarr_clone(const boolarr* ba){
 
     boolarr* temp = (boolarr*)calloc(1, sizeof(boolarr));
-    temp->binary = (char*)calloc(ba->length, sizeof(char));
-    strcpy(temp->binary, ba->binary);
+
+    temp->binary = (bool*)calloc(ba->length, sizeof(bool));
+   
+    for(int i = 0; i < ba->length; i++){
+        if(ba->binary[i] == true){
+            temp->binary[i] = true;
+        }else{
+            temp->binary[i] = false;
+        }
+    }   
+    
     temp->length = ba->length;
 
     return temp;
@@ -68,7 +84,7 @@ unsigned int boolarr_size(const boolarr* ba){
 
     int counter = 0;
 
-    for(int i = 0; i < ba->length - 1; i++){
+    for(int i = 0; i < ba->length; i++){
         counter++;
     }
 
@@ -81,7 +97,7 @@ unsigned int boolarr_count1s(const boolarr* ba){
 
     int counter = 0;
     
-    for(int i =0; i < ba->length - 1; i++){
+    for(int i = 0; i < ba->length; i++){
         
         if(ba->binary[i] == true){
             counter++;
@@ -121,17 +137,28 @@ bool boolarr_get(const boolarr* ba, const unsigned int n, bool* b){
 /* Return if two arrays are the same (bitwise) */
 bool boolarr_issame(const boolarr* b1, const boolarr* b2){
 
+    int counter = 0;
     
     if(b1 == NULL && b2 == NULL){
         return false;
     }
     
-    if(strcmp(b1->binary, b2->binary) == 1){
+    if(b1->length != b2->length){
         return false;
     }
 
-    return true;
+    //compare each bit value - true/false
+    for(int i = 0; i < b1->length; i++){
+        if(b1->binary[i] == b2->binary[i]){
+            counter++;
+        }
+    }
 
+    if(counter == b1->length - 1){
+        return true;
+    }
+
+    return false;
 }
 
 /* Store to string - rightmost bit is LSB */
@@ -163,7 +190,7 @@ bool boolarr_print(const boolarr* ba){
 
     for(int i = 0; i < ba->length - 1; i++){
     
-        printf("%c ",ba->binary[i]);
+        printf("%i ",ba->binary[i]);
 
     }
 
@@ -194,7 +221,7 @@ bool boolarr_negate(boolarr* ba){
 boolarr* boolarr_bitwise(const boolarr* ba1, const boolarr* ba2, const logicalop l){
 
     boolarr* temp = (boolarr*)calloc(1, sizeof(boolarr));
-    temp->binary = (char*)calloc(ba1->length, sizeof(char));
+    temp->binary = (bool*)calloc(ba1->length, sizeof(bool));
 
     switch(l){
         //or
@@ -269,7 +296,7 @@ int main(){
    unsigned int i;
    bool b2;
 
-   assert(boolarr_size(NULL)==0);
+  /* assert(boolarr_size(NULL)==0);
    assert(!boolarr_get(NULL, 0, &b));
    assert(!boolarr_set(NULL, 0, true));
    assert(!boolarr_set(NULL, 1, true));
@@ -351,10 +378,21 @@ int main(){
    boolarr_free(ba);
    boolarr_free(bb);
    boolarr_free(bc);
+   */
+
 
    /* Bitwise */
    ba = boolarr_initstr("100100100");
-   assert(ba);
+   
+   if(ba){
+    printf("Hello");
+   }
+
+   for(int i = 0; i < ba->length; i++){
+    printf("%d ", ba->binary[i]);
+   }
+   
+   //assert(ba);
    bb = boolarr_initstr("110110110");
    assert(bb);
 
@@ -371,7 +409,7 @@ int main(){
    assert(strcmp(str, "110110110")==0);
    assert(boolarr_issame(bb, bc));
    boolarr_free(bc);
-
+/*
    bc = boolarr_bitwise(ba, bb, xor);
    assert(bc);
    assert(boolarr_tostring(bc, str));
@@ -380,6 +418,6 @@ int main(){
    boolarr_free(ba);
    boolarr_free(bb);
    boolarr_free(bc);
-
+*/
    return 0;
 }
