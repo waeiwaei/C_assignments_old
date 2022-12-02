@@ -44,21 +44,19 @@ lisp* lisp_copy(const lisp* l){
 lisp* lisp_cons(const lisp* l1,  const lisp* l2){
 
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-    
+
+    //check if the length of the string is > 1
     if(l1->cdr != NULL){
 
+        //store l1 in temp->car
         temp->car = (lisp*)l1;
     
+    //store only the atom value in the list;
     }else{
 
         temp->atomtype = l1->atomtype;
     
     }
-
-    //check if l1->cdr is not NULL
-        //we store the l1 to the temp->car: temp->car = (lisp*)l1;
-    //else
-    //temp->atomtype = l1->atomtype
 
         temp->cdr = (lisp*)l2;
 
