@@ -24,8 +24,42 @@ atomtype atms(lisp* l);
 
 void test(void);
 
+
+int main(){
+
+   lisp* l1;
+   lisp* l2;
+   //lisp* l3;
+
+   l1 = cons(atom(1), NULL);
+   l2 = cons(NULL, atom(2));
+   //l3 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
+   
+   //printf("l3 car %i, cdr->car %i, cdr->cdr %i \n",l3->car->atomtype, l3->cdr->car->atomtype, l3->cdr->cdr->car->atomtype);
+
+
+   if(l1 == NULL){
+      printf("L1 - ERROR");
+   }
+
+   if(l2 == NULL){
+      printf("L2 - ERROR");
+   }
+
+   int count = lisp_length(l1);
+
+   printf("COUNT: %i", count);
+      
+   free(l1);
+   free(l2);
+
+    return 0;
+}
+
+/*
 int main(void)
 {
+   
    test();
    char str[LISTSTRLEN];
    printf("Test Lisp (%s) Start ... ", LISPIMPL);
@@ -67,14 +101,14 @@ int main(void)
    assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
 
 
-   /* ------------------------- */
-   /* lisp_car & lisp_cdr tests */
-   /* ------------------------- */
-   /*
+   // ------------------------- 
+   // lisp_car & lisp_cdr tests 
+   // ------------------------- 
+   
     (defvar l6 (car l1)) output=2
     (defvar l7 (cdr l3)) output=(4 5)
     (defvar l8 (car(cdr(cdr(l5))))) output=3
-   */
+    
    lisp* l6 = car(l1);
    lisp_tostring(l6, str);
    // This is not a list, therefore not bracketed.
@@ -87,12 +121,13 @@ int main(void)
    // This is not a list, therefore not bracketed.
    assert(strcmp(str, "3")==0);
 
-   /*-----------------*/
-   /* lisp_copy tests */
-   /*-----------------*/
-   /*
+   //-----------------
+   // lisp_copy tests 
+   //-----------------
+   
     (defvar l9 (copy-list l5)) output=(0 (1 2) 3 4 5)
-   */
+   
+
    lisp* l9 = copy(l5);
    lisp_tostring(l9, str);
    assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
@@ -100,14 +135,16 @@ int main(void)
    lisp_free(&l9);
    assert(!l9);
 
-   /* All other lists have been re-used to build l5
-      so no need to free l4, l3 etc.*/
+   // All other lists have been re-used to build l5
+   // so no need to free l4, l3 etc.
+  
    lisp_free(&l5);
    assert(!l5);
 
-   /*-------------------------*/
-   /* lisp_fromstring() tests */ 
-   /*-------------------------*/
+   //-------------------------
+   // lisp_fromstring() tests  
+   //-------------------------
+
    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((-1 2) (3 4) (5 (6 7)))"};
    for(int i=0; i<4; i++){
       lisp* f1 = fromstring(inp[i]);
@@ -117,9 +154,10 @@ int main(void)
       assert(!f1);
    }
 
-   /*--------------------*/
-   /* lisp_list() tests  */
-   /*--------------------*/
+   //--------------------
+   // lisp_list() tests  
+   //--------------------
+  
    lisp* g1 = lisp_list(3, atom(6), atom(7), atom(8));
    lisp_tostring(g1, str);
    assert(strcmp(str, "(6 7 8)")==0);
@@ -131,9 +169,10 @@ int main(void)
    lisp_free(&g2);
    assert(!g2);
 
-   /*----------------------*/
-   /* lisp_reduce() tests  */
-   /*----------------------*/
+   //----------------------
+   // lisp_reduce() tests  
+   //----------------------
+
    lisp* h1 = lisp_fromstring("(1 2 3 4)");
    assert(lisp_reduce(times, h1)==24);
    lisp_free(&h1);
@@ -144,17 +183,22 @@ int main(void)
    
    printf("End\n");
    return 0;
-}
 
+}
+*/
+
+/*
 atomtype times(lisp* l)
 {
    static atomtype acc = 1;
    return acc = acc * lisp_getval(l);
 }
 
-/* To count number of atoms in list, including sub-lists */
+// To count number of atoms in list, including sub-lists 
 atomtype atms(lisp* l)
 {
    static atomtype acc = 0;
    return acc = acc + lisp_length(l);
 }
+
+*/
