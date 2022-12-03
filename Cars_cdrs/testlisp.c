@@ -80,16 +80,24 @@ int main(){
    lisp* l6 = car(l1);
    lisp_tostring(l6, str);
 
-   printf("%s", str);
    // This is not a list, therefore not bracketed.
- /*  assert(strcmp(str, "2")==0);
+ //  assert(strcmp(str, "2")==0);
    lisp* l7 = cdr(l3);
    lisp_tostring(l7, str);
    assert(strcmp(str, "(4 5)")==0);
    lisp* l8 = car(cdr(cdr(l5)));
    lisp_tostring(l8, str);
    // This is not a list, therefore not bracketed.
-   assert(strcmp(str, "3")==0);*/
+//   assert(strcmp(str, "3")==0);*/
+
+   lisp* l9 = copy(l5);
+   lisp_tostring(l9, str);
+   assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
+   // OK, it's the same as l5, but is it deep?
+   lisp_free(&l9);
+   assert(!l9);
+
+   printf("Im gay");
 
    return 0;
 

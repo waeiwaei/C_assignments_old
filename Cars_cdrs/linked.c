@@ -108,7 +108,6 @@ int lisp_length(const lisp* l){
 // Does not copy any data.
 lisp* lisp_car(const lisp* l){
 
-
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
     if(l->car == NULL){
@@ -142,8 +141,21 @@ atomtype lisp_getval(const lisp* l){
     return value;
 }
 
+//returns empty list
+void empty_list(char * arr){
 
+    int index = 0;
 
+    arr[index] = '(';   
+    index++;
+
+    arr[index] = ')';
+    index++;
+    
+    arr[index] = '\0';
+
+    return;
+}
 
 
 
@@ -154,20 +166,17 @@ void lisp_tostring(const lisp* l, char* str){
     int index = 0;
     char arr[LISTSTRLEN];
 
+
     //If list is empty, return "()" string
     if(l == NULL){
 
-        arr[index] = '(';   
-        index++;
-        arr[index] = ')';
-        index++;
-        arr[index] = '\0';
+        empty_list(arr);
 
         strcpy(str, arr);
                 
         return;
 
-    }else if(l !=  NULL){
+    }else if(l != NULL){
 
     //populate the char str with the list
     arr[index] = '(';
@@ -243,20 +252,11 @@ void lisp_tostring(const lisp* l, char* str){
 
 }
 
+// Clears up all space used
+// Double pointer allows function to set 'l' to NULL on success
+void lisp_free(lisp** l){
 
-    //only return a list if one cons structure is passed
-    /*if(l->cdr == NULL){
+    *l = NULL;
+    free(*l);
 
-        if(l->car == NULL){
-
-            arr[index] = l->atomtype + '0';
-            index++;
-
-            arr[index] = '\0';
-
-            strcpy(str, arr);
-            
-            return;
-
-        }
-    }*/
+}
