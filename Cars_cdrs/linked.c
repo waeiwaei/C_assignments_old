@@ -166,9 +166,9 @@ void lisp_tostring(const lisp* l, char* str){
         strcpy(str, arr);
                 
         return;
-    }
 
-if(l !=  NULL){
+    }else if(l !=  NULL){
+
     //populate the char str with the list
     arr[index] = '(';
     index++;
