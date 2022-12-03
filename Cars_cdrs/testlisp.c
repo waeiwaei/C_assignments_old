@@ -87,6 +87,8 @@ int main(){
    assert(strcmp(str, "(4 5)")==0);
    lisp* l8 = car(cdr(cdr(l5)));
    lisp_tostring(l8, str);
+
+
    // This is not a list, therefore not bracketed.
 //   assert(strcmp(str, "3")==0);*/
 
@@ -96,8 +98,6 @@ int main(){
    // OK, it's the same as l5, but is it deep?
    lisp_free(&l9);
    assert(!l9);
-
-   printf("Im gay");
 
    return 0;
 
