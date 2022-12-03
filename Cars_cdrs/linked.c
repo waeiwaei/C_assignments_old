@@ -44,8 +44,8 @@ lisp* lisp_copy(const lisp* l){
 lisp* lisp_cons(const lisp* l1,  const lisp* l2){
 
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-    temp->car = (lisp*)ncalloc(1, sizeof(lisp));
-    temp->cdr = (lisp*)ncalloc(1, sizeof(lisp));
+    //temp->car = (lisp*)ncalloc(1, sizeof(lisp));
+    //temp->cdr = (lisp*)ncalloc(1, sizeof(lisp));
 
     //checks if the strings are null
     if(l1 == NULL){
@@ -55,10 +55,6 @@ lisp* lisp_cons(const lisp* l1,  const lisp* l2){
     if(l2 == NULL){
         temp->cdr = NULL;
 
-    }else{
-
-        temp->cdr = (lisp*)l2;
-    
     }
 
     //check if the length of the string is > 1
@@ -73,6 +69,8 @@ lisp* lisp_cons(const lisp* l1,  const lisp* l2){
         temp->atomtype = l1->atomtype;
         
     }
+    
+    temp->cdr = (lisp*) l2;
 
     return temp;
 
@@ -110,9 +108,10 @@ int lisp_length(const lisp* l){
 // Does not copy any data.
 lisp* lisp_car(const lisp* l){
 
+
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    temp->car = l->car;
+    temp = l->car;
 
     return temp; 
 }
@@ -125,9 +124,101 @@ lisp* lisp_cdr(const lisp* l){
 
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    temp->car = l->cdr;
+    temp = l->cdr;
+
+    printf("tempcdr - %i \n", temp->atomtype);
 
     return temp;
 
 }
 
+// Returns the data/value stored in the cons 'l'
+atomtype lisp_getval(const lisp* l){
+
+    int value = 0;
+
+    value = l->atomtype;
+
+    return value;
+}
+
+
+// Returns stringified version of list
+void lisp_tostring(const lisp* l, char* str){
+
+    lisp* temp;
+    int index = 0;
+    int length = 1;
+    char arr[LISTSTRLEN];
+
+    //str = (char*)ncalloc(2, sizeof(char));
+
+    //only printing a list with one cons
+    if(l->cdr == NULL){
+        if(l->car == NULL){
+
+            arr[index] = l->atomtype + '0';
+
+            index++;
+            arr[index] = '\0';
+
+            strcpy(str, arr);
+            
+            return;
+
+        }
+    }
+
+
+    while(l->cdr != NULL){
+
+        if(l->car != NULL){
+        
+            arr[index] = '('; 
+            
+            index++; 
+            length++;  
+        
+            temp = l->car;            
+            while(temp->cdr != NULL){
+                
+                //str = (char*)nremalloc(str, length * sizeof(char));
+                arr[index] = temp->atomtype + '0';
+                index++;
+                //length++;  
+
+                temp = temp->cdr;
+            }
+
+            arr[index] = ')';
+            index++;
+            //length++;
+
+        }else{
+            
+            //str = (char*)nremalloc(str, length * sizeof(char));
+            arr[index] = l->atomtype + '0';
+            index++;
+            //length++;
+
+        }
+
+        l = l->cdr;
+    }
+
+    //last cons block pointing to NULL
+    arr[index] = l->atomtype + '0';
+    index++;
+    //length++;
+
+    //str = (char*)nremalloc(str, length * sizeof(char));
+    arr[index] = '\0';
+
+    
+    printf("%i  ", index);
+    printf("%s", arr);
+
+    strcpy(str, arr);
+
+
+}

@@ -29,31 +29,24 @@ int main(){
 
    lisp* l1;
    lisp* l2;
-   //lisp* l3;
+   char str[LISTSTRLEN];
 
    l1 = cons(atom(1), NULL);
-   l2 = cons(NULL, atom(2));
-   //l3 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
+   l2 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
    
-   //printf("l3 car %i, cdr->car %i, cdr->cdr %i \n",l3->car->atomtype, l3->cdr->car->atomtype, l3->cdr->cdr->car->atomtype);
-
-
-   if(l1 == NULL){
-      printf("L1 - ERROR");
-   }
-
    if(l2 == NULL){
       printf("L2 - ERROR");
    }
 
-   int count = lisp_length(l1);
+   lisp_tostring(l1, str);
 
-   printf("COUNT: %i", count);
-      
+   printf("%s", str);
+
    free(l1);
    free(l2);
+   
+   return 0;
 
-    return 0;
 }
 
 /*
