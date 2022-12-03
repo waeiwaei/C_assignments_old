@@ -27,24 +27,70 @@ void test(void);
 
 int main(){
 
-   lisp* l1;
-   lisp* l2;
    char str[LISTSTRLEN];
+   //printf("Test Lisp (%s) Start ... ", LISPIMPL);
 
-   l1 = cons(atom(1), NULL);
-   l2 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
-   
-   if(l2 == NULL){
-      printf("L2 - ERROR");
-   }
+   lisp_tostring(NIL, str);
+   assert(lisp_length(NIL)==0);
+   assert(strcmp(str, "()")==0);
 
+   lisp* l1 = cons(atom(2), NIL);
+   assert(l1);
+   assert(lisp_length(l1)==1);
    lisp_tostring(l1, str);
+   assert(strcmp(str, "(2)")==0);
+   assert(lisp_getval(car(l1))==2);
+
+   lisp* l2 = cons(atom(1), l1);
+   assert(l2);
+   assert(lisp_length(l2)==2);
+   lisp_tostring(l1, str);
+   lisp_tostring(l2, str);
+   assert(strcmp(str, "(1 2)")==0);
+
+   lisp* l3 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
+   assert(l3);
+   assert(lisp_length(l3)==3);
+   lisp_tostring(l3, str);
+   assert(strcmp(str, "(3 4 5)")==0);
+
+
+   lisp* l4 = cons(l2, l3);
+   assert(l4);
+   assert(lisp_length(l4)==4);
+   lisp_tostring(l4, str);
+   assert(strcmp(str, "((1 2) 3 4 5)")==0);
+
+
+   lisp* l5 = cons(atom(0), l4);
+   assert(l5);
+   assert(lisp_length(l5)==5);
+   lisp_tostring(l5, str);
+   assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
+
+
+   /* ------------------------- 
+    lisp_car & lisp_cdr tests 
+    ------------------------- 
+   
+    (defvar l6 (car l1)) output=2
+    (defvar l7 (cdr l3)) output=(4 5)
+    (defvar l8 (car(cdr(cdr(l5))))) output=3*/
+    
+   lisp* l6 = car(l1);
+   lisp_tostring(l6, str);
 
    printf("%s", str);
+   // This is not a list, therefore not bracketed.
+ /*  assert(strcmp(str, "2")==0);
+   lisp* l7 = cdr(l3);
+   lisp_tostring(l7, str);
+   assert(strcmp(str, "(4 5)")==0);
+   lisp* l8 = car(cdr(cdr(l5)));
+   lisp_tostring(l8, str);
+   // This is not a list, therefore not bracketed.
+   assert(strcmp(str, "3")==0);*/
 
-   free(l1);
-   free(l2);
-   
    return 0;
 
 }

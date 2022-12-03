@@ -111,7 +111,11 @@ lisp* lisp_car(const lisp* l){
 
     lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    temp = l->car;
+    if(l->car == NULL){
+        temp->atomtype = l->atomtype;   
+    }else{
+        temp = l->car; 
+    }
 
     return temp; 
 }
@@ -126,8 +130,6 @@ lisp* lisp_cdr(const lisp* l){
 
     temp = l->cdr;
 
-    printf("tempcdr - %i \n", temp->atomtype);
-
     return temp;
 
 }
@@ -135,12 +137,14 @@ lisp* lisp_cdr(const lisp* l){
 // Returns the data/value stored in the cons 'l'
 atomtype lisp_getval(const lisp* l){
 
-    int value = 0;
-
-    value = l->atomtype;
+    int value = l->atomtype;
 
     return value;
 }
+
+
+
+
 
 
 // Returns stringified version of list
@@ -148,18 +152,106 @@ void lisp_tostring(const lisp* l, char* str){
 
     lisp* temp;
     int index = 0;
-    int length = 1;
     char arr[LISTSTRLEN];
 
-    //str = (char*)ncalloc(2, sizeof(char));
+    //If list is empty, return "()" string
+    if(l == NULL){
 
-    //only printing a list with one cons
-    if(l->cdr == NULL){
+        arr[index] = '(';   
+        index++;
+        arr[index] = ')';
+        index++;
+        arr[index] = '\0';
+
+        strcpy(str, arr);
+                
+        return;
+    }
+
+if(l !=  NULL){
+    //populate the char str with the list
+    arr[index] = '(';
+    index++;
+
+    while(l->cdr != NULL){
+            
+        if(l->car != NULL){
+        
+            arr[index] = '('; 
+            index++; 
+        
+            temp = l->car;            
+            while(temp->cdr != NULL){
+                
+                arr[index] = temp->atomtype + '0';
+                index++;
+
+                arr[index] = ' ';
+                index++;
+
+                temp = temp->cdr;
+            }
+
+            if(arr[index - 1] != ' '){
+                arr[index] = ' ';
+            }
+
+            //last cons block pointing to NULL
+            arr[index] = temp->atomtype + '0';
+            index++;
+
+            arr[index] = ')';
+            index++;
+
+            arr[index] = ' ';
+            index++;
+
+        }else{
+            
+            arr[index] = l->atomtype + '0';
+            index++;
+
+            arr[index] = ' ';
+            index++;
+
+        }
+
+        l = l->cdr;
+    }
+
+    if(index > 0){
+        if(arr[index - 1] != ' '){
+            arr[index] = ' ';
+        }
+    }
+
+    //last cons block pointing to NULL
+    arr[index] = l->atomtype + '0';
+    index++;
+
+    arr[index] = ')';
+    index++;
+
+    arr[index] = '\0';
+
+
+    strcpy(str, arr);
+
+    return;
+
+}
+
+}
+
+
+    //only return a list if one cons structure is passed
+    /*if(l->cdr == NULL){
+
         if(l->car == NULL){
 
             arr[index] = l->atomtype + '0';
-
             index++;
+
             arr[index] = '\0';
 
             strcpy(str, arr);
@@ -167,58 +259,4 @@ void lisp_tostring(const lisp* l, char* str){
             return;
 
         }
-    }
-
-
-    while(l->cdr != NULL){
-
-        if(l->car != NULL){
-        
-            arr[index] = '('; 
-            
-            index++; 
-            length++;  
-        
-            temp = l->car;            
-            while(temp->cdr != NULL){
-                
-                //str = (char*)nremalloc(str, length * sizeof(char));
-                arr[index] = temp->atomtype + '0';
-                index++;
-                //length++;  
-
-                temp = temp->cdr;
-            }
-
-            arr[index] = ')';
-            index++;
-            //length++;
-
-        }else{
-            
-            //str = (char*)nremalloc(str, length * sizeof(char));
-            arr[index] = l->atomtype + '0';
-            index++;
-            //length++;
-
-        }
-
-        l = l->cdr;
-    }
-
-    //last cons block pointing to NULL
-    arr[index] = l->atomtype + '0';
-    index++;
-    //length++;
-
-    //str = (char*)nremalloc(str, length * sizeof(char));
-    arr[index] = '\0';
-
-    
-    printf("%i  ", index);
-    printf("%s", arr);
-
-    strcpy(str, arr);
-
-
-}
+    }*/
