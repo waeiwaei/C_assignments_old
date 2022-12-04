@@ -18,61 +18,59 @@ typedef int atomtype;
 // by itelf would be printed as e.g. "3", and not "(3)"
 lisp* lisp_atom(const atomtype a){
 
-    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-    temp->atomtype = a;
-    temp->car = NULL;
-    temp->cdr = NULL; 
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   
+   temp->atomtype = a;
+   temp->car = NULL;
+   temp->cdr = NULL; 
 
-    return temp;
+   return temp;
 
 }
 
 // Returns a deep copy of the list 'l'
 lisp* lisp_copy(const lisp* l){
 
-    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    temp->car = l->car;
-    temp->cdr = l->cdr;
-    temp->atomtype = l->atomtype;
+   temp->car = l->car;
+   temp->cdr = l->cdr;
+   temp->atomtype = l->atomtype;
 
-    return temp;
+   return temp;
 
 }
 
 
 lisp* lisp_cons(const lisp* l1,  const lisp* l2){
 
-    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-    //temp->car = (lisp*)ncalloc(1, sizeof(lisp));
-    //temp->cdr = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    //checks if the strings are null
-    if(l1 == NULL){
-        temp->car = NULL;
-    }
+   //checks if the strings are null
+   if(l1 == NULL){
+      temp->car = NULL;
+   }
 
-    if(l2 == NULL){
-        temp->cdr = NULL;
+   if(l2 == NULL){
+      temp->cdr = NULL;
+   }
 
-    }
+   //check if the length of the string is > 1
+   if(l1->cdr != NULL){
 
-    //check if the length of the string is > 1
-    if(l1->cdr != NULL){
+      //store l1 in temp->car
+      temp->car = (lisp*) l1;
+   
+   //store only the atom value in the list;
+   }else{
+      
+      temp->atomtype = l1->atomtype;
+      
+   }
+   
+   temp->cdr = (lisp*) l2;
 
-        //store l1 in temp->car
-        temp->car = (lisp*) l1;
-    
-    //store only the atom value in the list;
-    }else{
-        
-        temp->atomtype = l1->atomtype;
-        
-    }
-    
-    temp->cdr = (lisp*) l2;
-
-    return temp;
+   return temp;
 
 }
 
@@ -80,27 +78,24 @@ lisp* lisp_cons(const lisp* l1,  const lisp* l2){
 //returns the number of components in the lisp
 int lisp_length(const lisp* l){
 
-    if(l == NULL){
-        return 0;
-    }
- 
-    lisp* tracker = (lisp*) l;
+   if(l == NULL){
+      return 0;
+   }
 
-    //counter for integers
-    int counter = 0;
+   lisp* tracker = (lisp*) l;
 
-    while(tracker != NULL){
+   //counter for integers
+   int counter = 0;
 
-        counter++;
-        tracker = tracker->cdr;
+   while(tracker != NULL){
 
-    }
+      counter++;
+      tracker = tracker->cdr;
 
-    return counter;
+   }
+
+   return counter;
 }
-
-
-
 
 
 
@@ -108,15 +103,19 @@ int lisp_length(const lisp* l){
 // Does not copy any data.
 lisp* lisp_car(const lisp* l){
 
-    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    if(l->car == NULL){
-        temp->atomtype = l->atomtype;   
-    }else{
-        temp = l->car; 
-    }
+   if(l->cdr == NULL && l->car == NULL){
+      temp->choice = true;
+   }
 
-    return temp; 
+   if(l->car == NULL){
+      temp->atomtype = l->atomtype;   
+   }else{
+      temp = l->car; 
+   }
+
+   return temp; 
 }
 
 
@@ -125,130 +124,154 @@ lisp* lisp_car(const lisp* l){
 // Does not copy any data.
 lisp* lisp_cdr(const lisp* l){
 
-    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-    temp = l->cdr;
+   temp = l->cdr;
 
-    return temp;
+   return temp;
 
 }
 
 // Returns the data/value stored in the cons 'l'
 atomtype lisp_getval(const lisp* l){
 
-    int value = l->atomtype;
+   int value = l->atomtype;
 
-    return value;
+   return value;
 }
+
+
+//function to populate the left and right brackets
+void populate_left_bracket(char * arr, int* index){
+
+   arr[*index] = '('; 
+   (*index)++; 
+
+   return;
+
+}
+
+//function to populate the left and right brackets
+void populate_right_bracket(char * arr, int* index){
+
+   arr[*index] = ')'; 
+   (*index)++; 
+
+   return;
+
+}
+
+//function to populate the left and right brackets
+void populate_space(char * arr, int* index){
+
+   arr[*index] = ' '; 
+   (*index)++; 
+
+   return;
+
+}
+
 
 //returns empty list
 void empty_list(char * arr){
 
-    int index = 0;
+   int index = 0;
 
-    arr[index] = '(';   
-    index++;
+   populate_left_bracket(arr, &index);
+   populate_right_bracket(arr, &index);
+   
+   arr[index] = '\0';
 
-    arr[index] = ')';
-    index++;
-    
-    arr[index] = '\0';
-
-    return;
+   return;
 }
-
 
 
 // Returns stringified version of list
 void lisp_tostring(const lisp* l, char* str){
 
-    lisp* temp;
-    int index = 0;
-    char arr[LISTSTRLEN];
+   lisp* temp;
+   int index = 0;
+   char arr[LISTSTRLEN];
 
+   //If list is empty, return "()" string
+   if(l == NULL){
 
-    //If list is empty, return "()" string
-    if(l == NULL){
+      empty_list(arr);
 
-        empty_list(arr);
+      strcpy(str, arr);
+               
+      return;
 
-        strcpy(str, arr);
-                
-        return;
+   }
 
-    }else if(l != NULL){
+   if(l->choice == true){
+      
+      arr[index] = l->atomtype + '0';
+      index++;
+      arr[index] = '\0';
 
-    //populate the char str with the list
-    arr[index] = '(';
-    index++;
+      strcpy(str, arr);
 
-    while(l->cdr != NULL){
-            
-        if(l->car != NULL){
-        
-            arr[index] = '('; 
-            index++; 
-        
-            temp = l->car;            
+      return;
+   
+   }
+
+   //populate the char str with the list
+   populate_left_bracket(arr, &index);
+
+   while(l->cdr != NULL){
+         
+         if(l->car != NULL){
+         
+            populate_left_bracket(arr, &index);
+
+            temp = l->car;
             while(temp->cdr != NULL){
-                
-                arr[index] = temp->atomtype + '0';
-                index++;
+                  
+               arr[index] = temp->atomtype + '0';
+               index++;
 
-                arr[index] = ' ';
-                index++;
+               populate_space(arr, &index);
 
-                temp = temp->cdr;
+               temp = temp->cdr;
             }
 
             if(arr[index - 1] != ' '){
-                arr[index] = ' ';
+               populate_space(arr, &index);
             }
 
             //last cons block pointing to NULL
             arr[index] = temp->atomtype + '0';
             index++;
 
-            arr[index] = ')';
-            index++;
+            populate_right_bracket(arr, &index);
 
-            arr[index] = ' ';
-            index++;
+            populate_space(arr, &index);
 
-        }else{
+         }else{
             
             arr[index] = l->atomtype + '0';
             index++;
 
-            arr[index] = ' ';
-            index++;
+            populate_space(arr, &index);
 
-        }
+         }
 
-        l = l->cdr;
-    }
+         l = l->cdr;
+      }
 
-    if(index > 0){
-        if(arr[index - 1] != ' '){
-            arr[index] = ' ';
-        }
-    }
+      //last cons block pointing to NULL
+      arr[index] = l->atomtype + '0';
+      index++;
 
-    //last cons block pointing to NULL
-    arr[index] = l->atomtype + '0';
-    index++;
+      populate_right_bracket(arr, &index);
 
-    arr[index] = ')';
-    index++;
+      arr[index] = '\0';
 
-    arr[index] = '\0';
+      strcpy(str, arr);
 
+      return;
 
-    strcpy(str, arr);
-
-    return;
-
-}
 
 }
 
@@ -256,7 +279,10 @@ void lisp_tostring(const lisp* l, char* str){
 // Double pointer allows function to set 'l' to NULL on success
 void lisp_free(lisp** l){
 
-    *l = NULL;
-    free(*l);
+   *l = NULL;
+   free(*l);
 
 }
+
+
+
