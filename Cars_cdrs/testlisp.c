@@ -84,7 +84,6 @@ int main(void)
    assert(strcmp(str, "(4 5)")==0);
    lisp* l8 = car(cdr(cdr(l5)));
    lisp_tostring(l8, str);
-   //printf("%s", str);
 
    // This is not a list, therefore not bracketed.
    assert(strcmp(str, "3")==0);
@@ -110,16 +109,20 @@ int main(void)
    /*-------------------------*/
    /* lisp_fromstring() tests */ 
    /*-------------------------*/
-/* 
+
    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((-1 2) (3 4) (5 (6 7)))"};
    for(int i=0; i<4; i++){
       lisp* f1 = fromstring(inp[i]);
       lisp_tostring(f1, str);
-      assert(strcmp(str, inp[i])==0);
+
+      printf("%s \n", str);
+
+
+      //assert(strcmp(str, inp[i])==0);
       lisp_free(&f1);
       assert(!f1);
    }
-*/
+
 
    /*--------------------*/
    /* lisp_list() tests  */
@@ -151,6 +154,7 @@ int main(void)
    printf("End\n");
    return 0;
 }
+
 /*
 atomtype times(lisp* l)
 {

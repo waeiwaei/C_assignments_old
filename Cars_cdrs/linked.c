@@ -33,6 +33,13 @@ lisp* lisp_copy(const lisp* l){
 
    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
+/*
+memcpy(temp->car, l->car, sizeof(lisp));
+memcpy(temp->cdr, l->cdr, sizeof(lisp));
+memcpy(temp->atomtype, l->atomtype, sizeof(int));
+*/
+
+
    temp->car = l->car;
    temp->cdr = l->cdr;
    temp->atomtype = l->atomtype;
@@ -105,9 +112,7 @@ lisp* lisp_car(const lisp* l){
 
    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-   if(l->cdr == NULL && l->car == NULL){
-      temp->choice = true;
-   }
+   temp->choice = true;
 
    if(l->car == NULL){
       temp->atomtype = l->atomtype;   
@@ -142,7 +147,7 @@ atomtype lisp_getval(const lisp* l){
 
 
 //function to populate the left and right brackets
-void populate_left_bracket(char * arr, int* index){
+void populate_left_bracket(char* arr, int* index){
 
    arr[*index] = '('; 
    (*index)++; 
@@ -152,7 +157,7 @@ void populate_left_bracket(char * arr, int* index){
 }
 
 //function to populate the left and right brackets
-void populate_right_bracket(char * arr, int* index){
+void populate_right_bracket(char* arr, int* index){
 
    arr[*index] = ')'; 
    (*index)++; 
@@ -162,7 +167,7 @@ void populate_right_bracket(char * arr, int* index){
 }
 
 //function to populate the left and right brackets
-void populate_space(char * arr, int* index){
+void populate_space(char* arr, int* index){
 
    arr[*index] = ' '; 
    (*index)++; 
@@ -185,6 +190,14 @@ void empty_list(char * arr){
    return;
 }
 
+/*
+void populate_list(lisp* l, char* arr, int* index){
+
+   arr[*index] = l->atomtype + '0'; 
+   (*index)++; 
+   
+}
+*/
 
 // Returns stringified version of list
 void lisp_tostring(const lisp* l, char* str){
@@ -231,6 +244,8 @@ void lisp_tostring(const lisp* l, char* str){
                arr[index] = temp->atomtype + '0';
                index++;
 
+               //populate_list(temp, arr, &index);
+
                populate_space(arr, &index);
 
                temp = temp->cdr;
@@ -244,6 +259,8 @@ void lisp_tostring(const lisp* l, char* str){
             arr[index] = temp->atomtype + '0';
             index++;
 
+            //populate_list(temp, arr, &index);
+
             populate_right_bracket(arr, &index);
 
             populate_space(arr, &index);
@@ -251,8 +268,10 @@ void lisp_tostring(const lisp* l, char* str){
          }else{
             
             arr[index] = l->atomtype + '0';
-            index++;
-
+            index++;  
+            
+            //populate_list(l, arr, &index);
+         
             populate_space(arr, &index);
 
          }
@@ -263,6 +282,8 @@ void lisp_tostring(const lisp* l, char* str){
       //last cons block pointing to NULL
       arr[index] = l->atomtype + '0';
       index++;
+
+      //populate_list(l, arr, &index);
 
       populate_right_bracket(arr, &index);
 
@@ -285,4 +306,53 @@ void lisp_free(lisp** l){
 }
 
 
+
+//function to store the new string values until the next '(' is reached 
+lisp* nested(lisp* l, const char* str, int* index){
+
+   lisp* tempo = (lisp*)ncalloc(1, sizeof(lisp));
+
+   if(str[*index] == ')'){
+      return NULL;
+   }
+
+   (*index)++;
+
+   tempo = nested(l, str, index);
+
+   return tempo;
+
+}
+
+
+
+lisp* lisp_fromstring(const char* str){
+
+   lisp* temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
+   int index = 0;
+
+   while(str[index] != ')'){
+      
+      if(str[index] == '('){
+
+         index++;
+
+         while(str[index] != ')'){
+
+            //use a recursive function to go through the list
+            //and store the values inside this function
+            temp_lisp->car = nested(temp_lisp, str, &index);
+            
+         }
+
+      }
+
+      temp_lisp->car = lisp_atom(atoi((&str[index])));
+
+      index++;
+
+   }
+
+   return temp_lisp;
+}
 
