@@ -308,24 +308,24 @@ void lisp_free(lisp** l){
 
 
 //function to store the new string values until the next '(' is reached 
-lisp* nested(lisp* l, const char* str, int* index){
+lisp* nested_car(const char* str, int* index){
 
    lisp* tempo = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* tempo2 = (lisp*)ncalloc(1, sizeof(lisp));
 
    if(str[*index] == ')'){
       return NULL;
    }
 
-   (*index)++;
-
-   tempo = nested(l, str, index);
+   tempo2 = nested_car(str, (index) + 1);
+   tempo = lisp_cons(lisp_atom(atoi(&str[(*index) - 1])), tempo2);
 
    return tempo;
 
 }
 
 
-
+//return a new list given the string of characters 
 lisp* lisp_fromstring(const char* str){
 
    lisp* temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
@@ -339,15 +339,14 @@ lisp* lisp_fromstring(const char* str){
 
          while(str[index] != ')'){
 
-            //use a recursive function to go through the list
-            //and store the values inside this function
-            temp_lisp->car = nested(temp_lisp, str, &index);
-            
+            temp_lisp->car = nested_car(str, &index); 
+
          }
 
       }
 
-      temp_lisp->car = lisp_atom(atoi((&str[index])));
+      temp_lisp->atomtype = atoi(&str[index]);
+      temp_lisp->cdr = lisp_atom(atoi(&str[index + 1]));
 
       index++;
 
