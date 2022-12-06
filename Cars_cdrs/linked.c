@@ -24,21 +24,36 @@ lisp* lisp_atom(const atomtype a){
    temp->car = NULL;
    temp->cdr = NULL; 
 
+   //only returns the atom element, not a list
+   temp->choice = true;
+
    return temp;
 
 }
+
+// Returns a boolean depending up whether l points to an atom (not a list)
+bool lisp_isatomic(const lisp* l){
+
+   if(l == NULL){
+      return false;
+   }
+
+   if(l->choice == true){
+
+      return true;
+
+   }
+
+   return false;   
+
+}
+
+
 
 // Returns a deep copy of the list 'l'
 lisp* lisp_copy(const lisp* l){
 
    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-
-/*
-memcpy(temp->car, l->car, sizeof(lisp));
-memcpy(temp->cdr, l->cdr, sizeof(lisp));
-memcpy(temp->atomtype, l->atomtype, sizeof(int));
-*/
-
 
    temp->car = l->car;
    temp->cdr = l->cdr;
@@ -54,8 +69,11 @@ lisp* lisp_cons(const lisp* l1,  const lisp* l2){
    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
    //checks if the strings are null
-   if(l1 == NULL){
+   if(l1 == NULL && l2 != NULL){
       temp->car = NULL;
+      temp->cdr = (lisp*) l2;
+
+      return temp;
    }
 
    if(l2 == NULL){
@@ -82,10 +100,11 @@ lisp* lisp_cons(const lisp* l1,  const lisp* l2){
 }
 
 
+
 //returns the number of components in the lisp
 int lisp_length(const lisp* l){
 
-   if(l == NULL){
+   if(l == NULL || l->choice == true){
       return 0;
    }
 
@@ -190,14 +209,26 @@ void empty_list(char * arr){
    return;
 }
 
-/*
-void populate_list(lisp* l, char* arr, int* index){
 
-   arr[*index] = l->atomtype + '0'; 
-   (*index)++; 
-   
+void populate_list(const lisp* l, char* arr, int* index){
+
+      //check to store negative numbers
+      if(l->atomtype < 0){
+            
+         arr[*index] = '-';
+         (*index)++;
+
+         arr[*index] = l->atomtype + '0';
+         (*index)++;   
+
+      }else if(l->atomtype >= 0){
+
+         arr[*index] = l->atomtype + '0';
+         (*index)++;
+
+      }
 }
-*/
+
 
 // Returns stringified version of list
 void lisp_tostring(const lisp* l, char* str){
@@ -219,9 +250,20 @@ void lisp_tostring(const lisp* l, char* str){
 
    if(l->choice == true){
       
-      arr[index] = l->atomtype + '0';
-      index++;
-      arr[index] = '\0';
+      //check to store negative numbers
+      if(l->atomtype < 0){
+         
+         populate_list(l, arr, &index);
+ 
+         arr[index] = '\0';      
+
+      }else if(l->atomtype >= 0){
+
+         populate_list(l, arr, &index);
+
+         arr[index] = '\0';
+
+      }
 
       strcpy(str, arr);
 
@@ -240,15 +282,12 @@ void lisp_tostring(const lisp* l, char* str){
 
             temp = l->car;
             while(temp->cdr != NULL){
-                  
-               arr[index] = temp->atomtype + '0';
-               index++;
-
-               //populate_list(temp, arr, &index);
-
+               
+               populate_list(temp, arr, &index);             
                populate_space(arr, &index);
 
-               temp = temp->cdr;
+            temp = temp->cdr;
+            
             }
 
             if(arr[index - 1] != ' '){
@@ -256,21 +295,15 @@ void lisp_tostring(const lisp* l, char* str){
             }
 
             //last cons block pointing to NULL
-            arr[index] = temp->atomtype + '0';
-            index++;
-
-            //populate_list(temp, arr, &index);
-
+            //check to store negative numbers
+            populate_list(temp, arr, &index);
             populate_right_bracket(arr, &index);
-
             populate_space(arr, &index);
 
          }else{
             
-            arr[index] = l->atomtype + '0';
-            index++;  
-            
-            //populate_list(l, arr, &index);
+            //check to store negative numbers
+            populate_list(l, arr, &index);
          
             populate_space(arr, &index);
 
@@ -279,12 +312,11 @@ void lisp_tostring(const lisp* l, char* str){
          l = l->cdr;
       }
 
+
       //last cons block pointing to NULL
-      arr[index] = l->atomtype + '0';
-      index++;
-
-      //populate_list(l, arr, &index);
-
+      //check to store negative numbers
+      populate_list(l, arr, &index);
+ 
       populate_right_bracket(arr, &index);
 
       arr[index] = '\0';
@@ -307,51 +339,183 @@ void lisp_free(lisp** l){
 
 
 
-//function to store the new string values until the next '(' is reached 
-lisp* nested_car(const char* str, int* index){
-
-   lisp* tempo = (lisp*)ncalloc(1, sizeof(lisp));
-   lisp* tempo2 = (lisp*)ncalloc(1, sizeof(lisp));
+//recursive function to itteratively go through each condition
+lisp* lisp_ans(lisp* temp_lisp, const char* str, int* index)
+{
 
    if(str[*index] == ')'){
       return NULL;
    }
 
-   tempo2 = nested_car(str, (index) + 1);
-   tempo = lisp_cons(lisp_atom(atoi(&str[(*index) - 1])), tempo2);
+   temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
+    
+   //tracker of the cons
+   lisp* p;
+   p = temp_lisp;
 
-   return tempo;
+   while(str[*index] != ')'){
 
-}
+   printf("INDEX - %i  , Character - %c\n", *index, str[*index]);
 
 
-//return a new list given the string of characters 
-lisp* lisp_fromstring(const char* str){
+      if(str[*index] == '('){
 
-   lisp* temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
-   int index = 0;
-
-   while(str[index] != ')'){
-      
-      if(str[index] == '('){
-
-         index++;
-
-         while(str[index] != ')'){
-
-            temp_lisp->car = nested_car(str, &index); 
-
-         }
-
+            (*index)++;
+            //use a recursive function to go through the list
+            //and store the values inside this function
+            p->car = lisp_ans(NULL, str, index);
       }
 
-      temp_lisp->atomtype = atoi(&str[index]);
-      temp_lisp->cdr = lisp_atom(atoi(&str[index + 1]));
+      else{
+         if(str[*index] == ' '){
+            (*index)++;
+         }
 
-      index++;
+         else{
+
+            int sign = 1;
+            int number;
+
+            //check if the prev character was also a number or not   
+            number = atoi((&str[*index]));
+
+            if(str[*index] == '-'){
+
+               sign = -1;
+               (*index)++;
+
+               number = number * sign;
+
+            }
+
+            if(p == NULL){
+               
+               p = lisp_atom(number);
+               (*index)++;
+
+            }
+            
+            else{
+
+               p->cdr = lisp_atom(number);
+               p = p->cdr;                  
+               (*index)++;
+
+            }
+         }
+         
+         
+      }
 
    }
 
+   p->cdr = NULL;
+
+   (*index)++;
+
    return temp_lisp;
+
 }
 
+
+lisp* lisp_fromstring(const char* str){
+
+   // lisp* temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
+   int index = 1;
+
+   //we pass in an 
+   return lisp_ans(NULL, str, &index);
+   
+}
+
+
+
+void test(){
+
+   int index;
+   char em_str_test[LISTSTRLEN];
+   char str_test[LISTSTRLEN];
+
+
+   lisp* t1 = lisp_cons(lisp_atom(3), NULL);
+   assert(lisp_isatomic(t1) == false);
+   assert((lisp_length(t1) == 1));
+
+   //self-created functions
+   empty_list(em_str_test);
+   assert(strcmp(em_str_test, "()")==0);
+
+   populate_left_bracket(str_test, &index);
+   assert(strcmp(&str_test[index], "(")==0);
+
+   populate_space(str_test, &index);
+   assert(strcmp(&str_test[index], " ")==0);
+
+   populate_right_bracket(str_test, &index);
+   assert(strcmp(&str_test[index], ")")==0);
+  
+   populate_list(t1, str_test, &index);
+   assert(strcmp(&str_test[index], "3")==0);
+
+   lisp_free(&t1);   
+
+
+   //testing get_val function and isatomic function
+   lisp* t2 = lisp_cons(lisp_atom(2), NULL);
+   lisp* t3 = lisp_cons(lisp_atom(1), t2);
+   lisp* t4 = lisp_cons(lisp_atom(3), lisp_cons(lisp_atom(4), lisp_cons(lisp_atom(5), NULL)));
+   lisp* t5 = lisp_cons(t3, t4);
+   lisp* t6 = lisp_cons(lisp_atom(0), t5);
+
+   lisp* la =  lisp_car(t6);
+   lisp* lb =  lisp_car(lisp_car(lisp_cdr(t6)));
+   lisp* lc =  lisp_car(lisp_cdr(lisp_car(lisp_cdr(t6))));
+   lisp* ld =  lisp_car(lisp_cdr(lisp_cdr(t6)));
+   lisp* le =  lisp_car(lisp_cdr(lisp_cdr(lisp_cdr(t6))));
+   lisp* lf =  lisp_car(lisp_cdr(lisp_cdr(lisp_cdr(lisp_cdr(t6)))));   
+
+   assert(lisp_getval(la) == 0);
+   assert(lisp_getval(lb) == 1);
+   assert(lisp_getval(lc) == 2);
+   assert(lisp_getval(ld) == 3);
+   assert(lisp_getval(le) == 4);
+   assert(lisp_getval(lf) == 5);
+
+   assert(lisp_isatomic(t2) != true);
+   assert(lisp_isatomic(lisp_car(t3)) == true);
+   assert(lisp_isatomic(lisp_cdr(t4)) == false);
+
+   //if NULL head is called, value return's will be 0;
+   lisp* t7 = lisp_cons(NULL, t5);
+
+   assert(lisp_getval(t7) == 0);
+
+   printf("Ended testing\n");
+
+   lisp_free(&t1);
+   assert(!t1);
+   lisp_free(&t2);
+   assert(!t2);
+   lisp_free(&t3);
+   assert(!t3);
+   lisp_free(&t4);
+   assert(!t4);
+   lisp_free(&t5);
+   assert(!t5);
+   lisp_free(&t6);
+   assert(!t6);
+
+   lisp_free(&la);
+   assert(!la);
+   lisp_free(&lb);
+   assert(!lb);
+   lisp_free(&lc);
+   assert(!lc);
+   lisp_free(&ld);
+   assert(!ld);
+   lisp_free(&le);
+   assert(!le);
+   lisp_free(&lf);
+   assert(!lf);
+
+}
