@@ -52,46 +52,49 @@ bool lisp_isatomic(const lisp* l){
 
 // Returns a deep copy of the list 'l'
 lisp* lisp_copy(const lisp* l){
-/*
-   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
 
-   temp->car = l->car;
-   temp->cdr = l->cdr;
-   temp->atomtype = l->atomtype;
-*/
+   lisp* p = (lisp*)ncalloc(1, sizeof(lisp));
+   lisp* temp1;
+   lisp* temp2;
 
-   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   while(l->cdr != NULL){
 
-   while(l->cdr != NULL && *head != NULL){
+      p->cdr = (lisp*)ncalloc(1, sizeof(lisp));
 
-      if(*head->car != NULL){
+      if(l->car != NULL){       
          
-         *temp1 = *head->car;
-         *temp2 = *temp1->cdr;
+         p->car = (lisp*)ncalloc(1, sizeof(lisp)); 
+         temp1 = l->car;
+         temp2 = p->car;
+         temp2->atomtype = p->atomtype;
 
-         while(*temp1->cdr != NULL){
-            
-            free(*temp1);
-            *temp1 = *temp2;
-            *temp2 = *temp2->cdr;
+         while(temp1->cdr != NULL){
+
+            temp2->cdr = (lisp*)ncalloc(1, sizeof(lisp));            
+            temp2->cdr->atomtype = temp1->atomtype;         
+
+            temp2 = temp2->cdr;            
+            temp1 = temp1->cdr;
             
          }
+         
+            temp2->cdr = NULL;
 
       }else{
 
-         free(*head);
+         p->atomtype = l->atomtype;
 
       }  
 
-      *head = *body;
-      *body = *body->cdr;
+
+      l = l->cdr;
+      p = p->cdr;
+
    }
 
+   p->cdr = NULL;
 
-
-
-
-   return temp;
+   return p;
 
 }
 
@@ -256,10 +259,42 @@ void populate_list(const lisp* l, char* arr, int* index){
          arr[*index] = val + '0';
          (*index)++;   
 
-      }else if(l->atomtype >= 0){
+      }else if(l->atomtype >= 10){
+            
+         int counter = 0;
+         int n = 0;
+         int val = l->atomtype;
+         int array[1000];
+         int in = 0;
 
-         arr[*index] = l->atomtype + '0';
-         (*index)++;
+         //counts the number of digits
+         while(n != 0){
+            n=n/10;
+            counter++;
+         }
+
+         //stores the values inside a int temporary array in reverse order
+         while(val > 0){
+
+            array[in] = val % 10;  
+            in++;
+            val = val/10;
+
+         }
+
+         //save the values into the string
+         while(counter >= 0){
+            
+            arr[*index] = array[counter] + '0';
+            (*index)++; 
+
+         }
+
+
+      }else{
+
+            arr[*index] = l->atomtype + '0';
+            (*index)++;
 
       }
 }
@@ -367,7 +402,8 @@ void lisp_tostring(const lisp* l, char* str){
 void lisp_free(lisp** l){
 
 /*
-   lisp** head, body;
+   lisp* head;
+   lisp* body;
    *head = *l;
    *body = (*head)->cdr;
    lisp** temp1, temp2;
@@ -399,12 +435,11 @@ void lisp_free(lisp** l){
 
 */
 
-/*
 
    *l = NULL;
    free(*l);
    
-*/
+
 }
 
 

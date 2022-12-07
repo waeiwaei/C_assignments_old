@@ -26,15 +26,15 @@ void test(void);
 
 int main(void)
 {
-   test();
+   //test();
    char str[LISTSTRLEN];
-   //printf("Test Lisp (%s) Start ... ", LISPIMPL);
+   printf("Test Lisp (%s) Start ... ", LISPIMPL);
 
    lisp_tostring(NIL, str);
    assert(lisp_length(NIL)==0);
    assert(strcmp(str, "()")==0);
-
    assert(lisp_isatomic(NULL)==false);
+
    lisp* a1 = atom(2);
    assert(lisp_length(a1)==0);
    assert(lisp_isatomic(a1)==true);
@@ -150,6 +150,8 @@ int main(void)
 
    lisp* l9 = copy(l5);
    lisp_tostring(l9, str);
+   printf("\n\n%s", str);
+
    assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
    // OK, it's the same as l5, but is it deep? -- clarify with sankalp on deep copy and free 
    lisp_free(&l9);
@@ -171,20 +173,20 @@ int main(void)
    /*-------------------------*/
    /* lisp_fromstring() tests */ 
    /*-------------------------*/
-
+/*
    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((-1 2) (3 4) (5 (6 7)))"};
    for(int i=0; i<4; i++){
       lisp* f1 = fromstring(inp[i]);
       lisp_tostring(f1, str);
 
-      printf("%s \n\n\n", str);
+      printf("\n%s \n\n\n", str);
 
 
       //assert(strcmp(str, inp[i])==0);
       lisp_free(&f1);
       assert(!f1);
    }
-
+*/
 
    /*--------------------*/
    /* lisp_list() tests  */
