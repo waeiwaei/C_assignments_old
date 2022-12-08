@@ -26,7 +26,7 @@ void test(void);
 
 int main(void)
 {
-   //test();
+   test();
    char str[LISTSTRLEN];
    printf("Test Lisp (%s) Start ... ", LISPIMPL);
 
@@ -41,12 +41,12 @@ int main(void)
    lisp_free(&a1);
    assert(a1==NULL);
 
-   lisp* l1 = cons(atom(2), NIL);
+   lisp* l1 = cons(atom(-12), NIL);
    assert(l1);
    assert(lisp_length(l1)==1);
    lisp_tostring(l1, str);
-   assert(strcmp(str, "(2)")==0);
-   assert(lisp_getval(car(l1))==2);
+   assert(strcmp(str, "(-12)")==0);
+   assert(lisp_getval(car(l1))==-12);
    assert(lisp_isatomic(l1)==false);
    assert(lisp_isatomic(lisp_car(l1))==true);
 
@@ -55,7 +55,7 @@ int main(void)
    assert(lisp_length(l2)==2);
    lisp_tostring(l1, str);
    lisp_tostring(l2, str);
-   assert(strcmp(str, "(1 2)")==0);
+   assert(strcmp(str, "(1 -12)")==0);
 
    lisp* l3 = cons(atom(3), cons(atom(4), cons(atom(5), NIL)));
    assert(l3);
@@ -67,54 +67,15 @@ int main(void)
    assert(l4);
    assert(lisp_length(l4)==4);
    lisp_tostring(l4, str);
-   assert(strcmp(str, "((1 2) 3 4 5)")==0);
+   assert(strcmp(str, "((1 -12) 3 4 5)")==0);
 
    lisp* l5 = cons(atom(0), l4);
    assert(l5);
    assert(lisp_length(l5)==5);
    lisp_tostring(l5, str);
-   assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
+   assert(strcmp(str, "(0 (1 -12) 3 4 5)")==0);
 
-
-   //personal testing - Tutors structure
-/*   lisp* la =  car(l5);
-   lisp* lb =  car(car(cdr(l5)));
-   lisp* lc =  car(cdr(car(cdr(l5))));
-   lisp* ld =  car(cdr(cdr(l5)));
-   lisp* le =  car(cdr(cdr(cdr(l5))));
-   lisp* lf =  car(cdr(cdr(cdr(cdr(l5)))));   
-
-   printf("%i \n\n",lisp_getval(la));
-   printf("%i \n\n",lisp_getval(lb));
-   printf("%i \n\n",lisp_getval(lc));
-   printf("%i \n\n",lisp_getval(ld));
-   printf("%i \n\n",lisp_getval(le));
-   printf("%i \n\n",lisp_getval(lf));*/
-
-
-/*
-   //personal testing - our structure
-   lisp* la =  car(l5);
-   lisp* lb =  car(car(cdr(l5)));
-   //clarify with sankalp
-   lisp* lc =  car(cdr(car(car(cdr(l5)))));
-   lisp* ld =  car(cdr(cdr(l5)));
-   lisp* le =  car(cdr(cdr(cdr(l5))));
-   lisp* lf =  car(cdr(cdr(cdr(cdr(l5)))));   
-
-   printf("%i \n\n",lisp_getval(la));
-   printf("%i \n\n",lisp_getval(lb));
-   printf("%i \n\n",lisp_getval(lc));
-   printf("%i \n\n",lisp_getval(ld));
-   printf("%i \n\n",lisp_getval(le));
-   printf("%i \n\n",lisp_getval(lf));
-
-
-   lisp_tostring(l2, str);
-   assert(strcmp(str, "(1 2)")==0);
-
-
-*/
+  
    /* ------------------------- */
    /* lisp_car & lisp_cdr tests */
    /* ------------------------- */
@@ -127,18 +88,16 @@ int main(void)
    
    lisp* l6 = car(l1);
    lisp_tostring(l6, str);
-   //printf("%s\n\n", str);
    // This is not a list, therefore not bracketed.
-   assert(strcmp(str, "2")==0);
+   assert(strcmp(str, "-12")==0);
    lisp* l7 = cdr(l3);
    lisp_tostring(l7, str);
-   //printf("%s\n\n", str);
    assert(strcmp(str, "(4 5)")==0);
    lisp* l8 = car(cdr(cdr(l5)));
    lisp_tostring(l8, str);
-   //printf("%s\n\n", str);
    // This is not a list, therefore not bracketed.
    assert(strcmp(str, "3")==0);
+
 
    /*-----------------*/
    /* lisp_copy tests */
@@ -147,13 +106,12 @@ int main(void)
     (defvar l9 (copy-list l5)) output=(0 (1 2) 3 4 5)
    */
 
-
    lisp* l9 = copy(l5);
    lisp_tostring(l9, str);
-   printf("\n\n%s", str);
 
-   assert(strcmp(str, "(0 (1 2) 3 4 5)")==0);
+   assert(strcmp(str, "(0 (1 -12) 3 4 5)")==0);
    // OK, it's the same as l5, but is it deep? -- clarify with sankalp on deep copy and free 
+
    lisp_free(&l9);
    assert(!l9);
 
