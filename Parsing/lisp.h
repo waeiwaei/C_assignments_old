@@ -12,8 +12,13 @@ typedef int atomtype;
 #include <stdarg.h>
 
 // Returns element 'a' - this is not a list, and
-// by itself would be printed as e.g. "3", and not "(3)"
+// by itelf would be printed as e.g. "3", and not "(3)"
 lisp* lisp_atom(const atomtype a);
+
+
+// Returns a boolean depending up whether l points to an atom (not a list)
+bool lisp_isatomic(const lisp* l);
+
 
 // Returns a list containing the car as 'l1'
 // and the cdr as 'l2'- data in 'l1' and 'l2' are reused,
@@ -30,9 +35,6 @@ lisp* lisp_cdr(const lisp* l);
 
 // Returns the data/value stored in the cons 'l'
 atomtype lisp_getval(const lisp* l);
-
-// Returns a boolean depending up whether l points to an atom (not a list)
-bool lisp_isatomic(const lisp* l);
 
 // Returns a deep copy of the list 'l'
 lisp* lisp_copy(const lisp* l);
@@ -59,7 +61,7 @@ lisp* lisp_fromstring(const char* str);
 lisp* lisp_list(const int n, ...);
 
 // Allow a user defined function 'func' to be applied to
-// each atom in the list l.
+// each component of the list 'l'.
 // The user-defined 'func' is passed a pointer to a cons,
 // and will maintain an accumulator of the result.
-void lisp_reduce(void (*func)(lisp* l, atomtype* n), lisp* l, atomtype* acc);
+atomtype lisp_reduce(atomtype(*func)(lisp* l), lisp* l);
