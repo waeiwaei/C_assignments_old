@@ -21,8 +21,8 @@ typedef struct lisp lisp;
 
 /*Function definitions*/
 bool program(char* input);
-void instructions(char* input, int* len_index);
-void instruction(char* input, int* len_index);
+void instructions(char* input, int* len_index, lisp* val);
+void instruction(char* input, int* len_index, lisp* val);
 bool functions(char* input);
 bool variable(char value);
 int length(char* input, int line);
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
 
       fclose(fp); 
 
-      printf("%s\n\n", input);
+      printf("%s\n", input);
 
       /*program function for parser and interpreter*/
       program(input);
@@ -83,12 +83,15 @@ int main(int argc, char* argv[]){
 
 bool program(char* input){
 
+   //used to store the values in the SET, and passed on to the PRINT
+   lisp* val = (lisp*)calloc(1, sizeof(lisp));
+
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
 
       int len_index = 1;
       //go into the instruction
-      instructions(input, &len_index);
+      instructions(input, &len_index, val);
       
    }else{
       printf("Input does not conform to formal grammar");
@@ -99,42 +102,48 @@ bool program(char* input){
 }
 
 
-void instructions(char* input, int* len_index){
+void instructions(char* input, int* len_index, lisp* val){
 
    //static int inc_len = 0;
 
    while(input[*len_index] != ')'){
       if(input[*len_index] == '('){
          (*len_index)++;
-         instructions(input, len_index);
+         instructions(input, len_index, val);
       }else if(input[*len_index] == ' '){
          (*len_index)++;
       }else{
-         instruction(input, len_index);
+         instruction(input, len_index, val);
       }
-
    }
 
 
 }
 
 
+void clear_string(char* input, int* len){
+
+   for(int i = 0; i <= (*len); i++){
+      input[i] = ' ';
+   }
+
+   *len = 0;
+
+}
+
 //to read the first word after that list to determine the specific instruction
-void instruction(char* input, int* len_index){
+void instruction(char* input, int* len_index, lisp* val){
    
    static int flag = 0;
    char inst[MAX_LENGTH];
    int len = 0;
-   lisp* val = (lisp*)calloc(1, sizeof(lisp));
+
 
    while(input[*len_index] != ')'){
 
-   //unable to read the val lisp pointer variable inside PRINT condition
-   printf("%s", val->list);
-
       if(input[*len_index] == '('){
          flag = 1;
-         instructions(input, len_index);
+         instructions(input, len_index, val);
       }
 
          //read the instructions given
@@ -151,10 +160,10 @@ void instruction(char* input, int* len_index){
             //pass in the rest of the string into the function
             val = ins_set(input, len_index);
 
+            clear_string(input, &len);
+
          }else if(strcmp(inst, "PRINT") == 0){
             printf("PRINT has been called\n");
-            // Unable to read val lisp pointer in PRINT condition
-            //printf("%s", val->list);
 
             if(val != NULL){
                char temp_array[MAX_LENGTH];
@@ -221,7 +230,12 @@ void instruction(char* input, int* len_index){
          (*len_index)++;
    }
 
+            printf("Outside loop Value - %s\n\n", val->list);
+
+
+
    if(input[*len_index] == ')'){
+
       if(flag == 0){
          (*len_index)++;
          return;
@@ -247,6 +261,8 @@ lisp* ins_set(char* input, int* len_index){
          (*len_index)++;
          //If it is a string literal
          ins_list(input, len_index, temp);
+
+         return temp;
 
       //error message - input does not conform to grammar
       }else{
@@ -280,8 +296,6 @@ void ins_list(char* input, int* len_index, lisp* temp){
 
 char check_nil[MAX_LENGTH];
 int index1 = 0, index2 = 0;
-
-   // printf("Value - %c, len index - %i\n", input[*len_index], *len_index);
 
    if(input[*len_index] == 39){
       (*len_index)++;
@@ -336,4 +350,7 @@ bool ins_print(char* array){
    }else{
       return false;
    }
+
+
+
 }
