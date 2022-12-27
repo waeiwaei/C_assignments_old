@@ -81,7 +81,10 @@ int main(int argc, char* argv[]){
 bool program(char* input){
 
    //used to store the values in the SET, and passed on to the PRINT
-   lisp* val = (lisp*)calloc(1, sizeof(lisp));
+   //lisp* val = (lisp*)calloc(1, sizeof(lisp));
+   lisp* val = NULL;
+
+   printf("Before: Program - address val - %p\n", val);
 
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
@@ -89,11 +92,15 @@ bool program(char* input){
       int len_index = 1;
       //go into the instruction
       instructions(input, &len_index, val);
-      
+
    }else{
       printf("Input does not conform to formal grammar");
       return false;
    }
+
+
+   printf("After: Program - address val - %p\n", val);
+
 
    return false;
 }
@@ -101,7 +108,7 @@ bool program(char* input){
 
 void instructions(char* input, int* len_index, lisp* val){
 
-   //static int inc_len = 0;
+   printf("Len index - %i, Ascii values - %i, Before: Instructions - The value of val - %p\n", *len_index, input[*len_index], val);
 
    while(input[*len_index] != ')'){
       if(input[*len_index] == '('){
@@ -114,6 +121,7 @@ void instructions(char* input, int* len_index, lisp* val){
       }
    }
 
+   //printf("After: Instructions - The value of val - %p\n", &val);
 
 }
 
@@ -131,19 +139,20 @@ void clear_string(char* input, int* len){
 //to read the first word after that list to determine the specific instruction
 void instruction(char* input, int* len_index, lisp* val){
    
+   //double nested list flag
    static int flag = 0;
    char inst[MAX_LENGTH];
    int len = 0;
 
-
    while(input[*len_index] != ')'){
 
+      //if there is a double nested list - call the instructions function again
       if(input[*len_index] == '('){
          flag = 1;
          instructions(input, len_index, val);
       }
 
-         //read the instructions given
+         //read the instructions given and store in 1D array
          //1. SET & PRINT (IO)
          //2. CAR, CDR, CONS (LIST)
          //3. PLUS & LENGTH (INT)
@@ -153,9 +162,13 @@ void instruction(char* input, int* len_index, lisp* val){
          //IO Functions
          if(strcmp(inst, "SET") == 0){
             printf("SET has been called\n");
+            printf("BEFORE ; SET The value of val - %p\n\n", val);
+
             (*len_index)++;
             //pass in the rest of the string into the function
-            val = ins_set(input, len_index);
+            val = (ins_set(input, len_index));
+
+            printf("AFTER ; SET The value of val - %p\n\n", val);
 
             clear_string(input, &len);
 
@@ -227,8 +240,7 @@ void instruction(char* input, int* len_index, lisp* val){
          (*len_index)++;
    }
 
-            printf("Outside loop Value - %s\n\n", val->list);
-
+   //printf("%s - Instruction - The value of val - %p\n\n", inst, val);
 
 
    if(input[*len_index] == ')'){
@@ -259,6 +271,9 @@ lisp* ins_set(char* input, int* len_index){
          //If it is a string literal
          ins_list(input, len_index, temp);
 
+         printf("Memory address of temp - %p\n\n", temp);
+         printf("value of the list - '%s'\n\n", temp->list);
+
          return temp;
 
       //error message - input does not conform to grammar
@@ -266,8 +281,6 @@ lisp* ins_set(char* input, int* len_index){
          printf("SET - Input does not conform to formal grammar\n");
 
       }
-
-      (*len_index)++;
    }
 
 
