@@ -156,6 +156,7 @@ bool instruction(char* input, int* len_index){
             ins_set(input, len_index);
 
          }else if(strcmp(inst, "PRINT") == 0){
+
             (*len_index)++;
 
             ins_print(input);
@@ -310,6 +311,9 @@ bool ins_var(char* input, int* len_index){
 
 //<PRINT> ::= "PRINT" <LIST> | "PRINT" <STRING>  
 bool ins_print(char* input){
+
+   printf("PRINT - function\n");
+
 
    //goes through the input, and fidn if it is a single quotation or double quotation
    //subsequently then saves it in a character array to print
