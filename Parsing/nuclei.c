@@ -4,35 +4,29 @@
 #include <ctype.h>
 #include <string.h>
 
-#define MAX_LENGTH 10000
+#define ON_ERROR(S) {fprintf(stderr, "%s", S);\
+                     exit(EXIT_FAILURE);}
 
-struct lisp{
-
-    int atomtype;
-    struct lisp* car;
-    struct lisp* cdr;
-    char list[MAX_LENGTH];
-    bool choice;
-
-};
-
-typedef struct lisp lisp;
+#define MAX_LENGTH 1000
 
 
-/*Function definitions*/
 bool program(char* input);
-void instructions(char* input, int* len_index, lisp* val);
-void instruction(char* input, int* len_index, lisp* val);
-lisp* ins_set(char* input, int* len_index);
+bool instructions(char* input, int* len_index);
+bool instruction(char* input, int* len_index);
+bool ins_set(char* input, int* len_index);
+bool ins_list(char* input, int* len_index);
 bool ins_var(char* input, int* len_index);
-void ins_list(char* input, int* len_index, lisp* temp);
+bool ins_literal(char* input, int* len_index);
 bool ins_print(char* array);
+bool ins_string(char* input, int* len_index);
 
-//we will also need to read a file, and store the input in a string, and then find each word based on "\n"
+
+//read file from argv, and store characters in 1D array
 int main(int argc, char* argv[]){
 
    char input[MAX_LENGTH];
    char c;
+   int val = 0;
 
    /*read files from argv[1]*/
    if(argc == 0){
@@ -46,7 +40,6 @@ int main(int argc, char* argv[]){
          return 0;
       }else{
 
-         int val;
          c = fgetc(fp);
 
       /*Populate 1D string with input from file*/
@@ -62,94 +55,89 @@ int main(int argc, char* argv[]){
 
       }
 
+      input[val] = '\0';
 
       fclose(fp); 
 
-      printf("%s\n", input);
-
-      /*program function for parser and interpreter*/
-      program(input);
+      /*program function for parser*/
+      if(program(input)){
+         printf("Parsed OK!");
+      }
 
       }
    }
    
-
    return 0;
 }
 
 
+//<PROG> ::= "(" <INSTRCTS>
 bool program(char* input){
 
-   //used to store the values in the SET, and passed on to the PRINT
-   //lisp* val = (lisp*)calloc(1, sizeof(lisp));
-   lisp* val = NULL;
-
-   printf("Before: Program - address val - %p\n", val);
+   printf("%s\n", input);
 
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
 
       int len_index = 1;
-      //go into the instruction
-      instructions(input, &len_index, val);
+      //go into the instructions function
+      if(instructions(input, &len_index)){
+         return true;
+      }else{
+         return false;
+      }
 
-   }else{
-      printf("Input does not conform to formal grammar");
-      return false;
    }
-
-
-   printf("After: Program - address val - %p\n", val);
-
-
+   
+   ON_ERROR("Expression does not have an opening bracket");
    return false;
+
 }
 
 
-void instructions(char* input, int* len_index, lisp* val){
+//<INSTRCTS> ::= <INSTRCT> <INSTRCTS> | ")"
+bool instructions(char* input, int* len_index){
 
-   printf("Len index - %i, Ascii values - %i, Before: Instructions - The value of val - %p\n", *len_index, input[*len_index], val);
-
+   //go through the input after the first '(', to identify the subsequent nested '('
+   //<INSTRCT> <INSTRCTS>
    while(input[*len_index] != ')'){
+
+      printf("INSTRUCTIONS - len_index - %i \n", *len_index);
       if(input[*len_index] == '('){
          (*len_index)++;
-         instructions(input, len_index, val);
+         instructions(input, len_index);
       }else if(input[*len_index] == ' '){
          (*len_index)++;
       }else{
-         instruction(input, len_index, val);
+         if(!instruction(input, len_index)){
+            return false;
+         }
       }
    }
 
-   //printf("After: Instructions - The value of val - %p\n", &val);
-
-}
-
-
-void clear_string(char* input, int* len){
-
-   for(int i = 0; i <= (*len); i++){
-      input[i] = ' ';
+   // | ")"
+   if(input[*len_index] == ')'){
+      return true;
    }
 
-   *len = 0;
+   return false;
 
 }
 
-//to read the first word after that list to determine the specific instruction
-void instruction(char* input, int* len_index, lisp* val){
-   
-   //double nested list flag
-   static int flag = 0;
+//<INSTRCT> ::= "(" <FUNC> ")"
+bool instruction(char* input, int* len_index){
+
+   printf("INSTRUCTION - len_index - %i \n", *len_index);
+
    char inst[MAX_LENGTH];
    int len = 0;
 
    while(input[*len_index] != ')'){
 
-      //if there is a double nested list - call the instructions function again
+      //if there is another nested list - call the instruction function once again
       if(input[*len_index] == '('){
-         flag = 1;
-         instructions(input, len_index, val);
+         (*len_index)++;
+         instruction(input, len_index);
       }
 
          //read the instructions given and store in 1D array
@@ -161,48 +149,16 @@ void instruction(char* input, int* len_index, lisp* val){
 
          //IO Functions
          if(strcmp(inst, "SET") == 0){
-            printf("SET has been called\n");
-            printf("BEFORE ; SET The value of val - %p\n\n", val);
 
             (*len_index)++;
-            //pass in the rest of the string into the function
-            val = (ins_set(input, len_index));
 
-            printf("AFTER ; SET The value of val - %p\n\n", val);
-
-            clear_string(input, &len);
+            //pass in the rest of the string into the function - and check the values
+            ins_set(input, len_index);
 
          }else if(strcmp(inst, "PRINT") == 0){
-            printf("PRINT has been called\n");
+            (*len_index)++;
 
-            if(val != NULL){
-               char temp_array[MAX_LENGTH];
-               strcpy(temp_array, val->list);
-
-               ins_print(temp_array);
-
-            }else{
-
-               //increase the index to point to the "
-               (*len_index) = (*len_index) + 2;
-
-               //string - "xxx" save in an array
-               if(input[*len_index] == 34){
-                 
-                  (*len_index)++;
-                  char str_input[MAX_LENGTH];
-                  int index1 = 0;
-
-                  while(input[*len_index] == 34){
-                     str_input[index1] = input[*len_index];
-                     index1++;
-                     (*len_index)++;
-                  }
-                  
-                  ins_print(str_input);
-               }
-
-            }
+            ins_print(input);
 
          //LIST Functions
          }else if(strcmp(inst, "CAR") == 0){
@@ -240,59 +196,111 @@ void instruction(char* input, int* len_index, lisp* val){
          (*len_index)++;
    }
 
-   //printf("%s - Instruction - The value of val - %p\n\n", inst, val);
-
 
    if(input[*len_index] == ')'){
-
-      if(flag == 0){
-         (*len_index)++;
-         return;
-      }else{
-      return;
-      }
-   } 
-
+      return true;
+   }else{
+      return false;
+   }
 }
 
 
 //<SET> ::= "SET" <VAR> <LIST>
-lisp* ins_set(char* input, int* len_index){
-   
-   lisp* temp = (lisp*)calloc(1, sizeof(lisp));
+bool ins_set(char* input, int* len_index){
+
+   printf("SET - len_index - %i \n", *len_index);
 
    while(input[*len_index] != ')'){
       if(input[*len_index] == ' '){
          (*len_index)++;
       }
 
+      //check if the VAR grammar is correct
       if(ins_var(input, len_index) == true){
+
          (*len_index)++;
          //If it is a string literal
-         ins_list(input, len_index, temp);
+         if(ins_list(input, len_index)){
 
-         printf("Memory address of temp - %p\n\n", temp);
-         printf("value of the list - '%s'\n\n", temp->list);
-
-         return temp;
+         }else{
+            return false;
+         };
 
       //error message - input does not conform to grammar
       }else{
-         printf("SET - Input does not conform to formal grammar\n");
 
+         ON_ERROR("Expecting a variable - between A to Z");
+         return false;
       }
    }
 
+   return true;
 
-   return temp;
+}
+
+//<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")"
+bool ins_list(char* input, int* len_index){
+
+   printf("LIST - len_index - %i \n", *len_index);
+   
+   //literal
+   if(input[*len_index] == 39){
+   //pass into a literal function - single quoted list - only numbers brackets and space
+      (*len_index)++;
+      if(ins_literal(input, len_index)){
+         return true;
+      }else{
+         ON_ERROR("Issue with literal value");
+      }
+
+   //check if it is a VAR, NIL
+   }
+
+   ON_ERROR("Expecting a literal, NIL or variable");
+   return false;
+
+}
+
+
+bool ins_literal(char* input, int* len_index){
+
+   printf("LITERAL - len_index - %i \n", *len_index);
+
+   int flag = 0;
+
+   //only accept space, bracket and numbers
+   while(input[*len_index] != 39){
+      //if((input[*len_index] >= 48 && input[*len_index] <= 57) || input[*len_index] == 32 || input[*len_index] == 40 || input[*len_index] == 41){
+      if((input[*len_index] >= 48 && input[*len_index] <= 57)){         
+         flag = 0;
+      }else{
+         flag = 1;
+      }
+
+      (*len_index)++;
+   }
+
+   printf("FLAG - %i\n", flag);
+
+   if(flag == 1){
+      (*len_index)++;
+      return false;
+   }
+
+   (*len_index)++;
+   return true;
+
 }
 
 
 bool ins_var(char* input, int* len_index){
 
+   printf("VARIABLE - len_index - %i \n", *len_index);
+
    if(input[*len_index] >= 'A' && input[*len_index] <= 'Z'){
       (*len_index)++;
       return true;
+   
    }else{
       return false;
    }
@@ -300,67 +308,64 @@ bool ins_var(char* input, int* len_index){
    return false;
 }
 
+//<PRINT> ::= "PRINT" <LIST> | "PRINT" <STRING>  
+bool ins_print(char* input){
 
-//<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")"
-void ins_list(char* input, int* len_index, lisp* temp){
+   //goes through the input, and fidn if it is a single quotation or double quotation
+   //subsequently then saves it in a character array to print
 
-char check_nil[MAX_LENGTH];
-int index1 = 0, index2 = 0;
+   int index1 = 0;
 
-   if(input[*len_index] == 39){
-      (*len_index)++;
+   while(input[index1] != '\0'){
+      //goes through each character to the first ' or "
+      if(input[index1] == 39){
 
-      while(input[*len_index] != 39){
-         temp->list[index1] = input[*len_index];
-         index1++;
-         (*len_index)++;
+         if(ins_list(input, &index1)){
+
+            return true;
+
+         }else{
+
+            return false;
+         }
+
+      }else if (input[index1] == '"'){
+
+         if(ins_string(input, &index1)){
+
+            return true;
+
+         }else{
+
+            return false;
+         }
+
       }
+      
+      index1++;
    }
 
-/*
-char check_nil[MAX_LENGTH];
-int index1 = 0, index2 = 0;
+   return false;
+}
 
-while(input[*len_index] != ')'){
-   //check if it is a single quoted literal
-   if(input[*len_index] == 39){
+//"PRINT" <LIST> | "PRINT" <STRING>
+bool ins_string(char* input, int* len_index){
+
+   int flag = 0;
+
+   if(input[*len_index] == '"'){
       (*len_index)++;
 
-      while(input[*len_index] != 39){
-         temp->list[index1] = input[*len_index];
-         index1++;
+      while(input[*len_index] != '"'){
+         if(input[*len_index] == '"'){flag = 1;}
          (*len_index)++;
-      }
-
-   }else{
-
-      check_nil[index1] = input[*len_index];
-
-      if(strcmp(check_nil, "NIL") == 0){
-         strcpy(temp->list , "NIL");   
       }
 
    }
 
-   index2++;
-   (*len_index)++;
-
-}
-*/
-
-}
-
-
-//should print the values of the string   
-bool ins_print(char* array){
-
-   if(strlen(array) > 0){
-      printf("%s", array);
+   if(flag == 1){
       return true;
-   }else{
-      return false;
    }
 
-
-
+   return false;
 }
