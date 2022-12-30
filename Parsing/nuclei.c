@@ -17,8 +17,8 @@ bool ins_set(char* input, int* len_index);
 bool ins_list(char* input, int* len_index);
 bool ins_var(char* input, int* len_index);
 bool ins_literal(char* input, int* len_index);
-bool ins_print(char* array);
 bool ins_string(char* input, int* len_index);
+bool ins_print(char* array, int* len_index);
 
 
 //read file from argv, and store characters in 1D array
@@ -74,8 +74,6 @@ int main(int argc, char* argv[]){
 //<PROG> ::= "(" <INSTRCTS>
 bool program(char* input){
 
-   printf("%s\n", input);
-
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
 
@@ -98,15 +96,18 @@ bool program(char* input){
 //<INSTRCTS> ::= <INSTRCT> <INSTRCTS> | ")"
 bool instructions(char* input, int* len_index){
 
+   printf("Instructions - %i, %c \n", *len_index, input[*len_index]);
+
    //go through the input after the first '(', to identify the subsequent nested '('
    //<INSTRCT> <INSTRCTS>
    while(input[*len_index] != ')'){
 
-      printf("INSTRUCTIONS - len_index - %i \n", *len_index);
+      //printf("INSTRUCTIONS - len_index - %i \n", *len_index);
       if(input[*len_index] == '('){
          (*len_index)++;
          instructions(input, len_index);
       }else if(input[*len_index] == ' '){
+         //printf("Space\n");
          (*len_index)++;
       }else{
          if(!instruction(input, len_index)){
@@ -117,6 +118,7 @@ bool instructions(char* input, int* len_index){
 
    // | ")"
    if(input[*len_index] == ')'){
+      printf("Instructions - ')'\n");
       return true;
    }
 
@@ -154,12 +156,14 @@ bool instruction(char* input, int* len_index){
 
             //pass in the rest of the string into the function - and check the values
             ins_set(input, len_index);
+            printf("After SET function - %c , %i\n",input[*len_index], *len_index);
 
          }else if(strcmp(inst, "PRINT") == 0){
 
-            (*len_index)++;
+            (*len_index) = (*len_index) + 2;
 
-            ins_print(input);
+            ins_print(input, len_index);
+            printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
 
          //LIST Functions
          }else if(strcmp(inst, "CAR") == 0){
@@ -199,6 +203,7 @@ bool instruction(char* input, int* len_index){
 
 
    if(input[*len_index] == ')'){
+      printf("Instructions - Value - %c\n", input[*len_index]);
       return true;
    }else{
       return false;
@@ -222,7 +227,7 @@ bool ins_set(char* input, int* len_index){
          (*len_index)++;
          //If it is a string literal
          if(ins_list(input, len_index)){
-
+            return true;
          }else{
             return false;
          };
@@ -242,7 +247,7 @@ bool ins_set(char* input, int* len_index){
 //<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")"
 bool ins_list(char* input, int* len_index){
 
-   printf("LIST - len_index - %i \n", *len_index);
+   printf(" %c, LIST - len_index - %i \n", input[*len_index], *len_index);
    
    //literal
    if(input[*len_index] == 39){
@@ -255,9 +260,24 @@ bool ins_list(char* input, int* len_index){
       }
 
    //check if it is a VAR, NIL
+   }else if(input[*len_index] >= 'A' && input[*len_index] <= 'Z'){
+
+      printf("Entered var check\n");
+      if(input[*len_index + 1] == ')'){
+         printf("VARIABLE\n");
+         return true;
+      }
+
+   }else if(input[*len_index] == 'N'){
+      if(input[*len_index + 1] == 'I'){
+         if(input[*len_index + 2] == 'L'){
+            printf("it is a NIL\n");
+            (*len_index) = (*len_index) + 3;
+            return true;
+         }
+      }
    }
 
-   ON_ERROR("Expecting a literal, NIL or variable");
    return false;
 
 }
@@ -281,7 +301,7 @@ bool ins_literal(char* input, int* len_index){
       (*len_index)++;
    }
 
-   printf("FLAG - %i\n", flag);
+   printf("LITERAL FLAG - %i\n", flag);
 
    if(flag == 1){
       (*len_index)++;
@@ -299,9 +319,10 @@ bool ins_var(char* input, int* len_index){
    printf("VARIABLE - len_index - %i \n", *len_index);
 
    if(input[*len_index] >= 'A' && input[*len_index] <= 'Z'){
-      (*len_index)++;
-      return true;
-   
+      if(input[*len_index + 1] == ' '){
+         (*len_index)++;
+         return true;
+      }
    }else{
       return false;
    }
@@ -310,58 +331,50 @@ bool ins_var(char* input, int* len_index){
 }
 
 //<PRINT> ::= "PRINT" <LIST> | "PRINT" <STRING>  
-bool ins_print(char* input){
+bool ins_print(char* input, int* len_index){
 
    printf("PRINT - function\n");
 
+   int flag = 0;
 
-   //goes through the input, and fidn if it is a single quotation or double quotation
-   //subsequently then saves it in a character array to print
+   if(ins_string(input, len_index)){
+      flag = 1;
+   }
 
-   int index1 = 0;
+   printf("%i\n", flag);
 
-   while(input[index1] != '\0'){
-      //goes through each character to the first ' or "
-      if(input[index1] == 39){
-
-         if(ins_list(input, &index1)){
-
-            return true;
-
-         }else{
-
-            return false;
-         }
-
-      }else if (input[index1] == '"'){
-
-         if(ins_string(input, &index1)){
-
-            return true;
-
-         }else{
-
-            return false;
-         }
-
+   if(flag == 0){
+      if(ins_list(input, len_index)){
+         flag = 1;
       }
-      
-      index1++;
+   }
+
+   if(flag == 1){
+      return true;
+   }else{
+      ON_ERROR("Was expecting a list or a string\n");
+      return false;
    }
 
    return false;
 }
 
-//"PRINT" <LIST> | "PRINT" <STRING>
+//<STRING> ::= Double-quoted string constant e.g. "Hello, World!", or "FAILURE ?"
 bool ins_string(char* input, int* len_index){
+
+   printf("char %c - %i \n",input[*len_index], *len_index);
 
    int flag = 0;
 
    if(input[*len_index] == '"'){
       (*len_index)++;
 
-      while(input[*len_index] != '"'){
-         if(input[*len_index] == '"'){flag = 1;}
+      while(input[*len_index] != ')'){
+
+         if(input[*len_index] == '"'){
+            flag = 1;
+         }
+
          (*len_index)++;
       }
 
