@@ -74,6 +74,8 @@ int main(int argc, char* argv[]){
 //<PROG> ::= "(" <INSTRCTS>
 bool program(char* input){
 
+   printf("%s\n\n", input);
+
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
 
@@ -138,8 +140,11 @@ bool instruction(char* input, int* len_index){
 
       //if there is another nested list - call the instruction function once again
       if(input[*len_index] == '('){
+         printf("\n\n NEXT INSTRUCTION\n\n");
          (*len_index)++;
-         instruction(input, len_index);
+         if(instruction(input, len_index)){
+            return true;
+         }
       }
 
          //read the instructions given and store in 1D array
