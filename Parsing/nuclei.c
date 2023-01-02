@@ -473,7 +473,7 @@ bool ret_func(char* input, int* len_index){
 
       //LISTFUNC
       if(strcmp(array, "CAR") == 0){
-   
+         (*len_index) = (*len_index) + 2;
          printf("CAR instruction triggered - index %i \n", *len_index);
          list_func(input, len_index, array);
 
@@ -522,14 +522,16 @@ bool list_func(char* input, int* len_index, char* instruct){
 while(input[*len_index] != ')'){
 
    if(strcmp(instruct, "CAR") == 0){
-      (*len_index) = (*len_index) + 2;
 
       printf("\n1.list_func - CAR instruction - len index %i \n", *len_index);
 
-      //ERROR  - causes seg fault
+      //ERROR  - causes seg fault 
+      //RESULT: return value should be true, with len_index at 42 - 'A'
+      //Idea is to increment the value by 1, to 43 - ')'
       if(ins_list(input, len_index)){
 
          (*len_index)++;
+
       }
 
       printf("\n2.list_func - CAR instruction - len index %i \n", *len_index);
