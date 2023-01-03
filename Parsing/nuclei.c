@@ -11,7 +11,9 @@
 
 
 bool list_func(char* input, int* len_index, char* instruct);
+bool func(char* input, int* len_index, char* inst);
 bool program(char* input);
+bool in_out_func(char* input, int* len_index, char* instruc);
 bool instructions(char* input, int* len_index);
 bool instruction(char* input, int* len_index);
 bool ins_set(char* input, int* len_index);
@@ -21,8 +23,9 @@ bool ins_var(char* input, int* len_index);
 bool ins_literal(char* input, int* len_index);
 bool ins_string(char* input, int* len_index);
 bool ins_print(char* array, int* len_index);
-void clear_string(char* input, int* len);
+void clear_string(char* input);
 bool ret_func(char* input, int* len_index);
+
 
 
 //read file from argv, and store characters in 1D array
@@ -131,6 +134,7 @@ bool instructions(char* input, int* len_index){
       if(input[*len_index] == '('){
          (*len_index)++;
          if(!instruction(input, len_index)){
+            
             return false;
          }
 
@@ -160,18 +164,19 @@ bool instruction(char* input, int* len_index){
 
    char inst[MAX_LENGTH] = "";
    int len = 0;
-   int flag = 1;
+   //int flag = 1;
 
    while(input[*len_index] != ')'){
 
       //if there is another nested list - call the instruction function once again
-      if(input[*len_index] == '('){
+/*      if(input[*len_index] == '('){
          printf("\n\n NEXT INSTRUCTION\n\n");
          (*len_index)++;
          if(instruction(input, len_index)){
             return true;
          }
       }
+*/
 
          //read the instructions given and store in 1D array
          //1. SET & PRINT (IO)
@@ -180,10 +185,25 @@ bool instruction(char* input, int* len_index){
          //4. LESS, GREATER, EQUAL (BOOL) 
          inst[len] = input[*len_index];
 
+         if(inst[len] == ' '){
+
+            inst[len] = '\0';
+            printf("%s\n", inst);
+            func(input, len_index, inst);
+
+         }
+
+
+/*
          //IO Functions
          if(strcmp(inst, "SET") == 0){
 
             (*len_index)++;
+
+            if(in_out_func(input, len_index, inst)){
+               clear_string(inst, &len);
+               flag = 0;
+            }
 
             //pass in the rest of the string into the function - and check the values
             ins_set(input, len_index);
@@ -199,24 +219,38 @@ bool instruction(char* input, int* len_index){
          }else if(strcmp(inst, "PRINT") == 0){
             (*len_index) = (*len_index) + 2;
 
-            ins_print(input, len_index);
-            printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
+            //ins_print(input, len_index);
+            //printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
 
-            clear_string(inst, &len);
-
-            flag = 0;
+            if(in_out_func(input, len_index, inst)){
+               clear_string(inst, &len);
+               flag = 0;
+            }
 
          //LIST Functions
          }else if(strcmp(inst, "CAR") == 0){
             printf("ENTER - CAR has been called\n");
 
-            flag = 0;
+            if(ret_func(input, len_index)){
+               clear_string(inst, &len);
+               flag = 0;
+            }
 
          }else if(strcmp(inst, "CDR") == 0){
             printf("CDR has been called\n");
 
+            if(ret_func(input, len_index)){
+               clear_string(inst, &len);
+               flag = 0;
+            }
+
          }else if(strcmp(inst, "CONS") == 0){
             printf("CONS has been called\n");
+
+            if(ret_func(input, len_index)){
+               clear_string(inst, &len);
+               flag = 0;
+            }
 
          //INT Functions
          }else if(strcmp(inst, "PLUS") == 0){
@@ -240,23 +274,150 @@ bool instruction(char* input, int* len_index){
          //error message - does not conform to grammar
          }
 
+        
+*/
          len++;
          (*len_index)++;
    }
+
+   if(input[*len_index] == ')'){
+      printf("Instruction - Value - %c, %i \n", input[*len_index], *len_index);
+      (*len_index)++;
+      return true;
+
+   }else{
+
+      return false;
+   }
+}
+
+//<FUNC> ::= <RETFUNC> | <IOFUNC> | <IF> | <LOOP>
+bool func(char* input, int* len_index, char* inst){
+
+   int flag = 1;
+
+         //IO Functions
+         if(strcmp(inst, "SET") == 0){
+
+            (*len_index)++;
+
+            if(in_out_func(input, len_index, inst)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+/*
+            //pass in the rest of the string into the function - and check the values
+            ins_set(input, len_index);
+
+            //It should exit at this point with the ) from the SET
+            printf("After SET function - %c , %i\n",input[*len_index], *len_index);
+            (*len_index)--;
+
+            clear_string(inst, &len);
+
+            flag = 0;
+*/
+
+         }else if(strcmp(inst, "PRINT") == 0){
+
+            //(*len_index) = (*len_index) + 2;
+            (*len_index)++;
+
+            //ins_print(input, len_index);
+            //printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
+
+            if(in_out_func(input, len_index, inst)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+         //LIST Functions
+         }else if(strcmp(inst, "CAR") == 0){
+            printf("ENTER - CAR has been called\n");
+
+            if(ret_func(input, len_index)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+         }else if(strcmp(inst, "CDR") == 0){
+            printf("CDR has been called\n");
+
+            if(ret_func(input, len_index)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+         }else if(strcmp(inst, "CONS") == 0){
+            printf("CONS has been called\n");
+
+            if(ret_func(input, len_index)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+         //INT Functions
+         }else if(strcmp(inst, "PLUS") == 0){
+            printf("PLUS has been called\n");
+            
+            if(ret_func(input, len_index)){
+               clear_string(inst);
+               flag = 0;
+            }
+
+         }else if(strcmp(inst, "LENGTH") == 0){
+            printf("LENGTH has been called\n");
+
+         //BOOL Functions
+         }else if(strcmp(inst, "LESS") == 0){
+            printf("LESS has been called\n");
+
+
+         }else if(strcmp(inst, "GREATER") == 0){
+            printf("GREATER has been called\n");
+
+
+         }else if(strcmp(inst, "EQUAL") == 0){
+            printf("EQUAL has been called\n");
+
+         //error message - does not conform to grammar
+         }
+
 
    if(flag == 1){
       ON_ERROR("The instruction is not known\n");
       return false;
    }
 
+   return true;
+}
 
-   if(input[*len_index] == ')'){
-      printf("Instruction - Value - %c, %i \n", input[*len_index], *len_index);
-      (*len_index)++;
+//<IOFUNC> ::= <SET> | <PRINT>
+bool in_out_func(char* input, int* len_index, char* instruc){
+
+   if(strcmp(instruc, "PRINT") == 0){
+
+      ins_print(input, len_index);
+      printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
+
       return true;
-   }else{
-      return false;
+
+   }else if(strcmp(instruc, "SET") == 0){
+            
+      //pass in the rest of the string into the function - and check the values
+      ins_set(input, len_index);
+
+      //It should exit at this point with the ) from the SET
+      printf("After SET function - %c , %i\n",input[*len_index], *len_index);
+      (*len_index)--;
+
+      return true;
+
    }
+
+   return false;
+
 }
 
 
@@ -452,13 +613,13 @@ bool ins_string(char* input, int* len_index){
 
 
 //clear instruction string to SPACE
-void clear_string(char* input, int* len){
+void clear_string(char* input){
 
-   for(int i = 0; i <= (*len); i++){
+   int length = strlen(input);
+
+   for(int i = 0; i <= length; i++){
       input[i] = ' ';
    }
-
-   *len = 0;
 
 }
 
@@ -484,7 +645,7 @@ bool ret_func(char* input, int* len_index){
 
       }else if(strcmp(array, "CDR") == 0){
          printf("CDR instruction triggered \n");
-         //listfunc();
+         list_func(input, len_index, array);
 
       }else if(strcmp(array, "CONS") == 0){
          (*len_index) = (*len_index) + 2;
@@ -495,6 +656,8 @@ bool ret_func(char* input, int* len_index){
 
       //INTFUNC
       else if(strcmp(array, "PLUS") == 0){
+         (*len_index) = (*len_index) + 2;
+         //int_func(input, len_index, array);
 
       }else if(strcmp(array, "LENGTH") == 0){
 
@@ -545,7 +708,12 @@ while(input[*len_index] != ')'){
       }
 
    }else if(strcmp(instruct, "CDR") == 0){
+
+      printf("\n1.list_func - CDR instruction - len index %i - %c\n", *len_index, input[*len_index]);
+
       if(ins_list(input, len_index)){
+
+         printf("\n2.list_func - CDR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
          return true;
       }
@@ -581,6 +749,19 @@ while(input[*len_index] != ')'){
 
    return true;
 }
+
+/*
+bool int_func(char* input, int* len_index, char* instruct){
+
+   if(strcmp(instruct,"PLUS") == 0){
+      ins_list(input, len_index);
+   }else if(strcmp(instruct,"LENGTH") == 0){
+
+   }
+
+   return true;
+}
+*/
 
 
 /*
