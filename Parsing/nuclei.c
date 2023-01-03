@@ -16,6 +16,7 @@ bool instructions(char* input, int* len_index);
 bool instruction(char* input, int* len_index);
 bool ins_set(char* input, int* len_index);
 bool ins_list(char* input, int* len_index);
+bool ins_list2(char* input, int* len_index);
 bool ins_var(char* input, int* len_index);
 bool ins_literal(char* input, int* len_index);
 bool ins_string(char* input, int* len_index);
@@ -207,7 +208,9 @@ bool instruction(char* input, int* len_index){
 
          //LIST Functions
          }else if(strcmp(inst, "CAR") == 0){
-            printf("CAR has been called\n");
+            printf("ENTER - CAR has been called\n");
+
+            flag = 0;
 
          }else if(strcmp(inst, "CDR") == 0){
             printf("CDR has been called\n");
@@ -333,7 +336,7 @@ bool ins_list(char* input, int* len_index){
 
       if(ret_func(input, len_index)){
          if(input[*len_index] == ')'){
-            printf(" %c  , %i \n", input[*len_index], *len_index);
+            printf("Value after returning from ret_func - %c  , %i \n", input[*len_index], *len_index);
             return true;
          }
       }
@@ -344,7 +347,7 @@ bool ins_list(char* input, int* len_index){
 
 }
 
-
+//<LITERAL> ::= Single-quoted list e.g. ’(1)’, ’(1 2 3 (4 5))’, or ’2’
 bool ins_literal(char* input, int* len_index){
 
    printf("LITERAL - len_index - %i \n", *len_index);
@@ -465,6 +468,8 @@ void clear_string(char* input, int* len){
 //<RETFUNC> ::= <LISTFUNC> | <INTFUNC> | <BOOLFUNC> - needed for the PRINT Statement
 bool ret_func(char* input, int* len_index){
 
+   printf("\n\n-----------Return Func---------------\n\n");
+
    char array[MAX_LENGTH] = "";
    int index = 0;
 
@@ -474,7 +479,7 @@ bool ret_func(char* input, int* len_index){
       //LISTFUNC
       if(strcmp(array, "CAR") == 0){
          (*len_index) = (*len_index) + 2;
-         printf("CAR instruction triggered - index %i \n", *len_index);
+         printf("\n      ---------CAR instruction triggered - index %i - value - %c \n", *len_index, input[*len_index]);
          list_func(input, len_index, array);
 
       }else if(strcmp(array, "CDR") == 0){
@@ -511,6 +516,10 @@ bool ret_func(char* input, int* len_index){
       (*len_index)++;
    }
 
+   printf("Last index - %i   %c\n\n", *len_index, input[*len_index]);
+   printf("------------------EXIT RET_FUNC---------------------\n\n");
+
+
    return true;
 }
 
@@ -523,22 +532,23 @@ while(input[*len_index] != ')'){
 
    if(strcmp(instruct, "CAR") == 0){
 
-      printf("\n1.list_func - CAR instruction - len index %i \n", *len_index);
+      printf("\n1.list_func - CAR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
       //ERROR  - causes seg fault 
       //RESULT: return value should be true, with len_index at 42 - 'A'
       //Idea is to increment the value by 1, to 43 - ')'
       if(ins_list(input, len_index)){
 
-         (*len_index)++;
+         printf("\n2.list_func - CAR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
+         return true;
       }
 
-      printf("\n2.list_func - CAR instruction - len index %i \n", *len_index);
-
-
    }else if(strcmp(instruct, "CDR") == 0){
-      ins_list(input, len_index);
+      if(ins_list(input, len_index)){
+
+         return true;
+      }
 
    }else if(strcmp(instruct, "CONS") == 0){
 
@@ -563,6 +573,69 @@ while(input[*len_index] != ')'){
 
 }
 
+   if(input[*len_index] == ')'){
+     
+      printf("list_func returns ')'\n");
+
+   }
+
    return true;
 }
 
+
+/*
+
+//<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")" for nested loops
+bool ins_list2(char* input, int* len_index){
+
+   printf("'%c', LIST - len_index - %i \n", input[*len_index], *len_index);
+   
+   //literal 
+   if(input[*len_index] == 39){
+   //pass into a literal function - single quoted list - only numbers brackets and space
+      (*len_index)++;
+      if(ins_literal(input, len_index)){
+         return true;
+      }else{
+         ON_ERROR("Issue with literal value");
+      }
+
+   }else if(input[*len_index] == 'N' && input[*len_index + 1] == 'I' && input[*len_index + 2] == 'L'){
+
+      printf("it is a NIL\n");
+      (*len_index)++;
+      return true;
+
+   //check if it is a VAR, NIL
+   }else if(input[*len_index] >= 'A' && input[*len_index] <= 'Z'){
+
+      printf("Entered var check %i\n", *len_index);
+      if(input[*len_index + 1] == ')'){
+         printf("VARIABLE\n");
+         return true;
+      }else{
+
+         printf("failed var check\n");
+      }
+   
+   
+   }else if(input[*len_index] == '('){
+
+      printf("RETFUNC instruction triggered - index %i \n", *len_index);
+
+      (*len_index)++;
+
+      if(ret_func(input, len_index)){
+         if(input[*len_index] == ')'){
+            printf(" %c  , %i \n", input[*len_index], *len_index);
+            return true;
+         }
+      }
+
+   }
+
+   return false;
+
+}
+
+*/
