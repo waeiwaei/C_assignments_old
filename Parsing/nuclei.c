@@ -153,14 +153,13 @@ bool instruction(char* input, int* len_index){
 
          inst[len] = input[*len_index];
 
-/* DEMO5.ncl - How to identify e.g. ((GARBAGE))
+         //DEMO5.ncl - How to identify e.g. ((GARBAGE))
          if(input[*len_index + 1] == ')'){
             printf("inst[len] - %s \n\n", inst);
             len++;
             inst[len] = '\0';
             func(input, len_index, inst);
          }
-*/
 
          if(inst[len] == ' '){
               
@@ -404,6 +403,7 @@ bool ins_list(char* input, int* len_index){
 
       printf("Entered var check %i\n", *len_index);
       if(input[*len_index + 1] == ')'){
+         (*len_index)++;
          printf("VARIABLE\n");
          return true;
       }else{
@@ -843,7 +843,6 @@ while(input[*len_index] != ')'){
 bool if_func(char* input, int* len_index){
 
    printf("Entered IF-func %i, %c \n", *len_index, input[*len_index]);  
-
 
    char instruct[MAX_LENGTH];
    int len = 0;
