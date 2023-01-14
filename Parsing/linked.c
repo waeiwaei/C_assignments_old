@@ -9,9 +9,9 @@
 #include "general.h"
 #include "specific.h"
 
-typedef struct lisp lisp;
+//typedef struct lisp lisp;
 
-typedef int atomtype;
+//typedef int atomtype;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -469,6 +469,8 @@ void lisp_free(lisp** l){
             
          }
 
+         temp1 = NULL;
+
          //free last block of the nested list
          free(temp1);
 
@@ -489,6 +491,107 @@ void lisp_free(lisp** l){
    *l = NULL;
    
 }
+
+
+
+void append(char* s,char c){
+
+   int len = strlen(s);
+   s[len] = c;
+   s[len + 1] = '\0';
+   
+}
+
+
+
+lisp* lisp_ans(lisp* temp_lisp, const char* str, int index){
+
+   static int inc = 0;
+   
+   lisp* p;
+   if (temp_lisp == NULL){p=NULL;}
+   else{p=temp_lisp;}
+
+
+      while(str[index] != ')'){
+         
+         if(str[index] == '('){
+
+            index++;
+
+            if (p==NULL){
+               temp_lisp=(lisp*)ncalloc(1, sizeof(lisp));
+               p=temp_lisp;
+            }else{
+               p=temp_lisp;
+               p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
+               p=p->cdr;
+            }
+            
+            p->car = lisp_ans(NULL, str, index);  
+            index=inc;
+               
+            index++;
+
+         }else{
+
+            if(str[index] == ' '){
+               index++;
+            }else{
+
+               char c[20] = "";
+               while(str[index] == '-' || isdigit(str[index])){
+                  append(c,str[index]);
+                  index++;
+               }
+            
+               if (p==NULL){
+                  temp_lisp=(lisp*)ncalloc(1, sizeof(lisp));
+                  p=temp_lisp;
+                  p->atomtype=atoi(c);
+               
+               }else{
+                  p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
+                  p->cdr->atomtype= atoi(c);
+                  p=p->cdr;
+                  
+               }
+            }   
+               
+         }
+
+         if(str[index+1] == ')'){
+            inc=index+1;
+         }
+
+         if(str[index] == ')'){
+            inc=index;
+         }
+
+      }
+
+
+   if(p) {
+      p->cdr=NULL;
+   }
+   
+   index++;
+
+   return temp_lisp;
+
+}
+
+
+lisp* lisp_fromstring(const char* str){
+//    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((1 2) (3 4) (5 (6 7)))"};
+
+   printf("value passed - %s\n\n", str);
+   int index=1;
+   return lisp_ans(NULL, str, index);
+
+}
+
+
 
 
 void test(){
@@ -545,3 +648,4 @@ void test(){
    assert(!t7);
 
 }
+

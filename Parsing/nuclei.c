@@ -3,32 +3,33 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include "specific.h"
+#include "general.h"
 
 #define ON_ERROR(S) {fprintf(stderr, "%s", S);\
                      exit(EXIT_FAILURE);}
 
 #define MAX_LENGTH 1000
+#define INTERPRET
 
-
-bool list_func(char* input, int* len_index, char* instruct);
-bool func(char* input, int* len_index, char* inst);
+bool list_func(char* input, int* len_index, char* instruct, lisp* temp);
+bool func(char* input, int* len_index, char* inst, lisp* temp);
 bool program(char* input);
-bool in_out_func(char* input, int* len_index, char* instruc);
-bool int_func(char* input, int* len_index, char* instruct);
-bool bool_func(char* input, int* len_index, char* instruct);
-bool if_func(char* input, int* len_index);
-bool loop_func(char* input, int* len_index);
-bool instructions(char* input, int* len_index);
-bool instruction(char* input, int* len_index);
-bool ins_set(char* input, int* len_index);
-bool ins_list(char* input, int* len_index);
+bool in_out_func(char* input, int* len_index, char* instruc, lisp* temp);
+bool int_func(char* input, int* len_index, char* instruct, lisp* temp);
+bool bool_func(char* input, int* len_index, char* instruct, lisp* temp);
+bool if_func(char* input, int* len_index, lisp* temp);
+bool loop_func(char* input, int* len_index, lisp* temp);
+bool instructions(char* input, int* len_index, lisp* temp);
+bool instruction(char* input, int* len_index, lisp* temp);
+bool ins_set(char* input, int* len_index, lisp* temp);
+bool ins_list(char* input, int* len_index, lisp* temp);
 bool ins_var(char* input, int* len_index);
-bool ins_literal(char* input, int* len_index);
+bool ins_literal(char* input, int* len_index, lisp* temp);
 bool ins_string(char* input, int* len_index);
-bool ins_print(char* array, int* len_index);
+bool ins_print(char* array, int* len_index, lisp* temp);
 void clear_string(char* input);
-bool ret_func(char* input, int* len_index);
-
+bool ret_func(char* input, int* len_index, lisp* temp);
 
 
 //read file from argv, and store characters in 1D array
@@ -46,8 +47,10 @@ int main(int argc, char* argv[]){
       FILE * fp = fopen(argv[1], "r");
 
       if(fp == NULL){
+
          printf("Error in opening file");
          return 0;
+
       }else{
 
          c = fgetc(fp);
@@ -86,17 +89,29 @@ bool program(char* input){
 
    printf("%s\n\n", input);
 
+   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
 
       int len_index = 1;
       //go into the instructions function
 
-      if(instructions(input, &len_index)){
+      if(instructions(input, &len_index, temp)){
          return true;
       }else{
          return false;
       }
+
+
+      /*
+         #ifdef INTPRET
+            return instructions(input, &len_index));
+         #else
+            instructions(input, &len_index);
+            return
+         #endif
+      */
 
    }
    
@@ -107,7 +122,7 @@ bool program(char* input){
 
 
 //<INSTRCTS> ::= <INSTRCT> <INSTRCTS> | ")"
-bool instructions(char* input, int* len_index){
+bool instructions(char* input, int* len_index, lisp* temp){
 
    printf("Instructions - %i, %c \n", *len_index, input[*len_index]);
 
@@ -118,13 +133,13 @@ bool instructions(char* input, int* len_index){
       if(input[*len_index] == '('){
          (*len_index)++;
 
-         if(!instruction(input, len_index)){            
+         if(!instruction(input, len_index, temp)){            
             return false;
          }
 
          printf("This is the LEN index here - %i \n\n", *len_index);
    
-      if(!instructions(input, len_index)){
+      if(!instructions(input, len_index, temp)){
          return false;
       }else{
          return true;
@@ -143,7 +158,7 @@ bool instructions(char* input, int* len_index){
 }
 
 //<INSTRCT> ::= "(" <FUNC> ")"
-bool instruction(char* input, int* len_index){
+bool instruction(char* input, int* len_index, lisp* temp){
 
    char inst[MAX_LENGTH] = "";
    int len = 0;
@@ -153,18 +168,17 @@ bool instruction(char* input, int* len_index){
 
          inst[len] = input[*len_index];
 
-         //DEMO5.ncl - How to identify e.g. ((GARBAGE))
          if(input[*len_index + 1] == ')'){
             printf("inst[len] - %s \n\n", inst);
             len++;
             inst[len] = '\0';
-            func(input, len_index, inst);
+            func(input, len_index, inst, temp);
          }
 
          if(inst[len] == ' '){
               
             inst[len] = '\0';
-            func(input, len_index, inst);
+            func(input, len_index, inst, temp);
 
          }       
 
@@ -186,7 +200,7 @@ bool instruction(char* input, int* len_index){
 
 
 //<FUNC> ::= <RETFUNC> | <IOFUNC> | <IF> | <LOOP>
-bool func(char* input, int* len_index, char* inst){
+bool func(char* input, int* len_index, char* inst, lisp* temp){
 
    int flag = 1;
 
@@ -197,7 +211,7 @@ bool func(char* input, int* len_index, char* inst){
 
             (*len_index)++;
 
-            if(in_out_func(input, len_index, inst)){
+            if(in_out_func(input, len_index, inst, temp)){
                clear_string(inst);
                flag = 0;
             }
@@ -206,11 +220,13 @@ bool func(char* input, int* len_index, char* inst){
 
             (*len_index)++;
 
-            if(in_out_func(input, len_index, inst)){
+            if(in_out_func(input, len_index, inst, temp)){
                clear_string(inst);
                flag = 0;
             }
 
+
+/*
          //LIST Functions
          }else if(strcmp(inst, "CAR") == 0){
             printf("ENTER - CAR has been called\n");
@@ -298,7 +314,7 @@ bool func(char* input, int* len_index, char* inst){
                clear_string(inst);
                flag = 0;
             }
-
+*/
          }else{
             
             ON_ERROR("Was Expecting a function name\n");
@@ -317,19 +333,19 @@ bool func(char* input, int* len_index, char* inst){
 }
 
 //<IOFUNC> ::= <SET> | <PRINT>
-bool in_out_func(char* input, int* len_index, char* instruc){
+bool in_out_func(char* input, int* len_index, char* instruc, lisp* temp){
 
    if(strcmp(instruc, "PRINT") == 0){
 
-      ins_print(input, len_index);
+      ins_print(input, len_index, temp);
       printf("After PRINT function - %c , %i\n",input[*len_index], *len_index);
       (*len_index)--;
       return true;
 
    }else if(strcmp(instruc, "SET") == 0){
-            
+      
       //pass in the rest of the string into the function - and check the values
-      ins_set(input, len_index);
+      ins_set(input, len_index, temp);
 
       //It should exit at this point with the ) from the SET
       printf("After SET function - %c , %i\n",input[*len_index], *len_index);
@@ -343,50 +359,58 @@ bool in_out_func(char* input, int* len_index, char* instruc){
 
 }
 
-
+//we want to set the value of a value to store the list in memory space
 //<SET> ::= "SET" <VAR> <LIST>
-bool ins_set(char* input, int* len_index){
+bool ins_set(char* input, int* len_index, lisp* temp){
 
    printf("SET - len_index - %i \n", *len_index);
 
    while(input[*len_index] != ')'){
+
       if(input[*len_index] == ' '){
          (*len_index)++;
       }
 
       //check if the VAR grammar is correct
-      if(ins_var(input, len_index) == true){
+      if(ins_var(input, len_index)){
 
          (*len_index)++;
-        
-         //If it is a string literal
-         if(ins_list(input, len_index)){
-            return true;
-         }else{
-            return false;
-         };
 
       //error message - input does not conform to grammar
       }else{
          ON_ERROR("Expecting a variable - between A to Z");
          return false;
       }
+
+      //If it is a string literal
+      if(ins_list(input, len_index, temp)){
+         return true;
+      }else{
+         return false;
+      };
+
    }
 
-   return true;
+   return false;
 
 }
 
 //<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")"
-bool ins_list(char* input, int* len_index){
+bool ins_list(char* input, int* len_index, lisp* temp){
 
    printf("'%c', LIST - len_index - %i \n", input[*len_index], *len_index);
    
+   if(temp == NULL){
+      printf("Value of temp is NULL\n\n");
+   }else{
+      printf("Value of temp is NOT NULL\n\n");
+   }
+
    //literal 
    if(input[*len_index] == 39){
    //pass into a literal function - single quoted list - only numbers brackets and space
       (*len_index)++;
-      if(ins_literal(input, len_index)){
+      if(ins_literal(input, len_index, temp)){
          return true;
       }else{
          ON_ERROR("Issue with literal value");
@@ -418,7 +442,7 @@ bool ins_list(char* input, int* len_index){
 
       (*len_index)++;
 
-      if(ret_func(input, len_index)){
+      if(ret_func(input, len_index, temp)){
          if(input[*len_index] == ')'){
             printf("Value after returning from ret_func - %c  , %i \n", input[*len_index], *len_index);
             (*len_index)++;  
@@ -433,15 +457,20 @@ bool ins_list(char* input, int* len_index){
 }
 
 //<LITERAL> ::= Single-quoted list e.g. ’(1)’, ’(1 2 3 (4 5))’, or ’2’
-bool ins_literal(char* input, int* len_index){
+bool ins_literal(char* input, int* len_index, lisp* temp){
 
    printf("LITERAL - len_index - %i \n", *len_index);
+
+   if(temp == NULL){
+      printf("Value of temp is NULL\n\n");
+   }else{
+      printf("Value of temp is NOT NULL\n\n");
+   }
 
    int flag = 0;
 
    //only accept space, bracket and numbers
    while(input[*len_index] != 39){
-      //if((input[*len_index] >= 48 && input[*len_index] <= 57) || input[*len_index] == 32 || input[*len_index] == 40 || input[*len_index] == 41){
       if(!(input[*len_index] >= 65 && input[*len_index] <= 90)){   
          flag = 0;
       }else{
@@ -450,6 +479,50 @@ bool ins_literal(char* input, int* len_index){
 
       (*len_index)++;
    }
+
+
+      #ifdef INTERPRET
+      
+         int len_input = 0;
+         int len_newarray = 0;
+         char temp_array[MAX_LENGTH];
+
+         //retrieve just the literal portion
+         while(input[len_input] != '\0'){
+
+            if(input[len_input] == 39){
+               
+               temp_array[len_newarray] = '(';
+               len_newarray++;
+               len_input++;
+
+               while(input[len_input] != 39){
+                  temp_array[len_newarray] = input[len_input];
+
+                  len_input++;
+                  len_newarray++;
+               }
+            }
+
+            len_input++;
+         }
+
+         temp_array[len_newarray] = ')';
+         len_newarray++;
+         temp_array[len_newarray] = '\0';
+
+         temp = lisp_fromstring(temp_array);
+         printf("Value of A: %i\n", temp->atomtype);
+
+            char str[MAX_LENGTH];
+
+            lisp_tostring(temp, str);
+            printf("%s\n\n\n",str);
+            printf("CAR - %i\n\n\n", lisp_getval(lisp_car(temp)));
+            printf("CDR - %i\n\n\n", lisp_getval(lisp_cdr(temp)));
+
+      #endif
+
 
    printf("\nLITERAL FLAG - %i\n", flag);
 
@@ -481,7 +554,7 @@ bool ins_var(char* input, int* len_index){
 }
 
 //<PRINT> ::= "PRINT" <LIST> | "PRINT" <STRING>  
-bool ins_print(char* input, int* len_index){
+bool ins_print(char* input, int* len_index, lisp* temp){
 
    printf("PRINT - function - %i\n", *len_index);
 
@@ -492,7 +565,7 @@ bool ins_print(char* input, int* len_index){
    }
 
    if(flag == 0){
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          flag = 1;
       }
    }
@@ -518,7 +591,7 @@ bool ins_string(char* input, int* len_index){
       (*len_index)++;
 
       while(input[*len_index] != ')'){
-
+         
          if(input[*len_index] == '"'){
             flag = 1;
          }
@@ -526,6 +599,31 @@ bool ins_string(char* input, int* len_index){
          (*len_index)++;
       }
 
+/*
+      //Store the value of the string inside the temp_array
+      #ifdef INTERPRET
+
+      while(input[len2] != '"'){
+         len2++;
+      }
+
+      len2++;
+
+      while(input[len2] != '"'){
+
+         temp_array[len] = input[len2];
+         
+         len2++;
+         len++;
+      
+      }
+
+      input[len] = '\0';
+
+      printf("\n\n%s\n\n", input);
+      
+      #endif
+*/
    }
 
    if(flag == 1){
@@ -533,37 +631,6 @@ bool ins_string(char* input, int* len_index){
    }
 
    return false;
-
-/*
-   printf("char %c - %i \n",input[*len_index], *len_index);
-
-   int flag = 0;
-
-   if(input[*len_index] == '"'){
-      (*len_index)++;
-
-      while(input[*len_index] != '"'){
-
-         if(input[*len_index] == '\0'){
-            break;
-         }
-         
-         (*len_index)++;
-      }
-
-      if(input[*len_index] == '"'){
-         flag = 1;
-      }
-
-   }
-
-   if(flag == 1){
-      return true;
-   }
-
-   //should be some form of error handling for incomplete "" inputs
-   //ON_ERROR("Expecting a closing paranthesis\n");
-   return false;*/
 }
 
 
@@ -582,7 +649,7 @@ void clear_string(char* input){
 
 
 //<RETFUNC> ::= <LISTFUNC> | <INTFUNC> | <BOOLFUNC> - needed for the PRINT Statement
-bool ret_func(char* input, int* len_index){
+bool ret_func(char* input, int* len_index, lisp* temp){
 
    printf("\n\n-----------Return Func---------------\n\n");
 
@@ -596,17 +663,17 @@ bool ret_func(char* input, int* len_index){
       if(strcmp(array, "CAR") == 0){
          (*len_index) = (*len_index) + 2;
          printf("\n      ---------CAR instruction triggered - index %i - value - %c \n", *len_index, input[*len_index]);
-         list_func(input, len_index, array);
+         list_func(input, len_index, array, temp);
 
       }else if(strcmp(array, "CDR") == 0){
          (*len_index) = (*len_index) + 2;
          printf("CDR instruction triggered \n");
-         list_func(input, len_index, array);
+         list_func(input, len_index, array, temp);
 
       }else if(strcmp(array, "CONS") == 0){
          (*len_index) = (*len_index) + 2;
          printf("CONS instruction triggered - index %i \n", *len_index);
-         list_func(input, len_index, array);
+         list_func(input, len_index, array, temp);
 
       }
 
@@ -614,12 +681,12 @@ bool ret_func(char* input, int* len_index){
       else if(strcmp(array, "PLUS") == 0){
          (*len_index) = (*len_index) + 2;
          printf("PLUS instruction triggered - index %i \n", *len_index);
-         int_func(input, len_index, array);
+         int_func(input, len_index, array, temp);
       
       }else if(strcmp(array, "LENGTH") == 0){
          (*len_index) = (*len_index) + 2;
          printf("LENGTH instruction triggered - index %i \n", *len_index);
-         int_func(input, len_index, array);
+         int_func(input, len_index, array, temp);
 
       } 
 
@@ -627,18 +694,18 @@ bool ret_func(char* input, int* len_index){
       else if(strcmp(array, "LESS") == 0){
          (*len_index) = (*len_index) + 2;
          printf("LESS instruction triggered - index %i \n", *len_index);
-         bool_func(input, len_index, array);
+         bool_func(input, len_index, array, temp);
 
       }else if(strcmp(array, "GREATER") == 0){
          (*len_index) = (*len_index) + 2;
          printf("GREATER instruction triggered - index %i \n", *len_index);
-         bool_func(input, len_index, array);
+         bool_func(input, len_index, array, temp);
       
       }else if(strcmp(array,"EQUAL") == 0){
          printf("before - EQUAL instruction triggered - index %i \n", *len_index);
          (*len_index) = (*len_index) + 2;
          printf("after - EQUAL instruction triggered - index %i \n", *len_index);
-         bool_func(input, len_index, array);
+         bool_func(input, len_index, array, temp);
       
       }
 
@@ -656,15 +723,15 @@ bool ret_func(char* input, int* len_index){
 
 
 //<LISTFUNC> ::= "CAR" <LIST> | "CDR" <LIST> | "CONS" <LIST> <LIST>
-bool list_func(char* input, int* len_index, char* instruct){
-         
+bool list_func(char* input, int* len_index, char* instruct,lisp* temp){
+
 while(input[*len_index] != ')'){
 
    if(strcmp(instruct, "CAR") == 0){
 
       printf("\n1.list_func - CAR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
 
          printf("\n2.list_func - CAR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
@@ -677,7 +744,7 @@ while(input[*len_index] != ')'){
 
       printf("\n1.list_func - CDR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
 
          printf("\n2.list_func - CDR instruction - len index %i - %c\n", *len_index, input[*len_index]);
 
@@ -690,13 +757,13 @@ while(input[*len_index] != ')'){
 
       printf("\n1.list_func - CONS instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          
          printf("\n2.list_func - CONS instruction - len index %i \n", *len_index);
             
             (*len_index)++;
 
-               if(ins_list(input, len_index)){
+               if(ins_list(input, len_index, temp)){
 
                      (*len_index)--;
 
@@ -722,7 +789,7 @@ while(input[*len_index] != ')'){
 }
 
 //<INTFUNC> ::= "PLUS" <LIST> <LIST> | "LENGTH" <LIST>
-bool int_func(char* input, int* len_index, char* instruct){
+bool int_func(char* input, int* len_index, char* instruct, lisp* temp){
 
 while(input[*len_index] != ')'){
 
@@ -730,13 +797,13 @@ while(input[*len_index] != ')'){
 
       printf("\n1.int_func - PLUS instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          
          printf("\n2.int_func - PLUS instruction - len index %i \n", *len_index);
 
          (*len_index)++;
 
-         if(ins_list(input, len_index)){
+         if(ins_list(input, len_index, temp)){
 
             (*len_index)--;
 
@@ -748,7 +815,7 @@ while(input[*len_index] != ')'){
 
       printf("\n1.int_func - LENGTH instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
 
          (*len_index)--;
 
@@ -766,7 +833,7 @@ while(input[*len_index] != ')'){
 }
 
 //<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
-bool bool_func(char* input, int* len_index, char* instruct){
+bool bool_func(char* input, int* len_index, char* instruct, lisp* temp){
 
    printf("BOOL FUNC - index %i, character - %c \n\n", *len_index, input[*len_index]);
 
@@ -781,13 +848,13 @@ while(input[*len_index] != ')'){
 
       printf("\n1.bool_func - LESS instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          
          printf("\n2.bool_func - LESS instruction - len index %i \n", *len_index);
 
          (*len_index)++;
 
-         if(ins_list(input, len_index)){
+         if(ins_list(input, len_index, temp)){
 
             (*len_index)--;
 
@@ -799,13 +866,13 @@ while(input[*len_index] != ')'){
 
       printf("\n1.bool_func - GREATER instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          
          printf("\n2.bool_func - GREATER instruction - len index %i \n", *len_index);
 
          (*len_index)++;
 
-         if(ins_list(input, len_index)){
+         if(ins_list(input, len_index, temp)){
 
             (*len_index)--;
 
@@ -817,13 +884,13 @@ while(input[*len_index] != ')'){
 
       printf("\n1.bool_func - EQUAL instruction - len index %i \n", *len_index);
 
-      if(ins_list(input, len_index)){
+      if(ins_list(input, len_index, temp)){
          
          printf("\n2.bool_func - EQUAL instruction - len index %i \n", *len_index);
 
          (*len_index)++;
 
-         if(ins_list(input, len_index)){
+         if(ins_list(input, len_index, temp)){
 
             (*len_index)--;
 
@@ -840,7 +907,7 @@ while(input[*len_index] != ')'){
 
 
 //<IF> ::= "IF" "(" <BOOLFUNC> ")" "(" <INSTRCTS> "(" <INSTRCTS>
-bool if_func(char* input, int* len_index){
+bool if_func(char* input, int* len_index, lisp* temp){
 
    printf("Entered IF-func %i, %c \n", *len_index, input[*len_index]);  
 
@@ -869,7 +936,7 @@ bool if_func(char* input, int* len_index){
             (*len_index)++;
             printf("%s\n", instruct);
 
-            if(bool_func(input, len_index, instruct)){
+            if(bool_func(input, len_index, instruct, temp)){
                
                flag = 1;
                
@@ -909,7 +976,7 @@ bool if_func(char* input, int* len_index){
       if(input[*len_index] == '('){
          (*len_index)++;
 
-         if(instructions(input, len_index)){
+         if(instructions(input, len_index, temp)){
 
             printf("IF condition - first instructions return %i", *len_index);
             flag3 = 1;
@@ -927,7 +994,7 @@ bool if_func(char* input, int* len_index){
          if(input[*len_index] == '('){
             (*len_index)++;
 
-            if(instructions(input, len_index)){
+            if(instructions(input, len_index, temp)){
 
                printf("IF condition - first instructions return %i\n", *len_index);
                flag4 = 1;
@@ -958,7 +1025,7 @@ bool if_func(char* input, int* len_index){
 
 
 //<LOOP> ::= "WHILE""(" <BOOLFUNC> ")" "(" <INSTRCTS>
-bool loop_func(char* input, int* len_index){ 
+bool loop_func(char* input, int* len_index, lisp* temp){ 
 
    printf("Entered LOOP-func %i, %c \n", *len_index, input[*len_index]);
 
@@ -985,7 +1052,7 @@ bool loop_func(char* input, int* len_index){
             instruct[len] = '\0';
             printf("%s\n", instruct);
 
-            if(bool_func(input, len_index, instruct)){
+            if(bool_func(input, len_index, instruct, temp)){
                
                flag = 1;
                
@@ -1008,7 +1075,6 @@ bool loop_func(char* input, int* len_index){
    }
 
 
-
    //"(" <INSTRCTS>
    if(flag2 == 1){
 
@@ -1022,7 +1088,7 @@ bool loop_func(char* input, int* len_index){
             (*len_index)++;
             printf("\n\n\n AFTER FIRST INDEX - %i\n\n", *len_index);
 
-            if(instructions(input, len_index)){
+            if(instructions(input, len_index, temp)){
 
                printf("WHILE condition - first instructions return %i\n", *len_index);
                flag3 = 1;

@@ -12,6 +12,7 @@
 #include <assert.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #define LISTSTRLEN 1000
 #define LISPIMPL "Linked"
@@ -29,6 +30,44 @@ struct lisp{
 
 };
 
+typedef struct lisp lisp;
+
+typedef int atomtype;
+
+
+// Returns element 'a' - this is not a list, and
+// by itelf would be printed as e.g. "3", and not "(3)"
+lisp* lisp_atom(const atomtype a);
+
+// Returns a list containing the car as 'l1'
+// and the cdr as 'l2'- data in 'l1' and 'l2' are reused,
+// and not copied. Either 'l1' and/or 'l2' can be NULL
+lisp* lisp_cons(const lisp* l1,  const lisp* l2);
+
+// Returns a boolean depending up whether l points to an atom (not a list)
+bool lisp_isatomic(const lisp* l);
+
+// Returns the car (1st) component of the list 'l'.
+// Does not copy any data.
+lisp* lisp_car(const lisp* l);
+
+// Returns the cdr (all but the 1st) component of the list 'l'.
+// Does not copy any data.
+lisp* lisp_cdr(const lisp* l);
+
+// Returns the data/value stored in the cons 'l'
+atomtype lisp_getval(const lisp* l);
+
+// Returns a deep copy of the list 'l'
+lisp* lisp_copy(const lisp* l);
+
+// Returns number of components in the list.
+int lisp_length(const lisp* l);
+
+// Returns stringified version of list
+void lisp_tostring(const lisp* l, char* str);
+
+
 //populates character string array with values from lisp 
 void populate_list(const struct lisp* l, char* arr, int* index);
 
@@ -44,3 +83,8 @@ void populate_right_bracket(char* arr, int* index);
 //populates left bracket in character string array
 void populate_left_bracket(char* arr, int* index);
 
+void append(char* s,char c);
+
+struct lisp* lisp_fromstring(const char* str);
+
+struct lisp* lisp_ans(struct lisp* temp_lisp, const char* str, int index);
