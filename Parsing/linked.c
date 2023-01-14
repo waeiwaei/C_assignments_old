@@ -525,6 +525,7 @@ lisp* lisp_ans(lisp* temp_lisp, const char* str, int index){
             }else{
                p=temp_lisp;
                p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
+               printf("Nested lisp: cdr->atomtype: %i\n\n\n", p->cdr->atomtype);
                p=p->cdr;
             }
             
@@ -546,13 +547,15 @@ lisp* lisp_ans(lisp* temp_lisp, const char* str, int index){
                }
             
                if (p==NULL){
-                  temp_lisp=(lisp*)ncalloc(1, sizeof(lisp));
+                  temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
                   p=temp_lisp;
-                  p->atomtype=atoi(c);
+                  p->atomtype = atoi(c);
+                  printf("%i, car->atomtype: %i\n\n", index, p->atomtype);
                
                }else{
-                  p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
-                  p->cdr->atomtype= atoi(c);
+                  p->cdr = (lisp*)ncalloc(1, sizeof(lisp));
+                  p->cdr->atomtype = atoi(c);
+                  printf("%i, cdr->atomtype: %i\n\n", index, p->cdr->atomtype);
                   p=p->cdr;
                   
                }
@@ -585,8 +588,9 @@ lisp* lisp_ans(lisp* temp_lisp, const char* str, int index){
 lisp* lisp_fromstring(const char* str){
 //    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((1 2) (3 4) (5 (6 7)))"};
 
-   printf("value passed - %s\n\n", str);
+   printf("string passed to fromstring - %s\n\n", str);
    int index=1;
+
    return lisp_ans(NULL, str, index);
 
 }

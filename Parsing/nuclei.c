@@ -90,6 +90,7 @@ bool program(char* input){
    printf("%s\n\n", input);
 
    lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
+   printf("Program function temp address - %p \n\n", (void*)(temp));
 
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
@@ -126,6 +127,9 @@ bool instructions(char* input, int* len_index, lisp* temp){
 
    printf("Instructions - %i, %c \n", *len_index, input[*len_index]);
 
+   printf("INSTRUCTIONS function temp address - %p \n\n", (void*)(temp));
+
+
    while(input[*len_index] == ' '){ 
       (*len_index)++;
    }
@@ -159,6 +163,9 @@ bool instructions(char* input, int* len_index, lisp* temp){
 
 //<INSTRCT> ::= "(" <FUNC> ")"
 bool instruction(char* input, int* len_index, lisp* temp){
+
+
+   printf("INSTURCTION function temp address - %p \n\n", (void*)(temp));
 
    char inst[MAX_LENGTH] = "";
    int len = 0;
@@ -205,6 +212,7 @@ bool func(char* input, int* len_index, char* inst, lisp* temp){
    int flag = 1;
 
          printf("\n\n\n (%i)Instruction - %s \n\n\n", *len_index, inst);
+         printf("FUNC function temp address - %p \n\n", (void*)(temp));
 
          //IO Functions
          if(strcmp(inst, "SET") == 0){
@@ -485,41 +493,71 @@ bool ins_literal(char* input, int* len_index, lisp* temp){
       
          int len_input = 0;
          int len_newarray = 0;
+         int flag2 = 0;
          char temp_array[MAX_LENGTH];
 
          //retrieve just the literal portion
          while(input[len_input] != '\0'){
 
             if(input[len_input] == 39){
-               
-               temp_array[len_newarray] = '(';
-               len_newarray++;
-               len_input++;
+                              
+               if(input[len_input + 1] != '('){
 
-               while(input[len_input] != 39){
-                  temp_array[len_newarray] = input[len_input];
+                  temp_array[len_newarray] = '(';
+                  len_newarray++;
+                  len_input++;
+
+                  while(input[len_input] != 39){
+                     temp_array[len_newarray] = input[len_input];
+                     len_input++;
+                     len_newarray++;
+                     flag2 = 1;
+                  }
+
+               }else{
 
                   len_input++;
-                  len_newarray++;
+
+                  while(input[len_input] != 39){
+                     temp_array[len_newarray] = input[len_input];
+
+                     len_input++;
+                     len_newarray++;
+                  }
+
                }
             }
 
             len_input++;
          }
 
-         temp_array[len_newarray] = ')';
-         len_newarray++;
-         temp_array[len_newarray] = '\0';
+         if(flag2 == 1){
+            printf("Entered flag2\n");
+            temp_array[len_newarray] = ')';
+            len_newarray++;
+            temp_array[len_newarray] = '\0';
 
-         temp = lisp_fromstring(temp_array);
-         printf("Value of A: %i\n", temp->atomtype);
+         }else{
+            printf("len_newarray - %i\n", len_newarray);
+            len_newarray++;
+            temp_array[len_newarray] = '\0'; 
+         }
 
-            char str[MAX_LENGTH];
+         printf("TEMP ARRAY - %s\n\n\n", temp_array);
 
-            lisp_tostring(temp, str);
-            printf("%s\n\n\n",str);
-            printf("CAR - %i\n\n\n", lisp_getval(lisp_car(temp)));
-            printf("CDR - %i\n\n\n", lisp_getval(lisp_cdr(temp)));
+         temp = lisp_copy(lisp_fromstring(temp_array));
+         printf("SET function temp address - %p \n\n", (void*)(temp));
+
+
+         char str[MAX_LENGTH];
+         lisp_tostring(temp, str);
+         printf("Printing the list %s\n\n\n",str);
+
+         printf("CAR - %i\n\n\n", lisp_getval(lisp_car(temp)));
+
+         printf("LENGTH - %i\n\n\n", lisp_length(temp));
+
+         printf("CDR - %i\n\n\n", lisp_getval(lisp_cdr(temp)));
 
       #endif
 
@@ -558,6 +596,11 @@ bool ins_print(char* input, int* len_index, lisp* temp){
 
    printf("PRINT - function - %i\n", *len_index);
 
+   #ifdef INTERPRET
+      printf("PRINT function temp address - %p \n\n", (void*)(temp));
+      printf("temp->atomtype - %i\n\n", lisp_getval(lisp_car(temp)));
+   #endif
+
    int flag = 0;
 
    if(ins_string(input, len_index)){
@@ -570,6 +613,19 @@ bool ins_print(char* input, int* len_index, lisp* temp){
       }
    }
 
+   #ifdef INTERPRET
+
+   char print_list[MAX_LENGTH];
+
+   if(flag == 1 && temp != NULL){
+      lisptostring(temp, print_list);
+
+      printf("%s", print_list);
+   }
+
+   #endif
+
+
    if(flag == 1){
       return true;
    }else{
@@ -579,6 +635,9 @@ bool ins_print(char* input, int* len_index, lisp* temp){
 
    return false;
 }
+
+
+
 
 //<STRING> ::= Double-quoted string constant e.g. "Hello, World!", or "FAILURE ?"
 bool ins_string(char* input, int* len_index){
@@ -599,31 +658,6 @@ bool ins_string(char* input, int* len_index){
          (*len_index)++;
       }
 
-/*
-      //Store the value of the string inside the temp_array
-      #ifdef INTERPRET
-
-      while(input[len2] != '"'){
-         len2++;
-      }
-
-      len2++;
-
-      while(input[len2] != '"'){
-
-         temp_array[len] = input[len2];
-         
-         len2++;
-         len++;
-      
-      }
-
-      input[len] = '\0';
-
-      printf("\n\n%s\n\n", input);
-      
-      #endif
-*/
    }
 
    if(flag == 1){
