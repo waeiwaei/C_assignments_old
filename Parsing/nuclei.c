@@ -12,7 +12,7 @@
 #define MAX_LENGTH 1000
 #define INTERPRET
 
-bool list_func(char* input, int* len_index, char* instruct, lisp* temp);
+bool list_func(char* input, int* len_index, char* instruct);
 bool func(char* input, int* len_index, char* inst, lisp* temp);
 bool program(char* input);
 bool in_out_func(char* input, int* len_index, char* instruc, lisp* temp);
@@ -89,8 +89,12 @@ bool program(char* input){
 
    printf("%s\n\n", input);
 
-   lisp* temp = (lisp*)ncalloc(1, sizeof(lisp));
-   printf("Program function temp address - %p \n\n", (void*)(temp));
+   //create the pointer to a space, to store the lisp from the set function
+   //we can then pass this to the PRINT function to print if it is a lisp
+   //if this is empty, then we know that PRINT function will print a string
+   lisp* temp = NULL;
+
+   printf("Initialised: Program function temp address - %p \n\n", (void*)(temp));
 
    //we check if the first character is a '(', then go into instructions
    if(input[0] == '('){
@@ -103,17 +107,6 @@ bool program(char* input){
       }else{
          return false;
       }
-
-
-      /*
-         #ifdef INTPRET
-            return instructions(input, &len_index));
-         #else
-            instructions(input, &len_index);
-            return
-         #endif
-      */
-
    }
    
    ON_ERROR("Expression does not have an opening bracket\n");
@@ -128,7 +121,6 @@ bool instructions(char* input, int* len_index, lisp* temp){
    printf("Instructions - %i, %c \n", *len_index, input[*len_index]);
 
    printf("INSTRUCTIONS function temp address - %p \n\n", (void*)(temp));
-
 
    while(input[*len_index] == ' '){ 
       (*len_index)++;
@@ -164,12 +156,10 @@ bool instructions(char* input, int* len_index, lisp* temp){
 //<INSTRCT> ::= "(" <FUNC> ")"
 bool instruction(char* input, int* len_index, lisp* temp){
 
-
    printf("INSTURCTION function temp address - %p \n\n", (void*)(temp));
 
    char inst[MAX_LENGTH] = "";
    int len = 0;
-   //int flag = 1;
 
    while(input[*len_index] != ')'){
 
@@ -202,6 +192,7 @@ bool instruction(char* input, int* len_index, lisp* temp){
    }else{
       return false;
    }
+
 }
 
 
@@ -211,7 +202,7 @@ bool func(char* input, int* len_index, char* inst, lisp* temp){
 
    int flag = 1;
 
-         printf("\n\n\n (%i)Instruction - %s \n\n\n", *len_index, inst);
+         printf("\n (%i)Instruction - %s \n\n\n", *len_index, inst);
          printf("FUNC function temp address - %p \n\n", (void*)(temp));
 
          //IO Functions
@@ -407,12 +398,7 @@ bool ins_set(char* input, int* len_index, lisp* temp){
 bool ins_list(char* input, int* len_index, lisp* temp){
 
    printf("'%c', LIST - len_index - %i \n", input[*len_index], *len_index);
-   
-   if(temp == NULL){
-      printf("Value of temp is NULL\n\n");
-   }else{
-      printf("Value of temp is NOT NULL\n\n");
-   }
+   printf("INS_LIST function temp address - %p \n\n", (void*)(temp));
 
    //literal 
    if(input[*len_index] == 39){
@@ -488,7 +474,6 @@ bool ins_literal(char* input, int* len_index, lisp* temp){
       (*len_index)++;
    }
 
-
       #ifdef INTERPRET
       
          int len_input = 0;
@@ -538,29 +523,27 @@ bool ins_literal(char* input, int* len_index, lisp* temp){
             temp_array[len_newarray] = '\0';
 
          }else{
-            printf("len_newarray - %i\n", len_newarray);
+            printf("line 541: len_newarray - %i\n", len_newarray);
             len_newarray++;
             temp_array[len_newarray] = '\0'; 
          }
 
-         printf("TEMP ARRAY - %s\n\n\n", temp_array);
-
-         temp = lisp_copy(lisp_fromstring(temp_array));
-         printf("SET function temp address - %p \n\n", (void*)(temp));
+         temp = (lisp_fromstring(temp_array));
+         printf("After copying: SET function temp address - %p \n\n", (void*)(temp));
 
 
          char str[MAX_LENGTH];
          lisp_tostring(temp, str);
-         printf("Printing the list %s\n\n\n",str);
+         printf("Printing the list %s\n",str);
 
-         printf("CAR - %i\n\n\n", lisp_getval(lisp_car(temp)));
+         printf("CAR - %i\n", lisp_getval(lisp_car(temp)));
+         printf("LENGTH - %i\n", lisp_length(temp));
 
-         printf("LENGTH - %i\n\n\n", lisp_length(temp));
-
-         printf("CDR - %i\n\n\n", lisp_getval(lisp_cdr(temp)));
+         lisp* l7 = lisp_cdr(temp);
+         lisp_tostring(l7, str);
+         printf("Cdr of list \n%s\n\n\n\n", str);
 
       #endif
-
 
    printf("\nLITERAL FLAG - %i\n", flag);
 
@@ -607,6 +590,34 @@ bool ins_print(char* input, int* len_index, lisp* temp){
       flag = 1;
    }
 
+   #ifdef INTERPRET
+
+      if(temp != NULL && flag == 1){
+         char print_string[MAX_LENGTH];
+         int len1 = 0;
+         int len2 = 0;
+
+         while(input[len1] != '\0'){
+            if(input[len1] == '"'){
+               len1++;
+
+               while(input[len1] != '"'){
+                  print_string[len2] = input[len1];
+                  len2++;
+                  len1++;
+               }
+            }
+            
+            len1++;
+         }
+
+         print_string[len2] = '\0';
+
+         printf("String - %s \n", print_string);
+      }
+
+   #endif
+
    if(flag == 0){
       if(ins_list(input, len_index, temp)){
          flag = 1;
@@ -618,9 +629,9 @@ bool ins_print(char* input, int* len_index, lisp* temp){
    char print_list[MAX_LENGTH];
 
    if(flag == 1 && temp != NULL){
-      lisptostring(temp, print_list);
+      lisp_tostring(temp, print_list);
 
-      printf("%s", print_list);
+      printf("line 623: LIST: %s\n\n", print_list);
    }
 
    #endif
@@ -641,7 +652,6 @@ bool ins_print(char* input, int* len_index, lisp* temp){
 
 //<STRING> ::= Double-quoted string constant e.g. "Hello, World!", or "FAILURE ?"
 bool ins_string(char* input, int* len_index){
-
    printf("char %c - %i \n",input[*len_index], *len_index);
 
    int flag = 0;
@@ -680,11 +690,9 @@ void clear_string(char* input){
 }
 
 
-
-
 //<RETFUNC> ::= <LISTFUNC> | <INTFUNC> | <BOOLFUNC> - needed for the PRINT Statement
 bool ret_func(char* input, int* len_index, lisp* temp){
-
+   
    printf("\n\n-----------Return Func---------------\n\n");
 
    char array[MAX_LENGTH] = "";
@@ -696,7 +704,7 @@ bool ret_func(char* input, int* len_index, lisp* temp){
       //LISTFUNC
       if(strcmp(array, "CAR") == 0){
          (*len_index) = (*len_index) + 2;
-         printf("\n      ---------CAR instruction triggered - index %i - value - %c \n", *len_index, input[*len_index]);
+         printf("\n ---------CAR instruction triggered - index %i - value - %c \n", *len_index, input[*len_index]);
          list_func(input, len_index, array, temp);
 
       }else if(strcmp(array, "CDR") == 0){
@@ -757,7 +765,7 @@ bool ret_func(char* input, int* len_index, lisp* temp){
 
 
 //<LISTFUNC> ::= "CAR" <LIST> | "CDR" <LIST> | "CONS" <LIST> <LIST>
-bool list_func(char* input, int* len_index, char* instruct,lisp* temp){
+bool list_func(char* input, int* len_index, char* instruct, lisp* temp){
 
 while(input[*len_index] != ')'){
 
