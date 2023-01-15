@@ -16,10 +16,13 @@ struct prog{
    char input[MAX_LENGTH];
    int len_index;
    char instruction[MAX_LENGTH];
+   
+   #ifdef INTERPRET
+      lisp* lisp_structure;
+   #endif
 };
 
 typedef struct prog prog;
-
 
 bool program(prog* prog);
 bool list_func(prog* prog);
@@ -27,8 +30,8 @@ bool func(prog* prog);
 bool in_out_func(prog* prog);
 bool int_func(prog* prog);
 bool bool_func(prog* prog);
-bool if_func(prog* prog);
 bool loop_func(prog* prog);
+bool if_func(prog* prog);
 bool instructions(prog* prog);
 bool instruction(prog* prog);
 bool ins_set(prog* prog);
@@ -376,8 +379,8 @@ bool ins_set(prog* prog){
 
       //check if the VAR grammar is correct
       if(ins_var(prog)){
-
-         (prog->len_index)++;
+      
+      (prog->len_index)++;
 
       //error message - input does not conform to grammar
       }else{
@@ -416,6 +419,11 @@ bool ins_list(prog* prog){
    }else if(prog->input[prog->len_index] == 'N' && prog->input[prog->len_index + 1] == 'I' && prog->input[prog->len_index + 2] == 'L'){
 
       printf("it is a NIL\n");
+
+      #ifdef INTERPRET
+         prog->lisp_structure = NULL;
+      #endif
+
       (prog->len_index)++;
       return true;
 
@@ -459,7 +467,6 @@ bool ins_literal(prog* prog){
    printf("LITERAL - len_index - %i \n", prog->len_index);
 
    int flag = 0;
-
    //only accept space, bracket and numbers
    while(prog->input[prog->len_index] != 39){
       if(!(prog->input[prog->len_index] >= 65 && prog->input[prog->len_index] <= 90)){   
@@ -470,38 +477,41 @@ bool ins_literal(prog* prog){
 
       (prog->len_index)++;
    }
-/*
+
       #ifdef INTERPRET
       
-         int len_input = 0;
+         static int const_index = 0;
+         int len_input = const_index;
          int len_newarray = 0;
          int flag2 = 0;
          char temp_array[MAX_LENGTH];
 
          //retrieve just the literal portion
-         while(input[len_input] != '\0'){
+         while(prog->input[len_input] != '\0'){
 
-            if(input[len_input] == 39){
-                              
-               if(input[len_input + 1] != '('){
+            if(prog->input[len_input] == 39){
+               printf("len_input - %i\n", len_input);
+
+               if(prog->input[len_input + 1] != '('){
 
                   temp_array[len_newarray] = '(';
                   len_newarray++;
                   len_input++;
 
-                  while(input[len_input] != 39){
-                     temp_array[len_newarray] = input[len_input];
+                  while(prog->input[len_input] != 39){
+                     temp_array[len_newarray] = prog->input[len_input];
                      len_input++;
                      len_newarray++;
                      flag2 = 1;
                   }
+                  break;
 
                }else{
 
                   len_input++;
 
-                  while(input[len_input] != 39){
-                     temp_array[len_newarray] = input[len_input];
+                  while(prog->input[len_input] != 39){
+                     temp_array[len_newarray] = prog->input[len_input];
 
                      len_input++;
                      len_newarray++;
@@ -520,28 +530,36 @@ bool ins_literal(prog* prog){
             temp_array[len_newarray] = '\0';
 
          }else{
-            printf("line 541: len_newarray - %i\n", len_newarray);
             len_newarray++;
             temp_array[len_newarray] = '\0'; 
          }
 
-         temp = (lisp_fromstring(temp_array));
-         printf("After copying: SET function temp address - %p \n\n", (void*)(temp));
+         temp_array[len_newarray] = '\0';
 
+         const_index = len_input + 1;
+
+
+         printf("TEMP- ARRAY: %s %i\n\n", temp_array, len_input);
+
+         prog->lisp_structure = (lisp_fromstring(temp_array));
+
+
+         if(flag2 == 1){
+            prog->lisp_structure->choice = true;
+         }
 
          char str[MAX_LENGTH];
-         lisp_tostring(temp, str);
+         lisp_tostring(prog->lisp_structure, str);
          printf("Printing the list %s\n",str);
 
-         printf("CAR - %i\n", lisp_getval(lisp_car(temp)));
-         printf("LENGTH - %i\n", lisp_length(temp));
+         printf("CAR - %i\n", lisp_getval(lisp_car(prog->lisp_structure)));
+         printf("LENGTH - %i\n", lisp_length(prog->lisp_structure));
 
-         lisp* l7 = lisp_cdr(temp);
-         lisp_tostring(l7, str);
-         printf("Cdr of list \n%s\n\n\n\n", str);
+         lisp_tostring(prog->lisp_structure, str);
+         printf("Cdr of list %s\n\n\n\n", str);
 
       #endif
-*/
+
    printf("\nLITERAL FLAG - %i\n", flag);
 
    if(flag == 1){
@@ -581,54 +599,33 @@ bool ins_print(prog* prog){
       flag = 1;
    }
 
-   /*
-
-   #ifdef INTERPRET
-
-      if(temp != NULL && flag == 1){
-         char print_string[MAX_LENGTH];
-         int len1 = 0;
-         int len2 = 0;
-
-         while(input[len1] != '\0'){
-            if(input[len1] == '"'){
-               len1++;
-
-               while(input[len1] != '"'){
-                  print_string[len2] = input[len1];
-                  len2++;
-                  len1++;
-               }
-            }
-            
-            len1++;
-         }
-
-         print_string[len2] = '\0';
-
-         printf("String - %s \n", print_string);
-      }
-
-   #endif
-
-   #ifdef INTERPRET
-
-   char print_list[MAX_LENGTH];
-
-   if(flag == 1 && temp != NULL){
-      lisp_tostring(temp, print_list);
-
-      printf("line 623: LIST: %s\n\n", print_list);
-   }
-
-   #endif
-*/
-
    if(flag == 0){
       if(ins_list(prog)){
          flag = 1;
       }
    }
+
+   #ifdef INTERPRET
+
+   int len = 0;
+   //int len1 = 0;
+   int flag3 = 0;
+   char str[MAX_LENGTH];
+
+   while(prog->input[len] != '\0'){
+      if(prog->input[len] == '"'){
+         flag3 = 1;
+      }
+      len++;
+   }
+
+   if(prog->lisp_structure != NULL && flag3 == 0){
+      
+      lisp_tostring(prog->lisp_structure, str);
+      printf("PRINT FUNCTION - %s\n\n\n", str);
+   }
+
+   #endif
 
    if(flag == 1){
       return true;
@@ -691,9 +688,24 @@ bool ret_func(prog* prog){
    //char array[MAX_LENGTH] = "";
    int index = 0;
 
+   clear_string(prog);
+
    while(prog->input[prog->len_index] != ')'){
+      
       prog->instruction[index] = prog->input[prog->len_index];
 
+      if(prog->instruction[index] == ' '){
+         break;
+      }
+
+      index++;
+      (prog->len_index)++;
+   }
+
+      prog->instruction[index] = '\0';
+      printf("%s\n\n", prog->instruction);
+
+      //printf("%s\n", prog->instruction);
       //LISTFUNC
       if(strcmp(prog->instruction, "CAR") == 0){
          (prog->len_index) = (prog->len_index) + 2;
@@ -706,7 +718,10 @@ bool ret_func(prog* prog){
          list_func(prog);
 
       }else if(strcmp(prog->instruction, "CONS") == 0){
-         (prog->len_index) = (prog->len_index) + 2;
+         //printf("Triggered\n");
+         //(prog->len_index) = (prog->len_index) + 2;
+         printf("CONS - %i\n\n", prog->len_index);
+         prog->len_index++;
          printf("CONS instruction triggered - index %i \n", prog->len_index);
          list_func(prog);
 
@@ -744,9 +759,8 @@ bool ret_func(prog* prog){
       
       }
 
-      index++;
-      (prog->len_index)++;
-   }
+
+
 
    printf("Last index - %i   %c\n\n", prog->len_index, prog->input[prog->len_index]);
    printf("------------------EXIT RET_FUNC---------------------\n\n");
@@ -759,6 +773,13 @@ bool ret_func(prog* prog){
 
 //<LISTFUNC> ::= "CAR" <LIST> | "CDR" <LIST> | "CONS" <LIST> <LIST>
 bool list_func(prog* prog){
+
+#ifdef INTERPRET
+lisp* temp1;
+lisp* temp2;
+#endif
+
+printf("list function - index - %i\n\n", prog->len_index);
 
 while(prog->input[prog->len_index] != ')'){
 
@@ -793,20 +814,42 @@ while(prog->input[prog->len_index] != ')'){
       printf("\n1.list_func - CONS instruction - len index %i \n", prog->len_index);
 
       if(ins_list(prog)){
-         
+
+         #ifdef INTERPRET 
+            temp1 = prog->lisp_structure;
+            printf("temp1 - %i", lisp_getval(temp1));
+         #endif
+
          printf("\n2.list_func - CONS instruction - len index %i \n", prog->len_index);
             
             (prog->len_index)++;
 
+            printf("line 816 - %i\n\n", prog->len_index);
+
                if(ins_list(prog)){
+
+                     #ifdef INTERPRET 
+                        temp2 = prog->lisp_structure;
+                        printf("temp2 - %i", lisp_getval(temp2));
+
+                     #endif
 
                      (prog->len_index)--;
 
                      return true;
                }
-
       }
+
+   #ifdef INTERPRET
+      char str[MAX_LENGTH];
+
+      prog->lisp_structure = lisp_cons(temp1, temp2);
+
+      lisp_tostring(prog->lisp_structure, str);
+
+      printf("CONS function - %s\n\n\n", str);
    }
+   #endif 
 
    if(prog->input[prog->len_index] == ' '){
       (prog->len_index)++;
