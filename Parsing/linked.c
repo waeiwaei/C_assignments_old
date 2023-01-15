@@ -348,8 +348,6 @@ void populate_list(const lisp* l, char* arr, int* index){
    }
 }
 
-
-// Returns stringified version of list
 void lisp_tostring(const lisp* l, char* str){
 
    lisp* temp;
@@ -418,9 +416,36 @@ void lisp_tostring(const lisp* l, char* str){
 
          l = l->cdr;
    }
-
+   //(1 2 (3 4))
    //last cons block pointing to NULL
-   populate_list(l, arr, &index);
+   if(l->car != NULL){         
+      populate_left_bracket(arr, &index);
+      temp = l->car;
+
+      while(temp->cdr != NULL){
+         populate_list(temp, arr, &index);             
+         populate_space(arr, &index);
+
+         temp = temp->cdr;
+      
+      }
+
+      if(arr[index - 1] != SPACE){
+         populate_space(arr, &index);
+
+      }
+
+      //last cons block pointing to NULL
+      populate_list(temp, arr, &index);
+      populate_right_bracket(arr, &index);
+      populate_space(arr, &index);
+      index--;
+
+   }
+   else
+   {
+      populate_list(l, arr, &index);
+   }
    populate_right_bracket(arr, &index);
 
    arr[index] = '\0';
@@ -502,96 +527,98 @@ void append(char* s,char c){
    
 }
 
+lisp* lisp_ans(lisp* temp_lisp, const char* str,int index)
+{
+    static int inc=0;
+    
+    lisp* p;
+    if (temp_lisp == NULL) p=NULL;
+    else p=temp_lisp;
 
-
-lisp* lisp_ans(lisp* temp_lisp, const char* str, int index){
-
-   static int inc = 0;
-   
-   lisp* p;
-   if (temp_lisp == NULL){p=NULL;}
-   else{p=temp_lisp;}
-
-
-      while(str[index] != ')'){
-         
-         if(str[index] == '('){
-
+   while(str[index] != ')'){
+      
+      if(str[index] == '('){
             index++;
-
-            if (p==NULL){
+            //use a recursive function to go through the list
+            //and store the values inside this function
+            // lisp* new=(lisp*)ncalloc(1, sizeof(lisp));
+            if (p==NULL)
+            {
                temp_lisp=(lisp*)ncalloc(1, sizeof(lisp));
                p=temp_lisp;
-            }else{
+            }
+            else
+            {
                p=temp_lisp;
+               while (p->cdr!=NULL) p=p->cdr;
                p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
-               printf("Nested lisp: cdr->atomtype: %i\n\n\n", p->cdr->atomtype);
                p=p->cdr;
             }
             
             p->car = lisp_ans(NULL, str, index);  
+            p->cdr=NULL;
             index=inc;
-               
+             
             index++;
-
-         }else{
-
-            if(str[index] == ' '){
-               index++;
-            }else{
-
-               char c[20] = "";
-               while(str[index] == '-' || isdigit(str[index])){
-                  append(c,str[index]);
-                  index++;
-               }
-            
-               if (p==NULL){
-                  temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
-                  p=temp_lisp;
-                  p->atomtype = atoi(c);
-                  printf("%i, car->atomtype: %i\n\n", index, p->atomtype);
-               
-               }else{
-                  p->cdr = (lisp*)ncalloc(1, sizeof(lisp));
-                  p->cdr->atomtype = atoi(c);
-                  printf("%i, cdr->atomtype: %i\n\n", index, p->cdr->atomtype);
-                  p=p->cdr;
-                  
-               }
-            }   
-               
-         }
-
-         if(str[index+1] == ')'){
-            inc=index+1;
-         }
-
-         if(str[index] == ')'){
-            inc=index;
-         }
-
       }
 
+        else
+        {
+            if (str[index] == ' ')
+            {
+               index++;
+               // if (str[index+1] == ')')  index--;
+            }
+            else{
+                char c[20] ="";
+               //  if (str[index]=='-')
+               //  {
+               //    index=index+1;
 
-   if(p) {
-      p->cdr=NULL;
+               //    index=index+2;
+               //  }
+                while (str[index]=='-' || isdigit(str[index]))
+                {
+                     append(c,str[index]);
+                     index++;
+                }
+               
+                if (p==NULL) {
+                    temp_lisp=(lisp*)ncalloc(1, sizeof(lisp));
+                    p=temp_lisp;
+                    p->atomtype=atoi(c);
+            
+                }
+                else{
+                    p->cdr=(lisp*)ncalloc(1, sizeof(lisp));
+                    p->cdr->atomtype= atoi(c);
+                    p=p->cdr;
+                    
+                }
+            }
+            
+            
+        }
+        if (str[index] == ')')
+      {
+        inc=index;
+      }
+
+      }
+      if (p) p->cdr=NULL;
+      index++;
+
+      return temp_lisp;
+
    }
-   
-   index++;
-
-   return temp_lisp;
-
-}
 
 
 lisp* lisp_fromstring(const char* str){
 //    char inp[4][LISTSTRLEN] = {"()", "(1)", "(0 (1 -2) 3 4 50)", "((1 2) (3 4) (5 (6 7)))"};
 
-   printf("string passed to fromstring - %s\n\n", str);
-   int index=1;
-
-   return lisp_ans(NULL, str, index);
+    // lisp* temp_lisp = (lisp*)ncalloc(1, sizeof(lisp));
+    int index=1;
+    return lisp_ans(NULL, str, index);
 
 }
 
