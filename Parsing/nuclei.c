@@ -549,8 +549,14 @@ bool ins_literal(prog* prog){
 
          const_index = len_input + 1;
 
-         prog->lisp_structure = (lisp_fromstring(temp_array));
 
+         if(strcmp(prog->instruction, "CAR") == 0 || strcmp(prog->instruction, "CONS") == 0 || strcmp(prog->instruction, "CDR") == 0 || strcmp(prog->instruction, "SET") == 0){
+            prog->lisp_structure = (lisp_fromstring(temp_array));
+         }
+
+         if(strcmp(prog->instruction, "LESS") == 0 || strcmp(prog->instruction, "GREATER") == 0 || strcmp(prog->instruction, "EQUAL") == 0 ){
+            prog->bool_lisp_structure = lisp_fromstring(temp_array);
+         }
 
          if(flag2 == 1){
             prog->lisp_structure->choice = true;
@@ -891,6 +897,13 @@ while(prog->input[prog->len_index] != ')'){
 //<INTFUNC> ::= "PLUS" <LIST> <LIST> | "LENGTH" <LIST>
 bool int_func(prog* prog){
 
+#ifdef INTERPRET
+lisp* temp1;
+lisp* temp2;
+static int accum = 0;
+#endif
+
+
 while(prog->input[prog->len_index] != ')'){
 
    if(strcmp(prog->instruction,"PLUS") == 0){
@@ -899,13 +912,25 @@ while(prog->input[prog->len_index] != ')'){
 
       if(ins_list(prog)){
          
+         #ifdef INTERPRET
+            temp1 = prog->bool_lisp_structure;
+         #endif
+
          printf("\n2.int_func - PLUS instruction - len index %i \n", prog->len_index);
 
          (prog->len_index)++;
 
          if(ins_list(prog)){
+            
+            #ifdef INTERPRET
+               temp2 = prog->lisp_structure;
 
-            //(prog->len_index)--;
+               //stores the atomtype for both list minus each other
+               accum = temp2->atomtype + temp1->atomtype;
+
+               prog->lisp_structure->atomtype = accum; 
+
+            #endif
 
             return true;
          }
@@ -957,9 +982,29 @@ while(prog->input[prog->len_index] != ')'){
 
             (prog->len_index)--;
 
+            #ifdef INTERPRET
+               //value of the C - 5
+               printf("lisp_structure - %i\n", prog->lisp_structure->atomtype);
+
+               //value of the bool condition - 0
+               printf("bool_condition - %i\n\n", prog->bool_lisp_structure->atomtype);
+            
+               if(prog->lisp_structure->atomtype >= prog->bool_lisp_structure->atomtype){
+
+                  prog->bool_cond = false;
+
+               }else{
+
+                  prog->bool_cond = true;
+               }
+
+            #endif
+
             return true;
          }
       }
+
+
 
    }else if(strcmp(prog->instruction, "GREATER") == 0){
 
@@ -1125,6 +1170,7 @@ bool if_func(prog* prog){
 //<LOOP> ::= "WHILE""(" <BOOLFUNC> ")" "(" <INSTRCTS>
 bool loop_func(prog* prog){ 
 
+/*
    printf("Entered LOOP-func %i, %c \n", prog->len_index, prog->input[prog->len_index]);
 
    //char instruct[MAX_LENGTH];
@@ -1140,10 +1186,13 @@ bool loop_func(prog* prog){
    if(prog->input[prog->len_index] == '('){
       (prog->len_index)++;
 
+      
+      clear_string(prog);
+
+
       while(prog->input[prog->len_index] != ')'){
 
-         clear_string(prog);
-
+         
          ////<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
          prog->instruction[len] = prog->input[prog->len_index];
 
@@ -1193,6 +1242,10 @@ bool loop_func(prog* prog){
                printf("WHILE condition - first instructions return %i\n", prog->len_index);
                flag3 = 1;
             }
+
+            #ifdef INTERPERT
+            #endif
+
          }
 
          (prog->len_index)++;
@@ -1208,5 +1261,201 @@ bool loop_func(prog* prog){
    }
 
 return false;
+
+*/
+
+#ifdef INTERPRET
+
+   int len = 0;
+   int flag = 0;
+   lisp* store_cond;
+   lisp* store_base;
+
+      //"(" <BOOLFUNC> ")"
+   if(prog->input[prog->len_index] == '('){
+      (prog->len_index)++;
+
+      clear_string(prog);
+
+      while(prog->input[prog->len_index] != ')'){
+         
+         ////<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
+         prog->instruction[len] = prog->input[prog->len_index];
+
+         if(prog->instruction[len] == ' '){
+
+            prog->instruction[len] = '\0';
+            printf("\n\nInstruction passed to bool func - %s\n", prog->instruction);
+
+            if(bool_func(prog)){
+               
+               flag = 1;
+               
+            }
+         }
+
+         len++;
+         (prog->len_index)++;
+      }
+   }
+
+
+
+   //keep track of the initial store condition of 0
+   store_cond = prog->bool_lisp_structure;
+   
+   //keep track of the initial base of 5
+   store_base = prog->lisp_structure;
+
+   printf("Store_cond - %i\n\n", store_cond->atomtype);
+   printf("Store_base - %i\n\n", store_base->atomtype);
+
+
+   int loop_index = prog->len_index; 
+
+   printf("LOOP INDEX - %i\n\n", loop_index);
+   printf("%i \n\n", flag);
+
+
+   //we will need to carry out the rest of the instructions
+   //until the condition inside is false
+
+   while(prog->bool_cond == false){
+
+      if(prog->input[prog->len_index] == ')'){
+         prog->len_index++;
+      }
+
+      while(prog->input[prog->len_index] != ')'){
+         instructions(prog);
+      }
+
+      bool_func(prog);
+
+      //to go over the same instructions from LESS onwards
+      prog->len_index = loop_index;
+
+   }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+return false;
+
+
+
+
+
+
+#else
+   printf("Entered LOOP-func %i, %c \n", prog->len_index, prog->input[prog->len_index]);
+
+   //char instruct[MAX_LENGTH];
+   int flag = 0, flag2 = 0, flag3 = 0;
+   int len = 0;
+
+   //spaces in between
+   while(prog->input[prog->len_index] == ' '){
+      (prog->len_index)++;
+   }
+
+      //"(" <BOOLFUNC> ")"
+   if(prog->input[prog->len_index] == '('){
+      (prog->len_index)++;
+
+      
+      clear_string(prog);
+
+
+      while(prog->input[prog->len_index] != ')'){
+
+         
+         ////<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
+         prog->instruction[len] = prog->input[prog->len_index];
+
+         if(prog->instruction[len] == ' '){
+
+            prog->instruction[len] = '\0';
+            printf("\n\nInstruction passed to bool func - %s\n", prog->instruction);
+
+            if(bool_func(prog)){
+               
+               flag = 1;
+               
+            }
+         }
+
+         len++;
+         (prog->len_index)++;
+      }
+   }
+
+   if(flag == 1 && prog->input[prog->len_index] == ')'){
+      (prog->len_index)++;
+
+      printf("\n\n\nINDEX - %i\n\n", prog->len_index);
+
+      printf("--------LOOP - Flag1 return true----------- \n\n");
+
+      flag2 = 1;
+   }
+
+
+   //"(" <INSTRCTS>
+   if(flag2 == 1){
+
+      printf("\n\n\nINDEX - %i\n\n", prog->len_index);
+      printf("--------LOOP - Flag2 return true----------- \n\n");
+
+      //spaces in between
+      while(prog->input[prog->len_index] != ')'){
+         
+         if(prog->input[prog->len_index] == '('){
+            (prog->len_index)++;
+            printf("\n\n\n AFTER FIRST INDEX - %i\n\n", prog->len_index);
+
+            if(instructions(prog)){
+
+               printf("WHILE condition - first instructions return %i\n", prog->len_index);
+               flag3 = 1;
+            }
+
+            #ifdef INTERPERT
+            #endif
+
+         }
+
+         (prog->len_index)++;
+      }
+
+   }
+
+   if(flag3 == 1){
+
+      (prog->len_index) = (prog->len_index)-2;
+
+      return true;
+   }
+
+return false;
+
+
+#endif
+
+
+
+
 
 }
