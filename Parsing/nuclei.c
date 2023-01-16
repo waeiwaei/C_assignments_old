@@ -1270,6 +1270,8 @@ return false;
    int flag = 0;
    lisp* store_cond;
    lisp* store_base;
+   char str_instruction_bool[MAX_LENGTH];
+
 
       //"(" <BOOLFUNC> ")"
    if(prog->input[prog->len_index] == '('){
@@ -1310,8 +1312,11 @@ return false;
    printf("Store_cond - %i\n\n", store_cond->atomtype);
    printf("Store_base - %i\n\n", store_base->atomtype);
 
-
+   prog->len_index = prog->len_index+2;
    int loop_index = prog->len_index; 
+   
+   //keep track of the instruction
+   strcpy(str_instruction_bool, prog->instruction);
 
    printf("LOOP INDEX - %i\n\n", loop_index);
    printf("%i \n\n", flag);
@@ -1326,9 +1331,13 @@ return false;
          prog->len_index++;
       }
 
+      printf("entered loop\n");
+
       while(prog->input[prog->len_index] != ')'){
          instructions(prog);
       }
+
+      strcpy(prog->instruction, str_instruction_bool);
 
       bool_func(prog);
 
