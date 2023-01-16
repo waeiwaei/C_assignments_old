@@ -19,6 +19,8 @@ struct prog{
    
    #ifdef INTERPRET
       lisp* lisp_structure;
+      lisp* bool_lisp_structure;
+      bool bool_cond;
    #endif
 };
 
@@ -49,6 +51,10 @@ int main(int argc, char* argv[]){
 
    prog* pro = (prog*)ncalloc(1, sizeof(prog));
    
+   #ifdef INTERPRET
+      pro->bool_cond = false;
+   #endif
+
    //char input[MAX_LENGTH];
    char c;
    int val = 0;
@@ -424,7 +430,10 @@ bool ins_list(prog* prog){
          prog->lisp_structure = NULL;
       #endif
 
-      (prog->len_index)++;
+      (prog->len_index) = (prog->len_index)+3;
+
+      printf("LEN INDEX - %i %c\n", prog->len_index, prog->input[prog->len_index]);
+
       return true;
 
    //check if it is a VAR, NIL
@@ -434,6 +443,8 @@ bool ins_list(prog* prog){
       if(prog->input[prog->len_index + 1] == ')'){
          (prog->len_index)++;
          printf("VARIABLE\n");
+         printf(" %i\n", prog->len_index);
+
          return true;
       }else{
 
@@ -538,9 +549,6 @@ bool ins_literal(prog* prog){
 
          const_index = len_input + 1;
 
-
-         printf("TEMP- ARRAY: %s %i\n\n", temp_array, len_input);
-
          prog->lisp_structure = (lisp_fromstring(temp_array));
 
 
@@ -550,12 +558,12 @@ bool ins_literal(prog* prog){
 
          char str[MAX_LENGTH];
          lisp_tostring(prog->lisp_structure, str);
-         printf("Printing the list %s\n",str);
+         printf("Printing the list - %s\n",str);
 
          printf("CAR - %i\n", lisp_getval(lisp_car(prog->lisp_structure)));
          printf("LENGTH - %i\n", lisp_length(prog->lisp_structure));
 
-         lisp_tostring(prog->lisp_structure, str);
+         lisp_tostring(lisp_cdr(prog->lisp_structure), str);
          printf("Cdr of list %s\n\n\n\n", str);
 
       #endif
@@ -624,6 +632,9 @@ bool ins_print(prog* prog){
       lisp_tostring(prog->lisp_structure, str);
       printf("PRINT FUNCTION - %s\n\n\n", str);
    }
+
+
+   printf("prog->len_index: %i %c\n\n", prog->len_index, prog->input[prog->len_index]);
 
    #endif
 
@@ -703,13 +714,15 @@ bool ret_func(prog* prog){
    }
 
       prog->instruction[index] = '\0';
-      printf("%s\n\n", prog->instruction);
+      printf("Instruction %s\n\n", prog->instruction);
 
       //printf("%s\n", prog->instruction);
       //LISTFUNC
       if(strcmp(prog->instruction, "CAR") == 0){
-         (prog->len_index) = (prog->len_index) + 2;
-         printf("\n ---------CAR instruction triggered - index %i - value - %c \n", prog->len_index, prog->input[prog->len_index]);
+         printf("CAR  - %i\n\n", prog->len_index);
+         prog->len_index++;
+         //(prog->len_index) = (prog->len_index) + 2;
+         printf("CAR instruction triggered - index %i - value - %c \n", prog->len_index, prog->input[prog->len_index]);
          list_func(prog);
 
       }else if(strcmp(prog->instruction, "CDR") == 0){
@@ -729,7 +742,8 @@ bool ret_func(prog* prog){
 
       //INTFUNC
       else if(strcmp(prog->instruction, "PLUS") == 0){
-         (prog->len_index) = (prog->len_index) + 2;
+         //(prog->len_index) = (prog->len_index) + 2;
+         (prog->len_index)++;
          printf("PLUS instruction triggered - index %i \n", prog->len_index);
          int_func(prog);
       
@@ -775,8 +789,8 @@ bool ret_func(prog* prog){
 bool list_func(prog* prog){
 
 #ifdef INTERPRET
-lisp* temp1;
-lisp* temp2;
+   lisp* temp1;
+   lisp* temp2;
 #endif
 
 printf("list function - index - %i\n\n", prog->len_index);
@@ -788,10 +802,15 @@ while(prog->input[prog->len_index] != ')'){
       printf("\n1.list_func - CAR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
 
       if(ins_list(prog)){
+         
+         #ifdef INTERPRET
+            prog->lisp_structure = lisp_car(prog->lisp_structure);
+            printf("%i\n\n\n", lisp_getval(prog->lisp_structure));
+         #endif
 
          printf("\n2.list_func - CAR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
 
-         (prog->len_index)--;
+         //(prog->len_index)--;
 
          return true;
       }
@@ -804,7 +823,7 @@ while(prog->input[prog->len_index] != ')'){
 
          printf("\n2.list_func - CDR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
 
-         (prog->len_index)--;
+         //(prog->len_index)--;
 
          return true;
       }
@@ -817,7 +836,7 @@ while(prog->input[prog->len_index] != ')'){
 
          #ifdef INTERPRET 
             temp1 = prog->lisp_structure;
-            printf("temp1 - %i", lisp_getval(temp1));
+            printf("temp 1 - %i", lisp_getval(temp1));
          #endif
 
          printf("\n2.list_func - CONS instruction - len index %i \n", prog->len_index);
@@ -830,26 +849,28 @@ while(prog->input[prog->len_index] != ')'){
 
                      #ifdef INTERPRET 
                         temp2 = prog->lisp_structure;
-                        printf("temp2 - %i", lisp_getval(temp2));
+                        //printf("temp2 - %i", lisp_getval(temp2));
 
                      #endif
 
-                     (prog->len_index)--;
+                     //(prog->len_index)--;
 
+                     #ifdef INTERPRET
+                        char str[MAX_LENGTH];
+
+                        prog->lisp_structure = lisp_cons(temp1, temp2);
+
+                        lisp_tostring(prog->lisp_structure, str);
+
+                        printf("CONS function - %s\n\n\n", str);
+                     
+                     #endif 
+                     }
                      return true;
                }
       }
 
-   #ifdef INTERPRET
-      char str[MAX_LENGTH];
 
-      prog->lisp_structure = lisp_cons(temp1, temp2);
-
-      lisp_tostring(prog->lisp_structure, str);
-
-      printf("CONS function - %s\n\n\n", str);
-   }
-   #endif 
 
    if(prog->input[prog->len_index] == ' '){
       (prog->len_index)++;
@@ -884,7 +905,7 @@ while(prog->input[prog->len_index] != ')'){
 
          if(ins_list(prog)){
 
-            (prog->len_index)--;
+            //(prog->len_index)--;
 
             return true;
          }
@@ -914,7 +935,7 @@ while(prog->input[prog->len_index] != ')'){
 //<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
 bool bool_func(prog* prog){
 
-   printf("BOOL FUNC - index %i, character - %c \n\n", prog->len_index, prog->input[prog->len_index]);
+printf("BOOL FUNC - index %i, character - %c \n\n", prog->len_index, prog->input[prog->len_index]);
 
 while(prog->input[prog->len_index] != ')'){
 
@@ -1121,13 +1142,15 @@ bool loop_func(prog* prog){
 
       while(prog->input[prog->len_index] != ')'){
 
+         clear_string(prog);
+
          ////<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
          prog->instruction[len] = prog->input[prog->len_index];
 
          if(prog->instruction[len] == ' '){
 
             prog->instruction[len] = '\0';
-            printf("%s\n", prog->instruction);
+            printf("\n\nInstruction passed to bool func - %s\n", prog->instruction);
 
             if(bool_func(prog)){
                

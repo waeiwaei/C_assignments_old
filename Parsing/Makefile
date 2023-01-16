@@ -5,9 +5,9 @@
 # set in the gcc/clang statement using -DINTERP
 # In this way ./parse & ./interp can both be built from the same source file.
 
-CC      := clang
+CC      := gcc -g -O0
 DEBUG   := -g3
-OPTIM   := -O3
+OPTIM   := -O0
 CFLAGS  := -Wall -Wextra -Wpedantic -Wfloat-equal -Wvla -std=c99 -Werror
 RELEASE := $(CFLAGS) $(OPTIM)
 SANI    := $(CFLAGS) -fsanitize=undefined -fsanitize=address $(DEBUG)
@@ -17,6 +17,17 @@ PRES := $(NCLS:.ncl=.pres)
 IRES := $(NCLS:.ncl=.ires)
 LIBS    := -lm
 
+#CC      := clang
+#DEBUG   := -g3
+#OPTIM   := -O3
+#CFLAGS  := -Wall -Wextra -Wpedantic -Wfloat-equal -Wvla -std=c99 -Werror
+#RELEASE := $(CFLAGS) $(OPTIM)
+#SANI    := $(CFLAGS) -fsanitize=undefined -fsanitize=address $(DEBUG)
+#VALG    := $(CFLAGS)  $(DEBUG)
+#NCLS    := $(wildcard *.ncl)
+#PRES := $(NCLS:.ncl=.pres)
+#IRES := $(NCLS:.ncl=.ires)
+#LIBS    := -lm
 
 parse: nuclei.c general.c nuclei.h
 	$(CC) nuclei.c general.c $(RELEASE) -o parse $(LIBS)
