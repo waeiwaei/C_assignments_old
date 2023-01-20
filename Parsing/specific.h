@@ -19,7 +19,8 @@
 #define LEFT_BRACKET '('
 #define RIGHT_BRACKET ')'
 #define SPACE ' '
-
+#define TEN 10
+#define ZERO 0
 
 struct lisp{    
 
@@ -67,6 +68,8 @@ int lisp_length(const lisp* l);
 // Returns stringified version of list
 void lisp_tostring(const lisp* l, char* str);
 
+//frees allocated space for lisps
+void lisp_free(lisp** l);
 
 //populates character string array with values from lisp 
 void populate_list(const struct lisp* l, char* arr, int* index);
