@@ -1,0 +1,52 @@
+
+=================================================================
+==46343==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2a0cfb1a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x561501ea8056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x561501ea76bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x561501ea7f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x561501e8fe81 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:716
+    #5 0x561501e8c566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x561501e8bbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x561501e8b104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x561501e8a2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x561501e89aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x561501e88b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x561501e87c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x561501e87ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7f2a0c5e2d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2a0cfb1a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x561501ea8056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x561501ea1ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x561501e8e051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x561501e925fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x561501e8af59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x561501e8a47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x561501e89aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x561501e88b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x561501e88c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x561501e87c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #11 0x561501e87ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #12 0x7f2a0c5e2d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2a0cfb1a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x561501ea8056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x561501ea76bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x561501ea7f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x561501e8fcdc in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:715
+    #5 0x561501e8c566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x561501e8bbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x561501e8b104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x561501e8a2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x561501e89aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x561501e88b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x561501e87c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x561501e87ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7f2a0c5e2d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 96 byte(s) leaked in 3 allocation(s).

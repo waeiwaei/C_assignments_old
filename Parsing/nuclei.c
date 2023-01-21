@@ -3,14 +3,16 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <assert.h>
 #include "specific.h"
 #include "general.h"
+//#define INTERP
+
 
 #define ON_ERROR(S) {fprintf(stderr, "%s", S);\
                      exit(EXIT_FAILURE);}
 
 #define MAX_LENGTH 1000
-#define INTERPRET
 
 //we want to make an array of lisp structures
 struct array_lisp{
@@ -30,7 +32,9 @@ struct prog{
    int condition;
    int numberoflisps;
    
-   #ifdef INTERPRET
+   #ifdef INTERP
+      array_lisp** array_of_mem_add[MAX_LENGTH];
+      lisp* mem_of_lisp_add[MAX_LENGTH];
       array_lisp* lisp_array[MAX_LENGTH];
       lisp* lisp_structure;
       lisp* bool_lisp_structure;
@@ -39,11 +43,13 @@ struct prog{
       char caller_instruction[MAX_LENGTH];
       int most_no_lisps;
       int cons_element;
+      int count_index_lisp_add;
    #endif
 };
 
 typedef struct prog prog;
 
+void test(void); 
 bool program(prog* prog);
 void white_space(prog* prog);
 bool list_car(prog* prog);
@@ -69,16 +75,21 @@ bool ins_var(prog* prog);
 bool ins_literal(prog* prog);
 bool ins_string(prog* prog);
 bool ins_print(prog* prog);
-void clear_string(prog* prog);
+void clear_instruction(prog* prog);
 bool ret_func(prog* prog);
+bool check_function_instruction(prog* prog);
+void white_space(prog* prog);
+
 
 
 //read file from argv, and store characters in 1D array
 int main(int argc, char* argv[]){
 
+   //test();
+
    prog* pro = (prog*)ncalloc(1, sizeof(prog));
    
-   #ifdef INTERPRET
+   #ifdef INTERP
       pro->bool_cond = false;
    #endif
 
@@ -150,17 +161,29 @@ bool program(prog* prog){
 
 
          //free allocated spaces of memory
-         #ifdef INTERPRET
+         #ifdef INTERP
             //free each of the lisp_arrays elements
             for(int i = 0; i < prog->numberoflisps; i++){
                if(prog->lisp_array[i]->structure != NULL){
                   lisp_free(&(prog->lisp_array[i]->structure));
+                  
                }
             }
 
-            if(prog->lisp_structure != NULL){
-               lisp_free(&(prog->lisp_structure));
+           for(int i = 0; i < prog->numberoflisps; i++){
+               free(*(prog->array_of_mem_add[i]));
             }
+
+           for(int i = 0; i < prog->count_index_lisp_add; i++){
+
+               if(prog->mem_of_lisp_add[i] != prog->lisp_structure){
+                  lisp_free(&(prog->mem_of_lisp_add[i]));
+               }
+            }
+
+            //if(prog->lisp_structure != NULL){
+            //   lisp_free(&(prog->lisp_structure));
+            //}
             
          #endif
 
@@ -183,16 +206,12 @@ bool instructions(prog* prog){
 
    printf("Instructions - %i, %c \n", prog->len_index, prog->input[prog->len_index]);
 
-   while(prog->input[prog->len_index] == ' '){ 
-      (prog->len_index)++;
-   }
+      white_space(prog);
 
       if(prog->input[prog->len_index] == '('){
          (prog->len_index)++;
 
-      while(prog->input[prog->len_index] == ' '){ 
-         (prog->len_index)++;
-      }
+      white_space(prog);
 
       if(prog->input[prog->len_index] == '('){
          (prog->len_index)++;
@@ -223,36 +242,54 @@ bool instructions(prog* prog){
 
 }
 
-//<INSTRCT> ::= "(" <FUNC> ")"
-bool instruction(prog* prog){
+//checks the instruction of the function to return
+bool check_function_instruction(prog* prog){
 
-   char inst[MAX_LENGTH] = "";
    int len = 0;
 
    while(prog->input[prog->len_index] != ')'){
 
+      prog->instruction[len] = prog->input[prog->len_index];
+
+      if(prog->input[prog->len_index + 1] == ')'){
+
          prog->instruction[len] = prog->input[prog->len_index];
-
-         if(prog->input[prog->len_index + 1] == ')'){
-
-            printf("inst[len] - %s \n\n", inst);
-            len++;
-            prog->instruction[len] = '\0';
-            func(prog);
-         }
-
-         if(prog->instruction[len] == ' '){
-              
-            prog->instruction[len] = '\0';
-            func(prog);
-
-         }       
-
          len++;
-         (prog->len_index)++;
+         prog->instruction[len] = '\0';
+         return true;
+      }
+
+      if(prog->instruction[len] == ' '){
+            
+         prog->instruction[len] = '\0';
+         return true;
+
+      }       
+
+      len++;
+      (prog->len_index)++;
 
    }
 
+return false;
+
+}
+
+
+
+
+
+//<INSTRCT> ::= "(" <FUNC> ")"
+bool instruction(prog* prog){
+
+   if(check_function_instruction(prog)){
+      func(prog);
+      (prog->len_index)++;
+
+   }else{
+
+      return false;
+   }
 
    if(prog->input[prog->len_index] == ')'){
       printf("Instruction - Value - %c, %i \n", prog->input[prog->len_index], prog->len_index);
@@ -281,7 +318,7 @@ bool func(prog* prog){
             (prog->len_index)++;
 
             if(in_out_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -290,7 +327,7 @@ bool func(prog* prog){
             (prog->len_index)++;
 
             if(in_out_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -299,7 +336,7 @@ bool func(prog* prog){
             printf("ENTER - CAR has been called\n");
 
             if(ret_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -307,7 +344,7 @@ bool func(prog* prog){
             printf("CDR has been called\n");
 
             if(ret_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -315,7 +352,7 @@ bool func(prog* prog){
             printf("CONS has been called\n");
 
             if(ret_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -324,7 +361,7 @@ bool func(prog* prog){
             printf("PLUS has been called\n");
             
             if(ret_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -332,7 +369,7 @@ bool func(prog* prog){
             printf("LENGTH has been called\n");
 
             if(ret_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -341,7 +378,7 @@ bool func(prog* prog){
             printf("LESS has been called\n");
 
             if(bool_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -350,7 +387,7 @@ bool func(prog* prog){
             printf("GREATER has been called\n");
 
             if(bool_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -359,7 +396,7 @@ bool func(prog* prog){
             printf("EQUAL has been called\n");
 
             if(bool_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
@@ -378,13 +415,13 @@ bool func(prog* prog){
             printf("WHILE has been called\n");
 
             if(loop_func(prog)){
-               clear_string(prog);
+               clear_instruction(prog);
                flag = 0;
             }
 
          }else{
             
-            #ifdef INTERPRET
+            #ifdef INTERP
 
                return false;
             #else
@@ -394,115 +431,6 @@ bool func(prog* prog){
             #endif
 
          }
-
-/*         switch(prog->instruction[MAX_LENGTH])
-         {
-            case "SET":
-            (prog->len_index)++;
-
-            if(in_out_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }            
-            break;
-
-            case "PRINT":
-            (prog->len_index)++;
-
-            if(in_out_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }            
-            break;
-
-            case "CAR":
-            if(ret_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "CDR":
-            if(ret_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "CONS":
-            if(ret_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "PLUS":
-            if(ret_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "LENGTH":
-            if(ret_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;       
-
-            case "LESS":
-            if(bool_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;     
-
-            case "GREATER":
-            if(bool_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "EQUAL":
-            if(bool_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "IF":
-            prog->len_index++;
-            if(if_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            case "WHILE":
-            prog->len_index++;
-            if(loop_func(prog)){
-               clear_string(prog);
-               flag = 0;
-            }
-            break;
-
-            
-            
-            
-            default:
-
-               #ifdef INTERPRET
-
-                  return false;
-               #else
-                  ON_ERROR("Was Expecting a function name\n");
-                  flag = 1;
-                  return false;
-               #endif
-
-         }
-*/
 
    if(flag == 1){
       ON_ERROR("The instruction is unknown\n");
@@ -540,12 +468,17 @@ bool in_out_func(prog* prog){
 
 }
 
+
+
 //creates and stores variables of lisps in a lisp_array
 bool ins_set(prog* prog){
 
-   #ifdef INTERPRET
+   #ifdef INTERP
       if(prog->lisp_array[prog->numberoflisps] == NULL){
          prog->lisp_array[prog->numberoflisps] = (array_lisp*)ncalloc(1, sizeof(array_lisp));
+
+         prog->array_of_mem_add[prog->numberoflisps] = &(prog->lisp_array[prog->numberoflisps]);
+
       }
       strcpy(prog->caller_instruction, prog->instruction);
    #endif
@@ -591,13 +524,16 @@ void white_space(prog* prog){
    }
 }
 
+
+
+
 //<LIST> ::= <VAR> | <LITERAL> | "NIL" | "(" <RETFUNC> ")"
 bool ins_list(prog* prog){
 
    white_space(prog);
 
    //to store the value of the instruction called
-   #ifdef INTERPRET
+   #ifdef INTERP
       static char temp_caller_ins[MAX_LENGTH];
 
       if(strcmp(prog->instruction, "SET") == 0){   
@@ -622,7 +558,7 @@ bool ins_list(prog* prog){
    }else if(prog->input[prog->len_index] == 'N' && prog->input[prog->len_index + 1] == 'I' && prog->input[prog->len_index + 2] == 'L'){
 
       //Returns null space in memory to the caller instruction
-      #ifdef INTERPRET
+      #ifdef INTERP
          prog->lisp_structure = NULL;
       #endif
 
@@ -638,7 +574,7 @@ bool ins_list(prog* prog){
       printf("Entered var check %i\n", prog->len_index);
       if(prog->input[prog->len_index - 1] == ' '){
          
-         #ifdef INTERPRET
+         #ifdef INTERP
          
             int flag = 0;
             
@@ -669,16 +605,6 @@ bool ins_list(prog* prog){
                prog->lisp_structure = lisp_copy(prog->lisp_structure);
                flag = 1;
             }
-/*
-            if(strcmp(prog->instruction, "CAR") == 0 || strcmp(prog->instruction, "CDR") == 0 ){
-               prog->lisp_structure = lisp_copy(prog->lisp_structure);
-            }
-
-            if(strcmp(prog->instruction, "PRINT") == 0 || strcmp(prog->instruction, "CDR") == 0 ){
-               prog->lisp_structure = lisp_copy(prog->lisp_structure);
-               flag = 1;
-            }
-*/
 
             //Return empty lisp if no matching variable name was found
             if(flag == 0){
@@ -706,7 +632,7 @@ bool ins_list(prog* prog){
       white_space(prog);
 
       //store the value of the current instruction      
-      #ifdef INTERPRET 
+      #ifdef INTERP 
          strcpy(prog->caller_instruction, prog->instruction);
       #endif
 
@@ -718,7 +644,7 @@ bool ins_list(prog* prog){
             (prog->len_index)++;  
 
             //return the previously called instruction into caller_instruction element
-            #ifdef INTERPRET               
+            #ifdef INTERP               
                if(strcmp(temp_caller_ins, "SET") == 0){
                   strcpy(prog->caller_instruction, temp_caller_ins);
                } 
@@ -741,7 +667,7 @@ bool ins_literal(prog* prog){
 
    printf("LITERAL - len_index - %i \n", prog->len_index);
 
-   #ifdef INTERPRET
+   #ifdef INTERP
 
 
       char str[MAX_LENGTH];
@@ -867,7 +793,7 @@ bool ins_var(prog* prog){
          
 
          //initialise and give name's to the new index's in the array
-         #ifdef INTERPRET
+         #ifdef INTERP
 
             //stores the number of lisps in the array - as the numberoflisp index may change each time
             //we will need to call an older value in the lisp 
@@ -917,7 +843,7 @@ bool ins_print(prog* prog){
    int flag = 0;
 
    //keep track of the elements we will need to print
-   #ifdef INTERPRET
+   #ifdef INTERP
       int initial_index = prog->len_index;
    #endif
 
@@ -933,7 +859,7 @@ bool ins_print(prog* prog){
    }
 
 
-   #ifdef INTERPRET
+   #ifdef INTERP
 
       int len_string = 0;
       int flag_string = 0;
@@ -1025,12 +951,12 @@ bool ins_string(prog* prog){
 
 
 //clear instruction string to SPACE
-void clear_string(prog* prog){
+void clear_instruction(prog* prog){
 
    int length = strlen(prog->instruction);
 
    for(int i = 0; i <= length; i++){
-      prog->instruction[i] = ' ';
+      prog->instruction[i] = '\0';
    }
 
 }
@@ -1039,7 +965,7 @@ void clear_string(prog* prog){
 //<RETFUNC> ::= <LISTFUNC> | <INTFUNC> | <BOOLFUNC> - needed for the PRINT Statement
 bool ret_func(prog* prog){
    
-   #ifdef INTERPRET
+   #ifdef INTERP
    #else
       char old_function[MAX_LENGTH];
       strcpy(old_function, prog->instruction);
@@ -1047,89 +973,76 @@ bool ret_func(prog* prog){
 
    printf("\n\n-----------Return Func---------------\n\n");
 
-   int ret_index = 0;
+   //int ret_index = 0;
 
-   clear_string(prog);
+   clear_instruction(prog);
 
-   //populate prog->instruction, with the instruction string
-   while(prog->input[prog->len_index] != ')'){
-      
-      prog->instruction[ret_index] = prog->input[prog->len_index];
-
-      if(prog->instruction[ret_index] == ' '){
-         break;
-      }
-
-      ret_index++;
-      (prog->len_index)++;
+   if(check_function_instruction(prog)){
+      printf("Instruction %s\n\n", prog->instruction);
    }
 
-      prog->instruction[ret_index] = '\0';
-      printf("Instruction %s\n\n", prog->instruction);
+   //identify the instruction call, based on prog->instruction
+   //LIST FUNCTIONS - CAR, CDR, CONS
+   if(strcmp(prog->instruction, "CAR") == 0){
 
+      prog->len_index++;
+      list_func(prog);
 
-      //identify the instruction call, based on prog->instruction
-      //LIST FUNCTIONS - CAR, CDR, CONS
-      if(strcmp(prog->instruction, "CAR") == 0){
-
-         prog->len_index++;
-         list_func(prog);
-
-      }else if(strcmp(prog->instruction, "CDR") == 0){
-        
-         prog->len_index++; 
-         list_func(prog);
-
-      }else if(strcmp(prog->instruction, "CONS") == 0){
-
-         prog->len_index++;
-         list_func(prog);
-
-      }
-
-      //INTFUNC - PLUS, LENGTH
-      else if(strcmp(prog->instruction, "PLUS") == 0){
-         
-         (prog->len_index)++;
-         //#endif
-         printf("PLUS instruction triggered - index %i \n", prog->len_index);
-         int_func(prog);
+   }else if(strcmp(prog->instruction, "CDR") == 0){
       
-      }else if(strcmp(prog->instruction, "LENGTH") == 0){
-         (prog->len_index)++;
-         printf("LENGTH instruction triggered - index %i \n", prog->len_index);
-         int_func(prog);
+      prog->len_index++; 
+      list_func(prog);
 
-      } 
+   }else if(strcmp(prog->instruction, "CONS") == 0){
 
-      //BOOLFUNC - LESS, GREATER, EQUAL
-      else if(strcmp(prog->instruction, "LESS") == 0){
-         (prog->len_index)++;
+      prog->len_index++;
+      list_func(prog);
 
-         #ifdef INTERPRET
-         #else
+   }
 
-            if(strcmp(old_function, "SET") == 0){
-               prog->condition = 1;
-            }
-
-         #endif
-
-         bool_func(prog);
-
-      }else if(strcmp(prog->instruction, "GREATER") == 0){
-
-         bool_func(prog);
+   //INTFUNC - PLUS, LENGTH
+   else if(strcmp(prog->instruction, "PLUS") == 0){
       
-      }else if(strcmp(prog->instruction,"EQUAL") == 0){
-         //(prog->len_index) = (prog->len_index) + 2;
-         prog->len_index++;
-         bool_func(prog);
-      
-      }
+      (prog->len_index)++;
+      //#endif
+      printf("PLUS instruction triggered - index %i \n", prog->len_index);
+      int_func(prog);
+   
+   }else if(strcmp(prog->instruction, "LENGTH") == 0){
+      (prog->len_index)++;
+      printf("LENGTH instruction triggered - index %i \n", prog->len_index);
+      int_func(prog);
 
+   } 
 
+   //BOOLFUNC - LESS, GREATER, EQUAL
+   else if(strcmp(prog->instruction, "LESS") == 0){
+      (prog->len_index)++;
 
+      #ifdef INTERP
+      #else
+
+         if(strcmp(old_function, "SET") == 0){
+            prog->condition = 1;
+         }
+
+      #endif
+
+      bool_func(prog);
+
+   }else if(strcmp(prog->instruction, "GREATER") == 0){
+
+      bool_func(prog);
+   
+   }else if(strcmp(prog->instruction,"EQUAL") == 0){
+      //(prog->len_index) = (prog->len_index) + 2;
+      prog->len_index++;
+      bool_func(prog);
+   
+   }else{
+      ON_ERROR("Unable to find return function name\n");
+      return false;
+   }
 
    printf("Last index - %i   %c\n\n", prog->len_index, prog->input[prog->len_index]);
    printf("------------------EXIT RET_FUNC---------------------\n\n");
@@ -1138,14 +1051,14 @@ bool ret_func(prog* prog){
    return true;
 }
 
+//hello
 bool list_car(prog* prog){
      
    //first 
    if(ins_list(prog)){
       
-      #ifdef INTERPRET
+      #ifdef INTERP
          prog->lisp_structure = lisp_car(prog->lisp_structure);
-         printf("%i\n\n\n", lisp_getval(prog->lisp_structure));
       #endif
 
       return true;
@@ -1156,12 +1069,12 @@ bool list_car(prog* prog){
 }
 
 
-
+//hello
 bool list_cdr(prog* prog){
 
    if(ins_list(prog)){
 
-      #ifdef INTERPRET
+      #ifdef INTERP
          prog->lisp_structure = lisp_cdr(prog->lisp_structure);
       #endif
 
@@ -1172,16 +1085,19 @@ bool list_cdr(prog* prog){
 }
 
 
+
+
+//hello
 bool list_cons(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
    lisp* temp1;
    lisp* temp2;
 #endif
 
    if(ins_list(prog)){
 
-      #ifdef INTERPRET 
+      #ifdef INTERP 
          temp1 = lisp_copy(prog->lisp_structure);
          printf("temp 1 - %i", lisp_getval(temp1));
       #endif
@@ -1190,30 +1106,46 @@ bool list_cons(prog* prog){
 
          if(ins_list(prog)){
 
-            #ifdef INTERPRET 
+            #ifdef INTERP 
                temp2 = lisp_copy(prog->lisp_structure);
 
             #endif
 
-            #ifdef INTERPRET
+            #ifdef INTERP
 
                if(strcmp(prog->caller_instruction, "SET") == 0){
                   prog->lisp_structure = lisp_cons(temp1, temp2);
 
                   if(prog->lisp_array[prog->numberoflisps] != NULL){
                      prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
+                     
+                     
                      prog->cons_element = 1;
                      prog->numberoflisps++;
                   }else{
                      prog->numberoflisps--;
                      prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
                      prog->numberoflisps++;
+
                   }
 
                }
 
                if(strcmp(prog->caller_instruction, "CONS") == 0){
                   prog->lisp_structure = lisp_cons(temp1, temp2);
+
+
+               }
+
+               //storing memory locations of temp1 and temp2 - to free before termination of programme
+               if(temp1 != NULL){
+               prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp1;
+               prog->count_index_lisp_add++;       
+               }
+
+               if(temp2 != NULL){
+               prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp2;
+               prog->count_index_lisp_add++;  
                }
             
             #endif 
@@ -1236,26 +1168,6 @@ while(prog->input[prog->len_index] != ')'){
 
    if(strcmp(prog->instruction, "CAR") == 0){
 
-/*
-      printf("\n1.list_func - CAR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
-
-      //first 
-      if(ins_list(prog)){
-         
-         #ifdef INTERPRET
-            prog->lisp_structure = lisp_car(prog->lisp_structure);
-            printf("%i\n\n\n", lisp_getval(prog->lisp_structure));
-         #endif
-
-         printf("\n2.list_func - CAR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
-
-         //(prog->len_index)--;
-
-         return true;
-      }
-
-*/
-
       if(list_car(prog)){
          return true;
       }
@@ -1263,92 +1175,17 @@ while(prog->input[prog->len_index] != ')'){
 
    }else if(strcmp(prog->instruction, "CDR") == 0){
 
-/*
-      printf("\n1.list_func - CDR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
-
-      if(ins_list(prog)){
-
-         printf("\n2.list_func - CDR instruction - len index %i - %c\n", prog->len_index, prog->input[prog->len_index]);
-
-         #ifdef INTERPRET
-            prog->lisp_structure = lisp_cdr(prog->lisp_structure);
-            //printf("%i\n\n\n", lisp_getval(prog->lisp_structure));
-         #endif
-
-         //(prog->len_index)--;
-
-         return true;
-      }
-*/
-
-
       if(list_cdr(prog)){
          return true;
       }
 
-
    }else if(strcmp(prog->instruction, "CONS") == 0){
 
-/*
-      printf("\n1.list_func - CONS instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-
-         #ifdef INTERPRET 
-            temp1 = lisp_copy(prog->lisp_structure);
-            printf("temp 1 - %i", lisp_getval(temp1));
-         #endif
-
-         printf("\n2.list_func - CONS instruction - len index %i \n", prog->len_index);
-            
-            (prog->len_index)++;
-
-            printf("line 816 - %i\n\n", prog->len_index);
-
-               if(ins_list(prog)){
-
-                     #ifdef INTERPRET 
-                        temp2 = lisp_copy(prog->lisp_structure);
-                        //printf("temp2 - %i", lisp_getval(temp2));
-
-                     #endif
-
-                     //(prog->len_index)--;
-
-                     #ifdef INTERPRET
-                        //char str[MAX_LENGTH];
-
-                        if(strcmp(prog->caller_instruction, "SET") == 0){
-                           prog->lisp_structure = lisp_cons(temp1, temp2);
-
-                           if(prog->lisp_array[prog->numberoflisps] != NULL){
-                              prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
-                              prog->cons_element = 1;
-                              prog->numberoflisps++;
-                           }else{
-                              prog->numberoflisps--;
-                              prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
-                              prog->numberoflisps++;
-                           }
-
-                        }
-
-                        if(strcmp(prog->caller_instruction, "CONS") == 0){
-                           //lisp_tostring(prog->lisp_structure, str);
-
-                           prog->lisp_structure = lisp_cons(temp1, temp2);
-                        }
-                     
-                     #endif 
-                     }
-                     return true;
-               }*/
-
-         if(list_cons(prog)){
-            return true;
-         }
-
+      if(list_cons(prog)){
+         return true;
       }
+
+   }
 
    white_space(prog);
 
@@ -1363,10 +1200,10 @@ while(prog->input[prog->len_index] != ')'){
    return true;
 }
 
-
+//hello
 bool int_plus(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
    lisp* temp1;
    static lisp* temp2;
    static int accum = 0;
@@ -1376,7 +1213,7 @@ bool int_plus(prog* prog){
 
       if(ins_list(prog)){
          
-         #ifdef INTERPRET
+         #ifdef INTERP
             temp1 = lisp_copy(prog->lisp_structure);
          #endif
 
@@ -1386,7 +1223,7 @@ bool int_plus(prog* prog){
 
          if(ins_list(prog)){
             
-            #ifdef INTERPRET
+            #ifdef INTERP
 
                if(strcmp(prog->caller_instruction, "SET") == 0){
                   temp2 = lisp_copy(prog->lisp_structure);
@@ -1398,31 +1235,45 @@ bool int_plus(prog* prog){
 
                   prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
                   prog->numberoflisps++;
-                  //printf("\n PLUS -1 : %i\n", prog->lisp_structure->atomtype);
                }
 
-            #endif
+            
+               //store the address the memory 
+               if(temp1 != NULL){
+                  prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp1;
+                  prog->count_index_lisp_add++;  
+               }
 
-            return true;
+               if(temp2 != NULL){
+                  prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp2;
+                  prog->count_index_lisp_add++;
+               }
+
+         #endif
+
          }
+
+         return true;
       }
+
 
    return false;
 }
 
 
-
+//hello
 bool int_length(prog* prog){
 
    if(ins_list(prog)){
 
-      #ifdef INTERPRET
+      #ifdef INTERP
 
       if(strcmp(prog->caller_instruction, "SET") == 0){
          prog->lisp_structure->choice = false;
          prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(lisp_length(prog->lisp_structure)), NULL);
          prog->lisp_array[prog->numberoflisps]->structure->choice = true;
          prog->numberoflisps++;
+
       }else if(strcmp(prog->caller_instruction, "EQUAL") == 0){
 
          //check if a exits in the database if not we set the choice to true
@@ -1450,53 +1301,9 @@ bool int_length(prog* prog){
 //<INTFUNC> ::= "PLUS" <LIST> <LIST> | "LENGTH" <LIST>
 bool int_func(prog* prog){
 
-/*
-#ifdef INTERPRET
-lisp* temp1;
-static lisp* temp2;
-static int accum = 0;
-#endif
-*/
-
 while(prog->input[prog->len_index] != ')'){
 
    if(strcmp(prog->instruction,"PLUS") == 0){
-
-/*     printf("\n1.int_func - PLUS instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-         
-         #ifdef INTERPRET
-            temp1 = lisp_copy(prog->lisp_structure);
-         #endif
-
-         printf("\n2.int_func - PLUS instruction - len index %i \n", prog->len_index);
-
-         (prog->len_index)++;
-
-         if(ins_list(prog)){
-            
-            #ifdef INTERPRET
-
-            if(strcmp(prog->caller_instruction, "SET") == 0){
-               temp2 = lisp_copy(prog->lisp_structure);
-
-               //stores the atomtype for both list minus each other
-               accum = temp2->atomtype + temp1->atomtype;
-
-               lisp* temp = lisp_cons(lisp_atom(accum), NULL);
-               prog->lisp_structure = lisp_copy(temp); 
-
-               prog->lisp_array[prog->numberoflisps]->structure = lisp_copy(prog->lisp_structure);
-               prog->numberoflisps++;
-               printf("\n PLUS -1 : %i\n", prog->lisp_structure->atomtype);
-            }
-
-            #endif
-
-            return true;
-         }
-      }*/
 
       if(int_plus(prog)){
          return true;
@@ -1504,34 +1311,6 @@ while(prog->input[prog->len_index] != ')'){
 
 
    }else if(strcmp(prog->instruction,"LENGTH") == 0){
-
- /*     printf("\n1.int_func - LENGTH instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-
-         #ifdef INTERPRET
-
-         if(strcmp(prog->caller_instruction, "SET") == 0){
-            prog->lisp_structure->choice = false;
-            prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(lisp_length(prog->lisp_structure)), NULL);
-            prog->lisp_array[prog->numberoflisps]->structure->choice = true;
-            prog->numberoflisps++;
-         }else if(strcmp(prog->caller_instruction, "EQUAL") == 0){
-
-            //check if a exits in the database if not we set the choice to true
-            if(prog->lisp_structure != NULL){
-               prog->lisp_structure->choice = false;
-            }
-
-            prog->lisp_structure = lisp_cons(lisp_atom(lisp_length(prog->lisp_structure)), NULL);
-         }
-
-
-         #endif
-
-         return true;
-      }*/
-
 
       if(int_length(prog)){
          return true;
@@ -1547,16 +1326,19 @@ while(prog->input[prog->len_index] != ')'){
 
 
 
+
+
+//hello
 bool bool_less(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
    lisp* temp1;
    lisp* temp2;
 #endif
 
    if(ins_list(prog)){
       
-      #ifdef INTERPRET
+      #ifdef INTERP
          temp1 = lisp_copy(prog->lisp_structure);
 
          //go on to the next index after the literal or variable
@@ -1569,49 +1351,14 @@ bool bool_less(prog* prog){
 
       if(ins_list(prog)){
 
-         #ifdef INTERPRET
+         #ifdef INTERP
             temp2 = lisp_copy(prog->lisp_structure);
          #endif
 
          (prog->len_index)--;
 
-         #ifdef INTERPRET
-
-         //should compare the values
-        /* if(strcmp(prog->caller_instruction, "WHILE") == 0){
-
-            if(temp1->atomtype < temp2->atomtype){
-
-               prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-
-            }else{
-
-               prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-
-            }
-
-
-         //should compare between the two and return output 1 or 0
-         }if(strcmp(prog->caller_instruction, "IF") == 0){
-
-            if(temp1->atomtype < temp2->atomtype){
-
-               prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-
-            }else{
-
-               prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-
-            }
-
-
-         //should compare between the two and return output 1 or 0
-         }*/
-         
-         
-         
-         
-         
+         #ifdef INTERP
+                  
          if(strcmp(prog->caller_instruction, "SET") == 0){
                
             if(temp1->atomtype < temp2->atomtype){
@@ -1628,6 +1375,7 @@ bool bool_less(prog* prog){
             prog->numberoflisps++;
          
          }else if(strcmp(prog->caller_instruction, "IF") == 0 || strcmp(prog->caller_instruction, "WHILE") == 0){
+/*            
             if(temp1->atomtype < temp2->atomtype){
 
                prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
@@ -1637,18 +1385,37 @@ bool bool_less(prog* prog){
                prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
 
             }
+*/
+
+        
+            if(temp1->atomtype < temp2->atomtype){
+
+               prog->lisp_structure->atomtype = 1;
+
+            }else{
+
+               prog->lisp_structure->atomtype = 0;
+
+            }
+
+            
+         }
+
+         if(temp1 != NULL){
+            lisp_free(&temp1);
+         }
+
+         if(temp2 != NULL){
+            lisp_free(&temp2);
          }
 
          #endif
 
-         #ifdef INTERPRET
-         #else
+
       
          if(prog->condition == 1){
             prog->len_index++;
          }
-
-      #endif
 
          return true;
       }
@@ -1657,16 +1424,19 @@ bool bool_less(prog* prog){
    return false;
 }
 
+
+
+//hello
 bool bool_greater(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
    lisp* temp1;
    lisp* temp2;
 #endif
 
    if(ins_list(prog)){
 
-      #ifdef INTERPRET
+      #ifdef INTERP
          temp1 = lisp_copy(prog->lisp_structure);
       #endif
 
@@ -1678,7 +1448,7 @@ bool bool_greater(prog* prog){
 
       if(ins_list(prog)){
 
-         #ifdef INTERPRET
+         #ifdef INTERP
 
             temp2 = lisp_copy(prog->lisp_structure);
 
@@ -1692,15 +1462,33 @@ bool bool_greater(prog* prog){
             }
 
             prog->numberoflisps++;
+
          }else if(strcmp(prog->caller_instruction, "IF") == 0 || strcmp(prog->caller_instruction, "WHILE") == 0){
-            
+/*            
             if(temp1->atomtype > temp2->atomtype){
                prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
             }else{
                prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
             }
+*/
+            if(temp1->atomtype > temp2->atomtype){
+               prog->lisp_structure->atomtype = 1;
+            }else{
+               prog->lisp_structure->atomtype = 0;
+            }            
 
          }
+
+         if(temp1 != NULL){
+            prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp1;
+            prog->count_index_lisp_add++;  
+         }
+
+         if(temp2 != NULL){
+            prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp2;
+            prog->count_index_lisp_add++;  
+         }
+
          #endif
 
          return true;
@@ -1710,17 +1498,17 @@ bool bool_greater(prog* prog){
    return false;
 }
 
-
+//hello
 bool bool_equal(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
    lisp* temp1;
    lisp* temp2;
 #endif
 
    if(ins_list(prog)){
       
-      #ifdef INTERPRET
+      #ifdef INTERP
          temp1 = lisp_copy(prog->lisp_structure);
       #endif         
 
@@ -1731,26 +1519,41 @@ bool bool_equal(prog* prog){
 
       if(ins_list(prog)){
 
-         #ifdef INTERPRET
+         #ifdef INTERP
 
          temp2 = lisp_copy(prog->lisp_structure);
 
          //should compare the values
          if(strcmp(prog->caller_instruction, "WHILE") == 0 || strcmp(prog->caller_instruction, "IF") == 0){
-
+/*
             if(temp1->atomtype == temp2->atomtype){
                prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
             }else{
                prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
             }
+*/
+
+            if(temp1->atomtype == temp2->atomtype){
+               prog->lisp_structure->atomtype = 1;
+            }else{
+               prog->lisp_structure->atomtype = 0;
+            }   
+
 
          }if(strcmp(prog->caller_instruction, "SET") == 0 && strcmp(prog->instruction, "CAR") == 0 ){
 
+/*
             if(temp1->atomtype == temp2->atomtype){
                prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
             }else{
                prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
             }
+*/
+            if(temp1->atomtype == temp2->atomtype){
+               prog->lisp_structure->atomtype = 1;
+            }else{
+               prog->lisp_structure->atomtype = 0;
+            }            
             
          }else if(strcmp(prog->caller_instruction, "SET") == 0){
 
@@ -1764,15 +1567,34 @@ bool bool_equal(prog* prog){
                prog->len_index++;
             
          }else{
-
+            
+            /*
             if(temp1->atomtype == temp2->atomtype){
                prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
             }else{
                prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
+            }*/
+
+            if(temp1->atomtype == temp2->atomtype){
+               prog->lisp_structure->atomtype = 1;
+            }else{
+               prog->lisp_structure->atomtype = 0;
             }
+
          }
 
             //prog->len_index++;
+
+         if(temp1 != NULL){
+            prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp1;
+            prog->count_index_lisp_add++;
+         }
+
+         if(temp2 != NULL){
+            prog->mem_of_lisp_add[prog->count_index_lisp_add] = temp2;
+            prog->count_index_lisp_add++;         
+         }
+
 
          #endif
 
@@ -1787,246 +1609,26 @@ bool bool_equal(prog* prog){
 //<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>
 bool bool_func(prog* prog){
 
-/*#ifdef INTERPRET
-   lisp* temp1;
-   lisp* temp2;
-#endif
-*/
 
 printf("BOOL FUNC - index %i, character - %c \n\n", prog->len_index, prog->input[prog->len_index]);
 
 while(prog->input[prog->len_index] != ')'){
 
-   if(prog->input[prog->len_index] == ' '){
-      (prog->len_index)++;
-   }
+   white_space(prog);
 
    if(strcmp(prog->instruction, "LESS") == 0){
-
-
-/*
-      printf("\n1.bool_func - LESS instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-         
-         #ifdef INTERPRET
-               temp1 = lisp_copy(prog->lisp_structure);
-         #endif
-
-         printf("\n2.bool_func - LESS instruction - len index %i \n", prog->len_index);
-
-         #ifdef INTERPRET
-
-         //go on to the next index after the literal or variable
-         prog->len_index++;
-
-         //for eliminating spaces inbetween
-         while(prog->input[prog->len_index] == ' '){
-            prog->len_index++;
-         }
-
-         #endif
-
-         if(ins_list(prog)){
-
-            #ifdef INTERPRET
-               temp2 = lisp_copy(prog->lisp_structure);
-            #endif
-
-            (prog->len_index)--;
-
-            #ifdef INTERPRET
-
-            //should compare the values
-            if(strcmp(prog->caller_instruction, "WHILE") == 0){
-
-               if(temp1->atomtype < temp2->atomtype){
-
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-
-               }else{
-
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-
-               }
-
-
-            //should compare between the two and return output 1 or 0
-            }if(strcmp(prog->caller_instruction, "IF") == 0){
-
-               if(temp1->atomtype < temp2->atomtype){
-
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-
-               }else{
-
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-
-               }
-
-
-            //should compare between the two and return output 1 or 0
-            }else if(strcmp(prog->caller_instruction, "SET") == 0){
-                  
-               if(temp1->atomtype < temp2->atomtype){
-
-                  prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(1), NULL);
-
-               }else{
-
-                  prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(0), NULL);
-
-               }
-
-               prog->len_index++;
-
-               prog->numberoflisps++;
-            }
-
-            #endif
-
-            #ifdef INTERPRET
-            #else
-         
-            if(prog->condition == 1){
-               prog->len_index++;
-            }
-
-         #endif
-
-            return true;
-         }
-      }
-   */
 
       if(bool_less(prog)){
          return true;
       }
 
-
    }else if(strcmp(prog->instruction, "GREATER") == 0){
-
- /*     printf("\n1.bool_func - GREATER instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-   
-         #ifdef INTERPRET
-            
-            temp1 = lisp_copy(prog->lisp_structure);
- 
-         #endif
-
-         printf("\n2.bool_func - GREATER instruction - len index %i \n", prog->len_index);
-
-         (prog->len_index)++;
-
-         //for eliminating spaces inbetween
-         while(prog->input[prog->len_index] == ' '){
-            prog->len_index++;
-         }
-
-         if(ins_list(prog)){
-
-            #ifdef INTERPRET
-
-               temp2 = lisp_copy(prog->lisp_structure);
-
-            #endif
-
-            #ifdef INTERPRET
-            //should compare the values
-            if(strcmp(prog->caller_instruction, "WHILE") == 0){
-
-               if(temp1->atomtype > temp2->atomtype){
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-               }
-
-            }if(strcmp(prog->caller_instruction, "IF") == 0){
-
-               if(temp1->atomtype > temp2->atomtype){
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-               }
-
-            }else if(strcmp(prog->caller_instruction, "SET") == 0){
-
-               if(temp1->atomtype < temp2->atomtype){
-                  prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_array[prog->numberoflisps]->structure = lisp_cons(lisp_atom(0), NULL);
-               }
-
-               prog->numberoflisps++;
-            }
-            #endif
-
-            return true;
-         }
-      }*/
 
       if(bool_greater(prog)){
          return true;
       }
       
    }else if(strcmp(prog->instruction, "EQUAL") == 0){
-
-/*      printf("\n1.bool_func - EQUAL instruction - len index %i \n", prog->len_index);
-
-      if(ins_list(prog)){
-         
-         #ifdef INTERPRET
-            temp1 = lisp_copy(prog->lisp_structure);
-         #endif         
-
-         printf("\n2.bool_func - EQUAL instruction - len index %i \n", prog->len_index);
-
-         (prog->len_index)++;
-
-         //for eliminating spaces inbetween
-         while(prog->input[prog->len_index] == ' '){
-            prog->len_index++;
-         }
-
-         if(ins_list(prog)){
-
-            #ifdef INTERPRET
-
-            temp2 = lisp_copy(prog->lisp_structure);
-
-            //should compare the values
-            if(strcmp(prog->caller_instruction, "WHILE") == 0){
-
-               if(temp1->atomtype == temp2->atomtype){
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-               }
-
-            }if(strcmp(prog->caller_instruction, "IF") == 0){
-
-               if(temp1->atomtype == temp2->atomtype){
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-               }
-
-            }else{
-
-               if(temp1->atomtype == temp2->atomtype){
-                  prog->lisp_structure = lisp_cons(lisp_atom(1), NULL);
-               }else{
-                  prog->lisp_structure = lisp_cons(lisp_atom(0), NULL);
-               }
-            }
-
-            #endif
-
-            return true;
-         }
-      }*/
 
       if(bool_equal(prog)){
          return true;
@@ -2042,17 +1644,15 @@ while(prog->input[prog->len_index] != ')'){
 
 
 
-
-
 //         (IF (CONDITION) ((IF-TRUE-INSTRCTS)) ((IF_FALSE_INSTRCTS)))
 //<IF> ::= "IF" "(" <BOOLFUNC> ")" "(" <INSTRCTS> "(" <INSTRCTS>
 bool if_func(prog* prog){
 
-#ifdef INTERPRET
+#ifdef INTERP
 
    int len = 0;
    //int flag = 0;
-   lisp* store_cond;
+   int store_cond;
    static int store_len = 0;
    static int lengh;
    int else_cond_index = 0;
@@ -2066,7 +1666,7 @@ bool if_func(prog* prog){
    if(prog->input[prog->len_index] == '('){
       (prog->len_index)++;
 
-      clear_string(prog);
+      clear_instruction(prog);
 
       while(prog->input[prog->len_index] != ')'){
          
@@ -2091,7 +1691,7 @@ bool if_func(prog* prog){
    store_len = prog->len_index;
 
    //keep track of the initial store condition of 0
-   store_cond = prog->lisp_structure;
+   store_cond = prog->lisp_structure->atomtype;
 
    //len_index should be pointing to the next subsequent position
    prog->len_index = prog->len_index + 2;
@@ -2137,10 +1737,10 @@ bool if_func(prog* prog){
    //keep track of the instruction
    strcpy(str_instruction_bool, prog->instruction);
 
-   printf("Store cond - %i\n\n", store_cond->atomtype);
+   printf("Store cond - %i\n\n", store_cond);
 
       //we want to give it the true instruction
-      if(store_cond->atomtype == 1){
+      if(store_cond == 1){
          
          while(prog->input[prog->len_index] == ' '){
             prog->len_index++;
@@ -2171,8 +1771,7 @@ bool if_func(prog* prog){
          }
 
          if(instructions(prog)){
-            //prog->len_index = prog->len_index-2;
-            //prog->len_index--;
+
             prog->len_index = ending_index;
             store_len = lengh;
             return true;
@@ -2302,7 +1901,7 @@ bool if_func(prog* prog){
 //<LOOP> ::= "WHILE""(" <BOOLFUNC> ")" "(" <INSTRCTS>
 bool loop_func(prog* prog){ 
 
-#ifdef INTERPRET
+#ifdef INTERP
 
    int enter_loop = 0;
 
@@ -2332,7 +1931,7 @@ bool loop_func(prog* prog){
    if(prog->input[prog->len_index] == '('){
       (prog->len_index)++;
 
-      clear_string(prog);
+      clear_instruction(prog);
 
       while(prog->input[prog->len_index] != ')'){
          
@@ -2418,9 +2017,8 @@ bool loop_func(prog* prog){
 
    while(prog->bool_cond != false){
 
-
       //<BOOLFUNC> ::= "LESS" <LIST> <LIST> | "GREATER" <LIST> <LIST> | "EQUAL" <LIST> <LIST>      
-      if(strcmp(str_instruction_bool, "LESS") == 0){
+      if(strcmp(str_instruction_bool, "LESS") == 0 || strcmp(str_instruction_bool, "GREATER") == 0 || strcmp(str_instruction_bool, "EQUAL") == 0){
 
          //compare two lists
          //while(store_base >= store_cond){
@@ -2450,79 +2048,8 @@ bool loop_func(prog* prog){
                prog->numberoflisps = prog->most_no_lisps;
             }
 
-
-            //prog->lisp_structure->atomtype = prog->temp_lisp_structure->atomtype;
-            //last_index = prog->len_index;
-            //prog->len_index = store_len;
-
-/*
-            if(store_base <= store_cond){
-               prog->bool_cond = false;
-               prog->len_index = last_index;
-               flag4 = 1; 
-            }
-*/
          }
 
-         //}
-      
-      }else if(strcmp(str_instruction_bool, "GREATER") == 0){
-
-         while(prog->bool_cond != false){
-
-            strcpy(prog->caller_instruction, loop_ins);
-            strcpy(prog->instruction, str_instruction_bool);
-            prog->len_index = enter_loop;
-
-            bool_func(prog);
-            
-            if(prog->lisp_structure->atomtype == 1){
-
-               prog->len_index = start_of_loop;
-               instructions(prog);
-
-               last_index = prog->len_index;
-               //store_base = prog->lisp_structure->atomtype;
-
-
-            }else if(prog->lisp_structure->atomtype == 0){
-
-               prog->bool_cond = false;
-               prog->len_index = last_index;
-               flag4 = 1;
-               prog->numberoflisps = prog->most_no_lisps;
-               
-            }
-         }
-
-      }else if(strcmp(str_instruction_bool, "EQUAL") == 0){
-
-         while(prog->bool_cond != false){
-
-            strcpy(prog->caller_instruction, loop_ins);
-            strcpy(prog->instruction, str_instruction_bool);
-            prog->len_index = enter_loop;
-
-            bool_func(prog);
-            
-            if(prog->lisp_structure->atomtype == 1){
-
-               prog->len_index = start_of_loop;
-               instructions(prog);
-
-               last_index = prog->len_index;
-               //store_base = prog->lisp_structure->atomtype;
-
-
-            }else if(prog->lisp_structure->atomtype == 0){
-
-               prog->bool_cond = false;
-               prog->len_index = last_index;
-               flag4 = 1;
-               prog->numberoflisps = prog->most_no_lisps;
-
-            }
-         }
       }
 
    }
@@ -2536,8 +2063,6 @@ bool loop_func(prog* prog){
 
 
 return false;
-
-
 
 
 
@@ -2560,7 +2085,7 @@ return false;
       (prog->len_index)++;
 
       
-      clear_string(prog);
+      clear_instruction(prog);
 
 
       while(prog->input[prog->len_index] != ')'){
@@ -2632,8 +2157,6 @@ return false;
                prog->len_index--;
             }
 
-            #ifdef INTERPERT
-            #endif
 
          }
 
@@ -2649,10 +2172,109 @@ return false;
       return true;
    }
 
-return false;
-
-
 #endif
 
+return false;
 
+}
+
+
+
+
+void test(void){
+
+    //Testing code non-related to formal grammar
+    //1. white_space(prog* prog);
+    //2. clear_instruction(prog*prog);
+
+    prog* testt = (prog*)ncalloc(1, sizeof(prog));
+
+   printf("------testing------\n\n");
+
+   strcpy(testt->input, "Test NUCLEI PARSER AND INTERPRETER");
+   testt->len_index = 4; //SPACE inbetween first and second word
+   strcpy(testt->instruction,"Test");
+
+   clear_instruction(testt);
+   assert(strcmp(testt->instruction, "\0") == 0);
+
+   white_space(testt);
+   assert((testt->len_index == 5) == 1);
+
+   check_function_instruction(testt);
+
+   assert(strcmp("NUCLEI", testt->instruction) == 0);
+
+
+   //Testing code related to formal grammar
+   #ifdef INTERP
+
+      strcpy(testt->input, "((SET A '5') (PRINT A))");
+      testt->len_index = 2;
+
+      check_function_instruction(testt);
+      assert(strcmp("SET", testt->instruction) == 0);  
+
+      testt->len_index++;
+      assert((in_out_func(testt)) == 1);
+
+      //len index after passing it into the string
+      assert(testt->len_index == 10);
+      assert((testt->numberoflisps == 1) == 1);
+      
+      //index of the numberoflisps will be pointing to the next element
+      testt->numberoflisps--;
+      assert((testt->lisp_array[testt->numberoflisps]->name == 'A') == 1);
+      assert((testt->lisp_array[testt->numberoflisps]->structure->atomtype == 5) == 1);
+
+
+      //when we pass in a invalid instruction into in_out_func
+      strcpy(testt->instruction, "CONS");
+      assert((in_out_func(testt)) == 0);
+
+
+   #endif
+/* 
+      //next subsequent instruction "PRINT A"
+      testt->len_index = 14;
+      testt->numberoflisps++;
+
+      check_function_instruction(testt);
+
+      assert(strcmp("PRINT", testt->instruction) == 0);  
+      assert((in_out_func(testt)) == 1);
+      
+
+     
+   #ifdef INTERP
+      //free allocated memory spaces
+      testt->numberoflisps--;
+      lisp_free(&(testt->lisp_structure));
+      lisp_free(&(testt->lisp_array[testt->numberoflisps]->structure));
+
+      assert((testt->lisp_structure == NULL) == 1);
+      assert((testt->lisp_array[testt->numberoflisps]->structure == NULL) == 1);
+
+   #endif
+
+   #ifdef INTERP
+  
+      strcpy(testt->input, "( (SET A (CONS '(3)' '4'))  )");
+      testt->len_index = 3;
+
+      check_function_instruction(testt);
+      assert(strcmp("SET", testt->instruction) == 0);  
+
+      testt->len_index++;
+      assert((in_out_func(testt)) == 1);
+
+      testt->numberoflisps--;
+      assert((testt->lisp_array[testt->numberoflisps]->structure->atomtype == 3) == 1);
+      assert((testt->lisp_array[testt->numberoflisps]->structure->cdr->atomtype == 4) == 1);
+
+   #endif
+
+   printf("------testing------\n\n");
+*/
+   
 }

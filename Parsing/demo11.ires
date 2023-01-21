@@ -1,0 +1,1603 @@
+(   (IF (EQUAL (LENGTH NIL) '0')   ((PRINT "NIL HAS ZERO LENGTH")) ((PRINT "FAILURE")))   (IF (EQUAL (LENGTH '(1)') '0') ((PRINT "FAILURE")) ((PRINT "(1) DOESN'T HAVE ZERO LENGTH")))   (IF (EQUAL (LENGTH A) '0')   ((PRINT "A HAS ZERO LENGTH")) ((PRINT "FAILURE")))   (SET L (CONS '2' NIL))   (PRINT L)   (IF (EQUAL (CAR L) '2') ((PRINT "L1 has Car 2"))((PRINT "FAILURE")))   (SET M (CONS '3' (CONS '4' (CONS '5' NIL))))   (PRINT M)   (SET N (CONS '1' L))   (PRINT N)   (SET P (CONS N M))   (PRINT P))
+
+Instructions - 1,   
+
+ (7)Instruction - IF 
+
+
+IF has been called
+
+
+Instruction passed to bool func - EQUAL
+BOOL FUNC - index 14, character -   
+
+'(', LIST - len_index - 15 
+RETFUNC instruction triggered - index 15 
+
+
+-----------Return Func---------------
+
+Instruction LENGTH
+
+LENGTH instruction triggered - index 23 
+'N', LIST - len_index - 23 
+LEN INDEX - 26 )
+Last index - 26   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 26 
+''', LIST - len_index - 28 
+LITERAL - len_index - 29 
+Store cond - 1
+
+Instructions - 36, ( 
+
+ (42)Instruction - PRINT 
+
+
+PRINT - function - 43
+Print FUNCTION (FINAL) - NIL HAS ZERO LENGTH
+
+
+Instruction - Value - ), 64 
+This is the LEN index here - 65 
+
+Instructions - 65, ) 
+Instructions - ')', 65
+Instruction - Value - ), 86 
+This is the LEN index here - 87 
+
+Instructions - 87,   
+
+ (93)Instruction - IF 
+
+
+IF has been called
+
+
+Instruction passed to bool func - EQUAL
+BOOL FUNC - index 100, character -   
+
+'(', LIST - len_index - 101 
+RETFUNC instruction triggered - index 101 
+
+
+-----------Return Func---------------
+
+Instruction LENGTH
+
+LENGTH instruction triggered - index 109 
+''', LIST - len_index - 109 
+LITERAL - len_index - 110 
+Last index - 114   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 114 
+''', LIST - len_index - 116 
+LITERAL - len_index - 117 
+Store cond - 0
+
+Instructions - 142, ( 
+
+ (148)Instruction - PRINT 
+
+
+PRINT - function - 149
+Print FUNCTION (FINAL) - (1) DOESN'T HAVE ZERO LENGTH
+
+
+Instruction - Value - ), 179 
+This is the LEN index here - 180 
+
+Instructions - 180, ) 
+Instructions - ')', 180
+Instruction - Value - ), 181 
+This is the LEN index here - 182 
+
+Instructions - 182,   
+
+ (188)Instruction - IF 
+
+
+IF has been called
+
+
+Instruction passed to bool func - EQUAL
+BOOL FUNC - index 195, character -   
+
+'(', LIST - len_index - 196 
+RETFUNC instruction triggered - index 196 
+
+
+-----------Return Func---------------
+
+Instruction LENGTH
+
+LENGTH instruction triggered - index 204 
+'A', LIST - len_index - 204 
+Entered var check 204
+Last index - 205   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 205 
+''', LIST - len_index - 207 
+LITERAL - len_index - 208 
+Store cond - 1
+
+Instructions - 215, ( 
+
+ (221)Instruction - PRINT 
+
+
+PRINT - function - 222
+Print FUNCTION (FINAL) - A HAS ZERO LENGTH
+
+
+Instruction - Value - ), 241 
+This is the LEN index here - 242 
+
+Instructions - 242, ) 
+Instructions - ')', 242
+Instruction - Value - ), 263 
+This is the LEN index here - 264 
+
+Instructions - 264,   
+
+ (271)Instruction - SET 
+
+
+VARIABLE - len_index - 272 
+'(', LIST - len_index - 274 
+RETFUNC instruction triggered - index 274 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+''', LIST - len_index - 280 
+LITERAL - len_index - 281 
+temp 1 - 2'N', LIST - len_index - 284 
+LEN INDEX - 287 )
+Last index - 287   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 287 
+Instruction - Value - ), 288 
+This is the LEN index here - 289 
+
+Instructions - 289,   
+
+ (298)Instruction - PRINT 
+
+
+PRINT - function - 299
+'L', LIST - len_index - 299 
+Entered var check 299
+PRINT FUNCTION (FINAL) - (2)
+
+
+Instruction - Value - ), 300 
+This is the LEN index here - 301 
+
+Instructions - 301,   
+
+ (307)Instruction - IF 
+
+
+IF has been called
+
+
+Instruction passed to bool func - EQUAL
+BOOL FUNC - index 314, character -   
+
+'(', LIST - len_index - 315 
+RETFUNC instruction triggered - index 315 
+
+
+-----------Return Func--------------
+=================================================================
+==46327==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c35f2 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:97
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2bd5 in lisp_atom /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:26
+    #3 0x55ab7f8b8b2f in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #14 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #15 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb436 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1512
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #10 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #11 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1f4e in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:740
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8bb55d in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1520
+    #7 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #8 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #9 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b8b3c in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #14 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #15 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb5f0 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1524
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #10 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #11 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c35f2 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:97
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1f4e in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:740
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b81a7 in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1267
+    #7 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #8 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #11 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #12 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #13 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #18 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #19 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b8b3c in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1a66 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:733
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b5be5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1098
+    #7 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #8 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #11 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #12 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #13 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #14 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #15 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #16 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #17 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #26 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #27 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb436 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1512
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb5f0 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1524
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b8b3c in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb436 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1512
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #11 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #12 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b5ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1f4e in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:740
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8bb55d in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1520
+    #7 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #8 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #9 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #14 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #15 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #14 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #15 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb5f0 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1524
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #11 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #12 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3f95 in lisp_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:184
+    #3 0x55ab7f8b59e6 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1061
+    #4 0x55ab7f8b6f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #5 0x55ab7f8b4b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2bd5 in lisp_atom /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:26
+    #3 0x55ab7f8b8b2f in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb5f0 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1524
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1a66 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:733
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b5be5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1098
+    #7 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #8 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #11 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #12 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #13 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2bd5 in lisp_atom /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:26
+    #3 0x55ab7f8b8b2f in int_length /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1284
+    #4 0x55ab7f8b8d23 in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1315
+    #5 0x55ab7f8b52ff in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1014
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #8 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #9 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #10 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #11 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1f4e in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:740
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8bb55d in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1520
+    #7 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #8 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #9 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1a66 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:733
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b5be5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1098
+    #7 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #8 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #11 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #12 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #13 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #14 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #15 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #16 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #17 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #18 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #19 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #20 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #21 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #22 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #23 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #27 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #28 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #29 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #12 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #13 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #14 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #15 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #16 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #17 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #18 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #27 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #28 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #12 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #13 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #14 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #15 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #16 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #17 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #18 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #27 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #28 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b696a in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1135
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #12 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #13 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #14 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #15 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #16 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #17 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #18 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #27 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #28 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1a66 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:733
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b5be5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1098
+    #7 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #8 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #11 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #12 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #13 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b5ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b5ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b6753 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1127
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #17 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #18 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #16 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #17 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c86bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x55ab7f8c8f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x55ab7f8b1a66 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:733
+    #5 0x55ab7f8ad566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x55ab7f8b5be5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1098
+    #7 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #8 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #9 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #11 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #12 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #13 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #24 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #25 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b5953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #5 0x55ab7f8b6f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #6 0x55ab7f8b4b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #7 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x55ab7f8bb3a3 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1509
+    #9 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #10 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #11 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #12 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #13 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b5ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8bb436 in bool_equal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1512
+    #4 0x55ab7f8bcf75 in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1633
+    #5 0x55ab7f8bda6f in if_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1681
+    #6 0x55ab7f8abc53 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:408
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b5c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c3a11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x55ab7f8b5ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c32bb in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:88
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 96 byte(s) in 3 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #17 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #18 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c32bb in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:88
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c309c in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:80
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8af051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x55ab7f8b35fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x55ab7f8abf59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x55ab7f8ab47b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #21 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #22 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2f8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x55ab7f8b6277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4b6ffba37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x55ab7f8c9056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x55ab7f8c2ea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x55ab7f8b5e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x55ab7f8b5db5 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1107
+    #8 0x55ab7f8b709f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #9 0x55ab7f8b4ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #10 0x55ab7f8af677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x55ab7f8acbb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x55ab7f8ac104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x55ab7f8ab2ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x55ab7f8aaaca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x55ab7f8a9b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x55ab7f8a9c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x55ab7f8a8c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x55ab7f8a8ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb4b662cd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 2048 byte(s) leaked in 64 allocation(s).

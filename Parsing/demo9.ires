@@ -1,0 +1,3933 @@
+(   (SET L '(1 0)')   (SET C '2')   (WHILE (LESS C '20') (      (SET N (PLUS (CAR L)  (CAR (CDR L))))      (SET M (CONS N L))      (SET L M)      (SET B (PLUS '1' C))      (SET C B)   ))   (PRINT M))
+
+Instructions - 1,   
+
+ (8)Instruction - SET 
+
+
+VARIABLE - len_index - 9 
+''', LIST - len_index - 11 
+LITERAL - len_index - 12 
+Instruction - Value - ), 18 
+This is the LEN index here - 19 
+
+Instructions - 19,   
+
+ (26)Instruction - SET 
+
+
+VARIABLE - len_index - 27 
+''', LIST - len_index - 29 
+LITERAL - len_index - 30 
+Instruction - Value - ), 32 
+This is the LEN index here - 33 
+
+Instructions - 33,   
+
+ (42)Instruction - WHILE 
+
+
+WHILE has been called
+
+
+Instruction passed to bool func - LESS
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+store: 20
+
+var: C
+
+Store_base - 2
+
+Store_cond - 20
+
+Start of the loop - 57
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 1'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 2'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 3'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 5'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 8'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 13'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 21'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 34'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 55'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 89'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 144'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 233'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 377'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 610'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 987'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 1597'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 2584'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instructions - 57, ( 
+
+ (68)Instruction - SET 
+
+
+VARIABLE - len_index - 69 
+'(', LIST - len_index - 71 
+RETFUNC instruction triggered - index 71 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 77 
+
+1.int_func - PLUS instruction - len index 77 
+'(', LIST - len_index - 77 
+RETFUNC instruction triggered - index 77 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'L', LIST - len_index - 82 
+Entered var check 82
+Last index - 83   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 83 
+
+2.int_func - PLUS instruction - len index 84 
+'(', LIST - len_index - 86 
+RETFUNC instruction triggered - index 86 
+
+
+-----------Return Func---------------
+
+Instruction CAR
+
+'(', LIST - len_index - 91 
+RETFUNC instruction triggered - index 91 
+
+
+-----------Return Func---------------
+
+Instruction CDR
+
+'L', LIST - len_index - 96 
+Entered var check 96
+Last index - 97   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 97 
+Last index - 98   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 98 
+Last index - 99   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 99 
+Instruction - Value - ), 100 
+This is the LEN index here - 101 
+
+Instructions - 101,   
+
+ (111)Instruction - SET 
+
+
+VARIABLE - len_index - 112 
+'(', LIST - len_index - 114 
+RETFUNC instruction triggered - index 114 
+
+
+-----------Return Func---------------
+
+Instruction CONS
+
+'N', LIST - len_index - 120 
+Entered var check 120
+temp 1 - 4181'L', LIST - len_index - 122 
+Entered var check 122
+Last index - 123   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 123 
+Instruction - Value - ), 124 
+This is the LEN index here - 125 
+
+Instructions - 125,   
+
+ (135)Instruction - SET 
+
+
+VARIABLE - len_index - 136 
+'M', LIST - len_index - 138 
+Entered var check 138
+Instruction - Value - ), 139 
+This is the LEN index here - 140 
+
+Instructions - 140,   
+
+ (150)Instruction - SET 
+
+
+VARIABLE - len_index - 151 
+'(', LIST - len_index - 153 
+RETFUNC instruction triggered - index 153 
+
+
+-----------Return Func---------------
+
+Instruction PLUS
+
+PLUS instruction triggered - index 159 
+
+1.int_func - PLUS instruction - len index 159 
+''', LIST - len_index - 159 
+LITERAL - len_index - 160 
+
+2.int_func - PLUS instruction - len index 162 
+'C', LIST - len_index - 163 
+Entered var check 163
+Last index - 164   )
+
+------------------EXIT RET_FUNC---------------------
+
+Value after returning from ret_func - )  , 164 
+Instruction - Value - ), 165 
+This is the LEN index here - 166 
+
+Instructions - 166,   
+
+ (176)Instruction - SET 
+
+
+VARIABLE - len_index - 177 
+'B', LIST - len_index - 179 
+Entered var check 179
+Instruction - Value - ), 180 
+This is the LEN index here - 181 
+
+Instructions - 181,   
+Instructions - ')', 184
+BOOL FUNC - index 48, character -   
+
+'C', LIST - len_index - 49 
+Entered var check 49
+''', LIST - len_index - 51 
+LITERAL - len_index - 52 
+Instruction - Value - ), 185 
+This is the LEN index here - 186 
+
+Instructions - 186,   
+
+ (195)Instruction - PRINT 
+
+
+PRINT - function - 196
+'M', LIST - len_index - 196 
+Entered var check 196
+PRINT FUNCTION (FINAL) - (4181 2584 1597 987 610 377 233 144 89 55 34 21 13 8 5 3 2 1 1 0)
+
+
+Instruction - Value - ), 197 
+This is the LEN index here - 198 
+
+Instructions - 198, ) 
+Instructions - ')', 
+=================================================================
+==46367==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 608 byte(s) in 19 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf4f61 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1339
+    #5 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #6 0x558520bfd3a8 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2032
+    #7 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #8 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #9 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 608 byte(s) in 19 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf5006 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1342
+    #4 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #5 0x558520bfd3a8 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2032
+    #6 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 608 byte(s) in 19 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bedcd7 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:737
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520bf5178 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1352
+    #7 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #8 0x558520bfd3a8 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2032
+    #9 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 608 byte(s) in 19 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf521d in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1355
+    #4 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #5 0x558520bfd3a8 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2032
+    #6 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfebd5 in lisp_atom /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:26
+    #3 0x558520bf38e8 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1234
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #13 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bffa11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x558520bf1ee9 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1117
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c00204 in lisp_cdr /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:203
+    #3 0x558520bf1b2e in list_cdr /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1078
+    #4 0x558520bf2ffb in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1178
+    #5 0x558520bf0d2b in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:994
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520bf1953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #8 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #9 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #10 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x558520bf36d5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1224
+    #12 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #13 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #14 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #15 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #16 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #17 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #18 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #21 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #22 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #23 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #24 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #25 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #27 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #28 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bead28 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:598
+    #4 0x558520bf36d5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1224
+    #5 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #6 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #7 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #9 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #10 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #11 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #12 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #17 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #18 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfff95 in lisp_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:184
+    #3 0x558520bf19e6 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1061
+    #4 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #5 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520bf36d5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1224
+    #8 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #9 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #10 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #17 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #18 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bed7f5 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:729
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520bf3481 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1214
+    #7 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #8 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #9 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #10 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #11 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #12 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #13 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #19 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #20 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #21 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #22 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #24 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #25 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #26 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bffa11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x558520bf38f5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1234
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #13 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf3b47 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1236
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #13 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520bf1e48 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1110
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf1953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #5 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #6 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #7 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x558520bf3481 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1214
+    #9 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #10 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #11 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #12 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #13 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #14 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #18 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #19 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #20 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #21 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #24 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #25 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bffa11 in lisp_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:122
+    #3 0x558520bf38f5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1234
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #16 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #17 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfff95 in lisp_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:184
+    #3 0x558520bf19e6 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1061
+    #4 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #5 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520bf3481 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1214
+    #8 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #9 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #10 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #11 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #12 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #13 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #17 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #18 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #19 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #23 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #24 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf3b47 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1236
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #16 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #17 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf1a9b in list_cdr /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1075
+    #5 0x558520bf2ffb in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1178
+    #6 0x558520bf0d2b in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:994
+    #7 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x558520bf1953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #9 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #10 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #11 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #12 0x558520bf36d5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1224
+    #13 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #14 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #15 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #16 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #17 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #18 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #19 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #20 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #21 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #22 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #23 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #24 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #25 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #27 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #28 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #29 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bea92a in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:591
+    #4 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #5 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #6 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf3514 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1217
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #13 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf37f2 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1229
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #13 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #14 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #15 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #19 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #20 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf3514 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1217
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #16 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #17 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfebd5 in lisp_atom /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:26
+    #3 0x558520bf38e8 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1234
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #16 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #17 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 576 byte(s) in 18 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf1c78 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1101
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 544 byte(s) in 17 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf2277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 544 byte(s) in 17 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf37f2 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1229
+    #4 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #5 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #15 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #16 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #17 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #18 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #19 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #20 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #21 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #22 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #23 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 544 byte(s) in 17 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bea92a in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:591
+    #4 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #5 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #6 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #12 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #13 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #18 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #19 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf4f61 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1339
+    #5 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #6 0x558520bfbe12 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1948
+    #7 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #8 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #9 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bece81 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:716
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bece81 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:716
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520bea92a in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:591
+    #4 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #5 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #6 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #12 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #13 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #18 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #19 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bef5fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x558520be7f59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x558520be747b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520bf2277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf521d in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1355
+    #4 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #5 0x558520bfbe12 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1948
+    #6 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520beccdc in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:715
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bedcd7 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:737
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520bf5178 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1352
+    #7 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #8 0x558520bfbe12 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1948
+    #9 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #14 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #15 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #16 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfeea0 in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:59
+    #3 0x558520bf5006 in bool_less /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1342
+    #4 0x558520bf8e2d in bool_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1621
+    #5 0x558520bfbe12 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1948
+    #6 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c046bd in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:596
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520beccdc in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:715
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520be842f in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:478
+    #3 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #4 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #5 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #6 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #7 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #8 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #12 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #13 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #18 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #19 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5472 byte(s) in 171 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf1a9b in list_cdr /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1075
+    #5 0x558520bf2ffb in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1178
+    #6 0x558520bf0d2b in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:994
+    #7 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x558520bf1953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #9 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #10 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #11 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #12 0x558520bf36d5 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1224
+    #13 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #14 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #15 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #16 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #17 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #18 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #19 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #20 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #21 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #22 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #23 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #24 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #25 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #26 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #27 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #28 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #29 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5472 byte(s) in 171 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bf1953 in list_car /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1058
+    #5 0x558520bf2f57 in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1171
+    #6 0x558520bf0b85 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:989
+    #7 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #8 0x558520bf3481 in int_plus /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1214
+    #9 0x558520bf4c7f in int_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1308
+    #10 0x558520bf10e8 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1009
+    #11 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #12 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #13 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #14 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #18 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #19 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #20 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #21 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #22 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #23 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #24 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #25 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5440 byte(s) in 170 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520bf2277 in list_cons /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1120
+    #4 0x558520bf309f in list_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:1184
+    #5 0x558520bf0ed1 in ret_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:999
+    #6 0x558520beb677 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:640
+    #7 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #8 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #9 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #10 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #11 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #12 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #13 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #14 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #15 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #16 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #17 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #18 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #19 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #20 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #21 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5440 byte(s) in 170 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520bea92a in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:591
+    #4 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #5 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #6 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520bfd553 in loop_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:2037
+    #12 0x558520be7e17 in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:417
+    #13 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #14 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #15 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #16 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #17 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #18 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #19 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 608 byte(s) in 19 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520bfef8f in lisp_copy /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:76
+    #3 0x558520beb051 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:605
+    #4 0x558520bef5fe in ins_print /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:856
+    #5 0x558520be7f59 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:452
+    #6 0x558520be747b in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:329
+    #7 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #8 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #9 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #10 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #11 0x558520be5c59 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:226
+    #12 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #13 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #14 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c049f4 in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:608
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520bece81 in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:716
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb3243e9a37 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
+    #1 0x558520c05056 in ncalloc /home/waei/Desktop/Programming_in_C/NUCELI4(4)/general.c:11
+    #2 0x558520c049f4 in lisp_ans /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:608
+    #3 0x558520c04f6a in lisp_fromstring /home/waei/Desktop/Programming_in_C/NUCELI4(4)/linked.c:637
+    #4 0x558520beccdc in ins_literal /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:715
+    #5 0x558520be9566 in ins_list /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:551
+    #6 0x558520be8bb9 in ins_set /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:504
+    #7 0x558520be8104 in in_out_func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:460
+    #8 0x558520be72ba in func /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:320
+    #9 0x558520be6aca in instruction /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:286
+    #10 0x558520be5b96 in instructions /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:220
+    #11 0x558520be4c6b in program /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:160
+    #12 0x558520be4ad6 in main /home/waei/Desktop/Programming_in_C/NUCELI4(4)/nuclei.c:134
+    #13 0x7fb323a1ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 38456 byte(s) leaked in 1202 allocation(s).
